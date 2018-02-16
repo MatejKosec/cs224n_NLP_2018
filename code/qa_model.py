@@ -191,7 +191,7 @@ class QAModel(object):
             tf.summary.scalar('loss_end', self.loss_end)
 
             # Add the two losses
-            self.loss = self.loss_start + self.loss_end
+            self.loss = self.loss_start + self.loss_end + pow(self.loss_end*self.loss_start, 0.5)
             tf.summary.scalar('loss', self.loss)
 
 
