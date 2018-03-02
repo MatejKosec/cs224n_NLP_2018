@@ -27,7 +27,7 @@ def yellowtext(s):
 
 def greentext(s):
     """Green text"""
-    return Fore.GREEN + Style.BRIGHT + s + Style.RESET_ALL + Fore.RESET
+    return Fore.GREEN  + Style.BRIGHT + s + Style.RESET_ALL + Fore.RESET
 
 def redtext(s):
     """Red text"""
@@ -35,11 +35,11 @@ def redtext(s):
 
 def redback(s):
     """Red background"""
-    return Back.RED + s + Back.RESET
+    return Back.LIGHTRED_EX + s + Back.RESET
 
 def magentaback(s):
     """Magenta background"""
-    return Back.MAGENTA + s + Back.RESET
+    return Back.LIGHTMAGENTA_EX + s + Back.RESET
 
 
 
