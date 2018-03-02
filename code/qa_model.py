@@ -378,6 +378,7 @@ class QAModel(object):
 
         # Note here we select discard_long=False because we want to sample from the entire dataset
         # That means we're truncating, rather than discarding, examples with too-long context or questions
+        f1_scores = []
         for batch in get_batch_generator(self.word2id, context_path, qn_path, ans_path, self.FLAGS.batch_size, context_len=self.FLAGS.context_len, question_len=self.FLAGS.question_len, discard_long=False):
 
             pred_start_pos, pred_end_pos = self.get_start_end_pos(session, batch)
@@ -400,6 +401,7 @@ class QAModel(object):
 
                 # Calc F1/EM
                 f1 = f1_score(pred_answer, true_answer)
+                f1_scores.append(f1)
                 em = exact_match_score(pred_answer, true_answer)
                 f1_total += f1
                 em_total += em
@@ -413,7 +415,7 @@ class QAModel(object):
 
             if num_samples != 0 and example_num >= num_samples:
                 break
-
+        np.savetxt('f1_scores_dev.txt', np.array(f1_scores))
         f1_total /= example_num
         em_total /= example_num
 
