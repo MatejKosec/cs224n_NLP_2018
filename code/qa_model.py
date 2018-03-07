@@ -144,7 +144,9 @@ class QAModel(object):
         # Apply fully connected layer to each blended representation
         # Note, blended_reps_final corresponds to b' in the handout
         # Note, tf.contrib.layers.fully_connected applies a ReLU non-linarity here by default
-        blended_reps_final = tf.contrib.layers.fully_connected(blended_reps, num_outputs=self.FLAGS.hidden_size) # blended_reps_final is shape (batch_size, context_len, hidden_size)
+        blended_reps_final1 = tf.contrib.layers.fully_connected(blended_reps, num_outputs=self.FLAGS.hidden_size) # blended_reps_final is shape (batch_size, context_len, hidden_size)
+	blended_reps_final2 = tf.contrib.layers.fully_connected(blended_reps_final1, num_outputs=self.FLAGS.hidden_size) # blended_reps_final is shape (batch_size, context_len, hidden_size)
+	blended_reps_final  = tf.contrib.layers.fully_connected(blended_reps_final2, num_outputs=self.FLAGS.hidden_size) # blended_reps_final is shape (batch_size, context_len, hidden_size)
 
         # Use softmax layer to compute probability distribution for start location
         # Note this produces self.logits_start and self.probdist_start, both of which have shape (batch_size, context_len)
@@ -373,6 +375,8 @@ class QAModel(object):
         f1_total = 0.
         em_total = 0.
         example_num = 0
+	number_start_after_end = 0
+	number_long_answers = 0
 
         tic = time.time()
 
@@ -393,6 +397,10 @@ class QAModel(object):
                 # Get the predicted answer
                 # Important: batch.context_tokens contains the original words (no UNKs)
                 # You need to use the original no-UNK version when measuring F1/EM
+		if pred_ans_end < pred_ans_start:
+		    number_start_after_end += 1
+		if pred_ans_end + 1 - pred_ans_start > 2*len(true_ans_tokens):
+ 		    number_long_answers +=1
                 pred_ans_tokens = batch.context_tokens[ex_idx][pred_ans_start : pred_ans_end + 1]
                 pred_answer = " ".join(pred_ans_tokens)
 
@@ -421,6 +429,8 @@ class QAModel(object):
 
         toc = time.time()
         logging.info("Calculating F1/EM for %i examples in %s set took %.2f seconds" % (example_num, dataset, toc-tic))
+        logging.info("Found %i examples where end was after start"%(number_start_after_end))
+        logging.info("Found %i examples where end-start was more than 3 times the answer length"%(number_long_answers))
 
         return f1_total, em_total
 
