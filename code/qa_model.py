@@ -151,7 +151,7 @@ class QAModel(object):
         #construct an LSTM from which to pull the start and end logits
         #ans_ptr_input= tf.reshape(blended_reps_final, shape=[-1,self.FLAGS.hidden_size*self.FLAGS.context_length])
         ans_ptr_input= blended_reps_final
-        ans_ptr_lstm = tf.contrib.rnn.BasicLSTM(self.FLAGS.hidden_size)
+        ans_ptr_lstm = tf.contrib.rnn.BasicLSTMCell(self.FLAGS.hidden_size)
         ans_ptr_hidd_state = ans_ptr_lstm.zero_state(self.FLAGS.batch_size)
         ans_ptr_curr_state = tf.zeros((self.FLAGS.hidden_size,1), dtype= tf.float32)
         state = ans_ptr_hidd_state, ans_ptr_curr_state
