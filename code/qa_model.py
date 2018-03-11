@@ -30,7 +30,7 @@ from tensorflow.python.ops import embedding_ops
 from evaluate import exact_match_score, f1_score
 from data_batcher import get_batch_generator
 from pretty_print import print_example
-from modules import RNNEncoder, SimpleSoftmaxLayer, BasicAttn
+from modules import RNNEncoder, SimpleSoftmaxLayer, BasicAttn, masked_softmax
 
 logging.basicConfig(level=logging.INFO)
 
@@ -144,21 +144,46 @@ class QAModel(object):
         # Apply fully connected layer to each blended representation
         # Note, blended_reps_final corresponds to b' in the handout
         # Note, tf.contrib.layers.fully_connected applies a ReLU non-linarity here by default
-        blended_reps_final1 = tf.contrib.layers.fully_connected(blended_reps, num_outputs=self.FLAGS.hidden_size) # blended_reps_final is shape (batch_size, context_len, hidden_size)
-	blended_reps_final2 = tf.contrib.layers.fully_connected(blended_reps_final1, num_outputs=self.FLAGS.hidden_size) # blended_reps_final is shape (batch_size, context_len, hidden_size)
-	blended_reps_final  = tf.contrib.layers.fully_connected(blended_reps_final2, num_outputs=self.FLAGS.hidden_size) # blended_reps_final is shape (batch_size, context_len, hidden_size)
+        blended_reps_final = tf.contrib.layers.fully_connected(blended_reps, num_outputs=self.FLAGS.hidden_size) # blended_reps_final is shape (batch_size, context_len, hidden_size)
+
+
+        #=================================ANSWER POINTER=======================
+        #construct an LSTM from which to pull the start and end logits
+        #ans_ptr_input= tf.reshape(blended_reps_final, shape=[-1,self.FLAGS.hidden_size*self.FLAGS.context_length])
+        ans_ptr_input= blended_reps_final
+        ans_ptr_lstm = tf.contrib.rnn.BasicLSTM(self.FLAGS.hidden_size)
+        ans_ptr_hidd_state = ans_ptr_lstm.zero_state(self.FLAGS.batch_size)
+        ans_ptr_curr_state = tf.zeros((self.FLAGS.hidden_size,1), dtype= tf.float32)
+        state = ans_ptr_hidd_state, ans_ptr_curr_state
+        
+        Vaptr = tf.get_variable('ans_ptr_V', dtype=tf.float32, shape=(self.FLAGS.hidden_size, self.FLAGS.hidden_size))
+        Waptr = tf.get_variable('ans_ptr_W', dtype=tf.float32, shape=(self.FLAGS.hidden_size, self.FLAGS.hidden_size))
+        ba    = tf.get_variable('ans_ptr_ba',dtype=tf.float32, shape=(self.FLAGS.hidden_size,1))
+        v     = tf.get_variable('ans_ptr_v' ,dtype=tf.float32, shape=(self.FLAGS.hidden_size,1))
+        c     = tf.get_variable('ans_ptr_c' ,dtype=tf.float32)
+        
+    
+        F_start = tf.nn.tanh(tf.matmul(Vaptr,ans_ptr_input) + (tf.matmul(Waptr,ans_ptr_hidd_state) +ba)) 
+        self.logits_start, self.probdist_start =  masked_softmax( tf.matmul(tf.transpose(v),F_start) + c,self.context_mask, 1)
+        state = ans_ptr_lstm(tf.matmul(ans_ptr_input,tf.transpose(self.logits_starts)), state)
+        ans_ptr_hidd_state, ans_ptr_curr_state = state
+            
+        F_end = tf.nn.tanh(tf.matmul(Vaptr,ans_ptr_input) + (tf.matmul(Waptr,ans_ptr_hidd_state) +ba)) 
+        self.logits_end, self.probdist_end = masked_softmax(tf.matmul(tf.transpose(v),F_end) + c,self.context_mask, 1)
+        
+        #=================================SOFTMAX OUTPUT=======================
 
         # Use softmax layer to compute probability distribution for start location
         # Note this produces self.logits_start and self.probdist_start, both of which have shape (batch_size, context_len)
-        with vs.variable_scope("StartDist"):
-            softmax_layer_start = SimpleSoftmaxLayer()
-            self.logits_start, self.probdist_start = softmax_layer_start.build_graph(blended_reps_final, self.context_mask)
+        #with vs.variable_scope("StartDist"):
+        #    softmax_layer_start = SimpleSoftmaxLayer()
+        #    self.logits_start, self.probdist_start = softmax_layer_start.build_graph(blended_reps_final, self.context_mask)
 
         # Use softmax layer to compute probability distribution for end location
         # Note this produces self.logits_end and self.probdist_end, both of which have shape (batch_size, context_len)
-        with vs.variable_scope("EndDist"):
-            softmax_layer_end = SimpleSoftmaxLayer()
-            self.logits_end, self.probdist_end = softmax_layer_end.build_graph(blended_reps_final, self.context_mask)
+        #with vs.variable_scope("EndDist"):
+        #    softmax_layer_end = SimpleSoftmaxLayer()
+        #    self.logits_end, self.probdist_end = softmax_layer_end.build_graph(blended_reps_final, self.context_mask)
 
 
     def add_loss(self):
