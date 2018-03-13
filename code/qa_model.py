@@ -30,7 +30,7 @@ from tensorflow.python.ops import embedding_ops
 from evaluate import exact_match_score, f1_score
 from data_batcher import get_batch_generator
 from pretty_print import print_example
-from modules import RNNEncoder, SimpleSoftmaxLayer, BasicAttn, masked_softmax
+from modules import RNNEncoder, SimpleSoftmaxLayer, BasicAttn, masked_softmax, MultiplicativeAttn
 
 logging.basicConfig(level=logging.INFO)
 
@@ -145,22 +145,31 @@ class QAModel(object):
         # Note, blended_reps_final corresponds to b' in the handout
         # Note, tf.contrib.layers.fully_connected applies a ReLU non-linarity here by default
         blended_reps_final = tf.contrib.layers.fully_connected(blended_reps, num_outputs=self.FLAGS.hidden_size) # blended_reps_final is shape (batch_size, context_len, hidden_size)
-
+        #=================================ANSWER POINTER=(BASIC)===============
+        #ans_ptr_input= blended_reps_final
+        ans_ptr_attn = MultiplicativeAttn(1, self.FLAGS.hidden_size)
+        ans_ptr_lstm = tf.contrib.rnn.BasicLSTMCell(self.FLAGS.hidden_size)
+        ans_ptr_hidd_state = tf.zeros([self.FLAGS.batch_size,self.FLAGS.hidden_size], dtype= tf.float32)
+        ans_ptr_curr_state = tf.zeros([self.FLAGS.batch_size,self.FLAGS.hidden_size], dtype= tf.float32)
+        state = ans_ptr_hidd_state, ans_ptr_curr_state
+        
+        
+        self.logits_start, self.probdist_start =  masked_softmax( tf.matmul(tf.transpose(v),F_start) + c,self.context_mask, 1)
+        state = ans_ptr_lstm(tf.matmul(ans_ptr_input,tf.transpose(self.logits_starts)), state)
+        ans_ptr_hidd_state, ans_ptr_curr_state = state
+            
+        F_end = tf.nn.tanh(tf.matmul(Vaptr,ans_ptr_input) + (tf.matmul(Waptr,ans_ptr_hidd_state) +ba)) 
+        self.logits_end, self.probdist_end = masked_softmax(tf.matmul(tf.transpose(v),F_end) + c,self.context_mask, 1)
 
         #=================================ANSWER POINTER=======================
         #construct an LSTM from which to pull the start and end logits
         ans_ptr_input= tf.reshape(blended_reps_final, shape=[-1,self.FLAGS.hidden_size*self.FLAGS.context_len])
         #ans_ptr_input= blended_reps_final
         ans_ptr_lstm = tf.contrib.rnn.BasicLSTMCell(self.FLAGS.hidden_size)
-	ans_ptr_hidd_state = tf.zeros([self.FLAGS.batch_size,self.FLAGS.hidden_size], dtype= tf.float32)
+        ans_ptr_hidd_state = tf.zeros([self.FLAGS.batch_size,self.FLAGS.hidden_size], dtype= tf.float32)
         ans_ptr_curr_state = tf.zeros([self.FLAGS.batch_size,self.FLAGS.hidden_size], dtype= tf.float32)
         state = ans_ptr_hidd_state, ans_ptr_curr_state
         
-        Vaptr = tf.get_variable('ans_ptr_V', dtype=tf.float32, shape=(self.FLAGS.context_len*self.FLAGS.hidden_size, self.FLAGS.hidden_size))
-        Waptr = tf.get_variable('ans_ptr_W', dtype=tf.float32, shape=(self.FLAGS.hidden_size, self.FLAGS.hidden_size))
-        ba    = tf.get_variable('ans_ptr_ba',dtype=tf.float32, shape=(self.FLAGS.hidden_size,1))
-        v     = tf.get_variable('ans_ptr_v' ,dtype=tf.float32, shape=(self.FLAGS.hidden_size,1))
-        c     = tf.get_variable('ans_ptr_c' ,dtype=tf.float32, shape=(1))
         
     
         F_start = tf.nn.tanh(tf.matmul(ans_ptr_input,Vaptr) + (tf.matmul(Waptr,ans_ptr_hidd_state) +ba)) 
