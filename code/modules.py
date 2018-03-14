@@ -175,6 +175,74 @@ class BasicAttn(object):
 
             return attn_dist, output
 
+class BiDirAttn(object): 
+    """Module for bidirectional attention.
+
+    Keys are context hidden states and values are question hidden states.
+    """
+
+    def __init__(self, keep_prob, key_vec_size, value_vec_size):
+        """
+        Inputs:
+          keep_prob: tensor containing a single scalar that is the keep probability (for dropout)
+          key_vec_size: size of the key vectors. int
+          value_vec_size: size of the value vectors. int
+        """
+        self.keep_prob = keep_prob
+        self.key_vec_size = key_vec_size
+        self.value_vec_size = value_vec_size
+
+    def build_graph(self, values, values_mask, keys):
+        """
+        Keys attend to values.
+        For each key, return an attention distribution and an attention output vector.
+
+        Inputs:
+          values: Tensor shape (batch_size, num_values, value_vec_size).
+          values_mask: Tensor shape (batch_size, num_values).
+            1s where there's real input, 0s where there's padding
+          keys: Tensor shape (batch_size, num_keys, value_vec_size)
+
+          Note: value_vec_size = 2 * hidden_size
+
+        Outputs:
+        """
+
+        with vs.variable_scope("BiDirAttn"):
+            # Compute similarity matrix
+            w_sim_t = tf.get_variable("w_sim_t", shape=(1, values.get_shape().as_list()[2] * 3), dtype=tf.float32, initializer=tf.contrib.layers.xavier_initializer()) # (1, 6 * hidden_size)
+            
+            keys_tiled = tf.tile(tf.expand_dims(keys, axis=2), multiples=(1, 1, values.get_shape().as_list()[1], 1)) # (batch_size, num_keys, num_values, 2 * hidden_size)
+            values_tiled = tf.tile(tf.expand_dims(values, axis=1), multiples=(1, keys.get_shape().as_list()[1], 1, 1)) # (batch_size, num_keys, num_values, 2 * hidden_size)
+            sim_scores = tf.multiply(keys_tiled, values_tiled) # element-wise multiplication -- (batch_size, num_keys, num_values, 2 * hidden_size)
+            unweighted_sim = tf.concat([keys_tiled, values_tiled, sim_scores], axis=3) # (batch_size, num_keys, num_values, 6 * hidden_size)
+            # unweighted_sim_t = tf.transpose(unweighted_sim, perm=[0, 3, 1, 2]) # (batch_size, 6 * hidden_size, num_keys, num_values)
+            
+            # swapped values.get_shape().as_list()[0] for -1, tf was unhappy
+            sim = tf.reshape(tf.tensordot(w_sim_t, unweighted_sim, axes=[[1], [3]]), [-1, keys.get_shape().as_list()[1], values.get_shape().as_list()[1]]) # (1, batch_size, num_keys, num_values) --> (batch_size, num_keys, num_values)
+
+            # Context to question (C2Q) attention 
+            sim_mask = tf.expand_dims(values_mask, 1) # shape (batch_size, 1, num_values)
+            _, c2q_attn_dist = masked_softmax(sim, sim_mask, 2) # shape (batch_size, num_keys, num_values). Take softmax over values.
+            
+            # Use attention distribution to take weighted sum of values
+            c2q_output = tf.matmul(c2q_attn_dist, values) # (batch_size, num_keys, value_vec_size)
+
+            # Question to context (Q2C) attention
+            max_sim = tf.reduce_max(sim, axis=2) # (batch_size, num_keys)
+            q2c_attn_dist = tf.nn.softmax(max_sim) # (batch_size, num_keys)
+            q2c_output = tf.matmul(tf.expand_dims(q2c_attn_dist, axis=1), keys) # (batch_size, 1, value_vec_size)
+            
+            # Calculate output
+            q2c_output_tiled = tf.tile(q2c_output, multiples=(1, keys.get_shape().as_list()[1], 1)) # (batch_size, num_keys, value_vec_size)
+            c_c2q_elem = tf.multiply(keys, c2q_output) # element-wise multiplication -- (batch_size, num_keys, value_vec_size)
+            c_q2c_elem = tf.multiply(keys, q2c_output_tiled) # element-wise multiplication -- (batch_size, num_keys, value_vec_size)
+            output = tf.concat([keys, c2q_output, c_c2q_elem, c_q2c_elem], axis=2) # (batch_size, num_keys, value_vec_size * 4) = (batch_size, num_keys, hidden_size * 8)
+
+            # Apply dropout
+            output = tf.nn.dropout(output, self.keep_prob)
+
+            return output
 
 def masked_softmax(logits, mask, dim):
     """
