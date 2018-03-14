@@ -231,9 +231,10 @@ class BiDirAttn(object):
             q2c_output = tf.matmul(tf.expand_dims(q2c_attn_dist, axis=1), keys) # (batch_size, 1, value_vec_size)
             
             # Calculate output
-            q2c_output_tiled = tf.tile(q2c_output, multiples=(1, keys.get_shape().as_list()[1], 1)) # (batch_size, num_keys, value_vec_size)
+            # q2c_output_tiled = tf.tile(q2c_output, multiples=(1, keys.get_shape().as_list()[1], 1)) # (batch_size, num_keys, value_vec_size)
             c_c2q_elem = tf.multiply(keys, c2q_output) # element-wise multiplication -- (batch_size, num_keys, value_vec_size)
-            c_q2c_elem = tf.multiply(keys, q2c_output_tiled) # element-wise multiplication -- (batch_size, num_keys, value_vec_size)
+            # c_q2c_elem = tf.multiply(keys, q2c_output_tiled) # element-wise multiplication -- (batch_size, num_keys, value_vec_size)
+            c_q2c_elem = tf.multiply(keys, q2c_output) # element-wise multiplication -- (batch_size, num_keys, value_vec_size)
             output = tf.concat([keys, c2q_output, c_c2q_elem, c_q2c_elem], axis=2) # (batch_size, num_keys, value_vec_size * 4) = (batch_size, num_keys, hidden_size * 8)
 
             # Apply dropout
