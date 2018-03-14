@@ -206,6 +206,8 @@ class BiDirAttn(object):
           Note: value_vec_size = 2 * hidden_size
 
         Outputs:
+          output: Tensor shape (batch_size, num_keys, hidden_size).
+            The bidirectional attention output.
         """
 
         with vs.variable_scope("BiDirAttn"):
@@ -216,16 +218,11 @@ class BiDirAttn(object):
             values_tiled = tf.tile(tf.expand_dims(values, axis=1), multiples=(1, keys.get_shape().as_list()[1], 1, 1)) # (batch_size, num_keys, num_values, 2 * hidden_size)
             sim_scores = tf.multiply(keys_tiled, values_tiled) # element-wise multiplication -- (batch_size, num_keys, num_values, 2 * hidden_size)
             unweighted_sim = tf.concat([keys_tiled, values_tiled, sim_scores], axis=3) # (batch_size, num_keys, num_values, 6 * hidden_size)
-            # unweighted_sim_t = tf.transpose(unweighted_sim, perm=[0, 3, 1, 2]) # (batch_size, 6 * hidden_size, num_keys, num_values)
-            
-            # swapped values.get_shape().as_list()[0] for -1, tf was unhappy
             sim = tf.reshape(tf.tensordot(w_sim_t, unweighted_sim, axes=[[1], [3]]), [-1, keys.get_shape().as_list()[1], values.get_shape().as_list()[1]]) # (1, batch_size, num_keys, num_values) --> (batch_size, num_keys, num_values)
 
             # Context to question (C2Q) attention 
             sim_mask = tf.expand_dims(values_mask, 1) # shape (batch_size, 1, num_values)
             _, c2q_attn_dist = masked_softmax(sim, sim_mask, 2) # shape (batch_size, num_keys, num_values). Take softmax over values.
-            
-            # Use attention distribution to take weighted sum of values
             c2q_output = tf.matmul(c2q_attn_dist, values) # (batch_size, num_keys, value_vec_size)
 
             # Question to context (Q2C) attention
