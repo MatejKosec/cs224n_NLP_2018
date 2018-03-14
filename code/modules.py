@@ -216,7 +216,8 @@ class BiDirAttn(object):
             
             keys_tiled = tf.tile(tf.expand_dims(keys, axis=2), multiples=(1, 1, values.get_shape().as_list()[1], 1)) # (batch_size, num_keys, num_values, 2 * hidden_size)
             values_tiled = tf.tile(tf.expand_dims(values, axis=1), multiples=(1, keys.get_shape().as_list()[1], 1, 1)) # (batch_size, num_keys, num_values, 2 * hidden_size)
-            sim_scores = tf.multiply(keys_tiled, values_tiled) # element-wise multiplication -- (batch_size, num_keys, num_values, 2 * hidden_size)
+            # sim_scores = tf.multiply(keys_tiled, values_tiled) # element-wise multiplication -- (batch_size, num_keys, num_values, 2 * hidden_size)
+            sim_scores = tf.multiply(tf.expand_dims(keys, axis=2), tf.expand_dims(values, axis=1)) # element-wise multiplication -- (batch_size, num_keys, num_values, 2 * hidden_size)
             unweighted_sim = tf.concat([keys_tiled, values_tiled, sim_scores], axis=3) # (batch_size, num_keys, num_values, 6 * hidden_size)
             sim = tf.reshape(tf.tensordot(w_sim_t, unweighted_sim, axes=[[1], [3]]), [-1, keys.get_shape().as_list()[1], values.get_shape().as_list()[1]]) # (1, batch_size, num_keys, num_values) --> (batch_size, num_keys, num_values)
 
