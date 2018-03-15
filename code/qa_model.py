@@ -145,40 +145,32 @@ class QAModel(object):
         # Note, blended_reps_final corresponds to b' in the handout
         # Note, tf.contrib.layers.fully_connected applies a ReLU non-linarity here by default
         blended_reps_final = tf.contrib.layers.fully_connected(blended_reps, num_outputs=self.FLAGS.hidden_size) # blended_reps_final is shape (batch_size, context_len, hidden_size)
-        #=================================ANSWER POINTER=(BASIC)===============
-        #ans_ptr_input= blended_reps_final
-        ans_ptr_attn = MultiplicativeAttn(1, self.FLAGS.hidden_size)
-        ans_ptr_lstm = tf.contrib.rnn.BasicLSTMCell(self.FLAGS.hidden_size)
-        ans_ptr_hidd_state = tf.zeros([self.FLAGS.batch_size,self.FLAGS.hidden_size], dtype= tf.float32)
-        ans_ptr_curr_state = tf.zeros([self.FLAGS.batch_size,self.FLAGS.hidden_size], dtype= tf.float32)
-        state = ans_ptr_hidd_state, ans_ptr_curr_state
-        
-        
-        self.logits_start, self.probdist_start =  masked_softmax( tf.matmul(tf.transpose(v),F_start) + c,self.context_mask, 1)
-        state = ans_ptr_lstm(tf.matmul(ans_ptr_input,tf.transpose(self.logits_starts)), state)
-        ans_ptr_hidd_state, ans_ptr_curr_state = state
-            
-        F_end = tf.nn.tanh(tf.matmul(Vaptr,ans_ptr_input) + (tf.matmul(Waptr,ans_ptr_hidd_state) +ba)) 
-        self.logits_end, self.probdist_end = masked_softmax(tf.matmul(tf.transpose(v),F_end) + c,self.context_mask, 1)
-
         #=================================ANSWER POINTER=======================
-        #construct an LSTM from which to pull the start and end logits
-        ans_ptr_input= tf.reshape(blended_reps_final, shape=[-1,self.FLAGS.hidden_size*self.FLAGS.context_len])
-        #ans_ptr_input= blended_reps_final
+        #Useful implementation references: https://www.tensorflow.org/tutorials/seq2seq and https://github.com/tensorflow/nmt#decoder
+        #Width of the beam search (for end conditioned on start) 
+        beam_search_width = 10 #suggested value by google's NMT tutorial
+        #Need to tile the input with the beam search
+        ans_ptr_input= tf.contrib.seq2seq.tile_batch(blended_reps_final, multiplier=beam_search_width)
+        #Also tile the sequence lengths 
+        sequence_lengths = tf.contrib.seq2seq.tile_batch(tf.reduce_sum(self.context_mask,axis=1), multiplier=beam_search_width)
+        #Define the attention mechanism
+        ans_ptr_attn = tf.contrib.seq2seq.BahdanauAttention(num_units=self.FLAGS.hidden_size,\
+                                                            memory=ans_ptr_input,\
+                                                            memory_sequence_length=sequence_lengths)
+        #Now construct a cell for the decoder        
         ans_ptr_lstm = tf.contrib.rnn.BasicLSTMCell(self.FLAGS.hidden_size)
-        ans_ptr_hidd_state = tf.zeros([self.FLAGS.batch_size,self.FLAGS.hidden_size], dtype= tf.float32)
-        ans_ptr_curr_state = tf.zeros([self.FLAGS.batch_size,self.FLAGS.hidden_size], dtype= tf.float32)
-        state = ans_ptr_hidd_state, ans_ptr_curr_state
         
+        #Wrap the cell in attention
+        ans_ptr_lstm = tf.contrib.seq2seq.AttentionWrapper(cell=ans_ptr_lstm, attention_mechanism=ans_ptr_attn)
         
-    
-        F_start = tf.nn.tanh(tf.matmul(ans_ptr_input,Vaptr) + (tf.matmul(Waptr,ans_ptr_hidd_state) +ba)) 
-        self.logits_start, self.probdist_start =  masked_softmax( tf.matmul(tf.transpose(v),F_start) + c,self.context_mask, 1)
-        state = ans_ptr_lstm(tf.matmul(ans_ptr_input,tf.transpose(self.logits_starts)), state)
-        ans_ptr_hidd_state, ans_ptr_curr_state = state
-            
-        F_end = tf.nn.tanh(tf.matmul(Vaptr,ans_ptr_input) + (tf.matmul(Waptr,ans_ptr_hidd_state) +ba)) 
-        self.logits_end, self.probdist_end = masked_softmax(tf.matmul(tf.transpose(v),F_end) + c,self.context_mask, 1)
+        #Construct the training helper
+        
+        #build the decoder module
+        
+        #Run the dynamic decoder
+        
+        #Get the start and end of the predictions from the dynmic decoder output
+
         
         #=================================SOFTMAX OUTPUT=======================
 
