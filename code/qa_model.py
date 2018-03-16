@@ -196,7 +196,7 @@ class QAModel(object):
         
         
         print 'Build the projection layer'
-        projection_layer = tf.layers.Dense(self.FLAGS.context_len, use_bias=False)
+        projection_layer = tf.layers.Dense(self.FLAGS.context_len, use_bias=False)*self.context_mask
         print 'Build the decoder module'
         ans_ptr_decoder = tf.contrib.seq2seq.BasicDecoder(
                 ans_ptr_lstm, ans_ptr_helper,
@@ -214,6 +214,8 @@ class QAModel(object):
         print('logits shape',logits.shape)
         
         print 'Process the outputs'
+        self.logits_start, self.probdist_start =  masked_softmax(tf.reshape(logits[:,0,:],shape=[-1,self.context_len]),self.context_mask,1)
+        self.logits_end, self.probdist_end =  masked_softmax(tf.reshape(logits[:,1,:],shape=[-1,self.context_len]),self.context_mask,1)
 
         
         #=================================SOFTMAX OUTPUT=======================
