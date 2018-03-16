@@ -146,6 +146,8 @@ class QAModel(object):
         # Note, tf.contrib.layers.fully_connected applies a ReLU non-linarity here by default
         blended_reps_final = tf.contrib.layers.fully_connected(blended_reps, num_outputs=self.FLAGS.hidden_size) # blended_reps_final is shape (batch_size, context_len, hidden_size)
         #=================================ANSWER POINTER=======================
+        #INFERENCE MODEL
+        """
         #Useful implementation references: https://www.tensorflow.org/tutorials/seq2seq and https://github.com/tensorflow/nmt#decoder
         #Width of the beam search (for end conditioned on start) 
         beam_search_width = 10 #suggested value by google's NMT tutorial
@@ -170,6 +172,38 @@ class QAModel(object):
         #Run the dynamic decoder
         
         #Get the start and end of the predictions from the dynmic decoder output
+        """
+        #TRAIN MODEL
+        ans_ptr_input= blended_reps_final
+        #Also tile the sequence lengths 
+        sequence_lengths =tf.reduce_sum(self.context_mask,axis=1)
+        #Define the attention mechanism
+        ans_ptr_attn = tf.contrib.seq2seq.BahdanauAttention(num_units=self.FLAGS.hidden_size,\
+                                                            memory=ans_ptr_input,\
+                                                            memory_sequence_length=sequence_lengths)
+        #Now construct a cell for the decoder        
+        ans_ptr_lstm = tf.contrib.rnn.BasicLSTMCell(self.FLAGS.hidden_size)
+        
+        #Wrap the cell in attention
+        ans_ptr_lstm = tf.contrib.seq2seq.AttentionWrapper(cell=ans_ptr_lstm, attention_mechanism=ans_ptr_attn)
+        
+        #Construct the training helper
+        ans_ptr_helper = tf.contrib.seq2seq.TrainingHelper(decoder_emb_inp, tf.ones_like(sequence_lengths)*2) #Always decode seuqnce of 2
+        
+        #build the decoder module
+        projection_layer = tf.layers.Dense(self.FLAGS.contex_len, use_bias=False)
+        ans_ptr_decoder = tf.contrib.seq2seq.BasicDecoder(
+                ans_ptr_lstm, ans_ptr_helper, ans_ptr_input,
+                output_layer=projection_layer)
+        
+        #Run the dynamic decoder
+        outputs, _ = tf.contrib.seq2seq.dynamic_decode(ans_ptr_decoder,maximum_iterations=2)
+        logits = outputs.rnn_output
+        print('outputs', outputs)
+        print('logits',logits)
+        
+        #Get the start and end of the predictions from the dynmic decoder output
+        self.logits_end, self.probdist_end = softmax_layer_end.build_graph(blended_reps_final, self.context_mask)
 
         
         #=================================SOFTMAX OUTPUT=======================
