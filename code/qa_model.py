@@ -146,6 +146,7 @@ class QAModel(object):
         # Note, tf.contrib.layers.fully_connected applies a ReLU non-linarity here by default
         blended_reps_final = tf.contrib.layers.fully_connected(blended_reps, num_outputs=self.FLAGS.hidden_size) # blended_reps_final is shape (batch_size, context_len, hidden_size)
         #=================================ANSWER POINTER=======================
+        """
         print 'Building the AnsPtr'.center(80,'=')
         #TRAIN MODEL
         ans_ptr_batch_size = tf.shape(self.context_ids)[0]
@@ -212,19 +213,41 @@ class QAModel(object):
 
 
         print 'Done building the AnsPtr'.center(80,'=')
+        """
         #=================================SOFTMAX OUTPUT=======================
 
         # Use softmax layer to compute probability distribution for start location
         # Note this produces self.logits_start and self.probdist_start, both of which have shape (batch_size, context_len)
-        #with vs.variable_scope("StartDist"):
-        #    softmax_layer_start = SimpleSoftmaxLayer()
-        #    self.logits_start, self.probdist_start = softmax_layer_start.build_graph(blended_reps_final, self.context_mask)
+        with vs.variable_scope("StartDist"):
+            softmax_layer_start = SimpleSoftmaxLayer()
+            self.logits_start, self.probdist_start = softmax_layer_start.build_graph(blended_reps_final, self.context_mask)
 
-        # Use softmax layer to compute probability distribution for end location
-        # Note this produces self.logits_end and self.probdist_end, both of which have shape (batch_size, context_len)
-        #with vs.variable_scope("EndDist"):
-        #    softmax_layer_end = SimpleSoftmaxLayer()
-        #    self.logits_end, self.probdist_end = softmax_layer_end.build_graph(blended_reps_final, self.context_mask)
+        #Use softmax layer to compute probability distribution for end location
+        #Note this produces self.logits_end and self.probdist_end, both of which have shape (batch_size, context_len)
+        with vs.variable_scope("EndDist"):
+            answer_len = 30
+            batch_size = tf.shape(self.context_ids)[0]
+            #Construct the input
+            start  = tf.argmax(self.probdist_start, axis=1)
+            inputs_for_end = tf.zeros(shape=[batch_size,answer_len],dtype=tf.float32)
+            masks_for_end  = tf.zeros(shape=[batch_size,answer_len],dtype=tf.float32)
+            self.logits_end   =  tf.ones(shape=[batch_size,self.FLAGS.context_len],dtype=tf.float32)*(-1e30)
+            self.probdist_end =  tf.zeros(shape=[batch_size,self.FLAGS.context_len],dtype=tf.float32)
+            
+            #Predict on end within 35 of end
+            inputs_for_end[:,0:min(answer_len,self.FLAGS.context_len-start)] = self.probdist_start[:,start:min(start+answer_len,self.FLAGS.context_len)]
+            masks_for_end[:,0:min(answer_len,self.FLAGS.context_len-start)] = 1
+            logits = tf.contrib.layers.fully_connected(inputs_for_end, num_outputs=30, activation_fn=None) 
+            print 'end logits', logits
+            #logits = tf.squeeze(logits, axis=[2]) # shape (batch_size, seq_len)
+            # Take softmax over sequence
+            logits_end, probdist_end = masked_softmax(logits, masks_for_end, 1)
+            self.logits_end[:,start:min(start+answer_len,self.FLAGS.context_len-start)] = logits_end[:,0:min(answer_len,self.FLAGS.context_len-start)]
+            self.probdist_end[:,start:min(start+answer_len,self.FLAGS.context_len-start)] = probdist_end[:,0:min(answer_len,self.FLAGS.context_len-start)]
+            
+        self.infer_start = start
+        self.infer_end   = start + tf.argmax(probdist_end,axis=1)
+            
 
 
     def add_loss(self):
@@ -367,9 +390,9 @@ class QAModel(object):
         input_feed[self.qn_ids] = batch.qn_ids
         input_feed[self.qn_mask] = batch.qn_mask
 
-        output_feed = [self.infer_outputs,self.infer_start, self.infer_end]
-        [infer_outputs, start_pos, end_pos] = session.run(output_feed, input_feed)
-        #print 'Infer outputs', infer_outputs
+        output_feed = [self.infer_start, self.infer_end]
+        [start_pos, end_pos] = session.run(output_feed, input_feed)
+    
         return start_pos, end_pos
 
 
