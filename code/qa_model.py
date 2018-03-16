@@ -202,8 +202,8 @@ class QAModel(object):
                 output_layer=projection_layer)
         infer_outputs, _ , _ = tf.contrib.seq2seq.dynamic_decode(inference_decoder,maximum_iterations=2)
         self.infer_outputs = infer_outputs
-        self.infer_start = infer_outputs.sample_id[0]
-        self.infer_end   = infer_outputs.sample_id[1]
+        self.infer_start = infer_outputs.sample_id[:,0]
+        self.infer_end   = infer_outputs.sample_id[:,1]
 
 
         print 'Done building the AnsPtr'.center(80,'=')
