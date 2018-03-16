@@ -195,7 +195,7 @@ class QAModel(object):
         #NOW FOR THE INFERENCE MODEL USING GREEDY SEARCH
         inference_helper = tf.contrib.seq2seq.GreedyEmbeddingHelper(
                     lambda x: tf.one_hot(x, self.FLAGS.context_len),
-                    tf.fill([ans_ptr_batch_size], 0), self.FLAGS.context_len+2)
+                    tf.fill([ans_ptr_batch_size], 5), self.FLAGS.context_len+2)
         inference_decoder = tf.contrib.seq2seq.BasicDecoder(
                 ans_ptr_lstm_wrap, inference_helper,
                 initial_state=ans_ptr_lstm_wrap.zero_state(dtype=tf.float32, batch_size=ans_ptr_batch_size),
