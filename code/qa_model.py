@@ -196,7 +196,7 @@ class QAModel(object):
         
         
         print 'Build the projection layer'
-        projection_layer = tf.layers.Dense(self.FLAGS.context_len, use_bias=False,name='Projection layer')
+        projection_layer = tf.layers.Dense(self.FLAGS.context_len, use_bias=False)
         print 'Build the decoder module'
         ans_ptr_decoder = tf.contrib.seq2seq.BasicDecoder(
                 ans_ptr_lstm, ans_ptr_helper,
