@@ -465,7 +465,7 @@ class QAModel(object):
         for batch in get_batch_generator(self.word2id, context_path, qn_path, ans_path, self.FLAGS.batch_size, context_len=self.FLAGS.context_len, question_len=self.FLAGS.question_len, discard_long=False):
 
             pred_start_pos, pred_end_pos = self.get_start_end_pos(session, batch)
-            #print 'Pred start pos', pred_start_pos, ', pred end pos', pred_end_pos
+            print 'Pred start pos', pred_start_pos, ', pred end pos', pred_end_pos
 
             # Convert the start and end positions to lists length batch_size
             pred_start_pos = pred_start_pos.tolist() # list length batch_size
@@ -509,7 +509,7 @@ class QAModel(object):
 
         toc = time.time()
         logging.info("Calculating F1/EM for %i examples in %s set took %.2f seconds" % (example_num, dataset, toc-tic))
-        logging.info("Found %i examples where end was after start"%(number_start_after_end))
+        logging.info("Found %i examples where start was after end"%(number_start_after_end))
         logging.info("Found %i examples where end-start was more than 3 times the answer length"%(number_long_answers))
 
         return f1_total, em_total
