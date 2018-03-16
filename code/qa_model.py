@@ -234,17 +234,16 @@ class QAModel(object):
             self.logits_end   =  tf.ones(shape=[batch_size,self.FLAGS.context_len],dtype=tf.float32)*(-1e30)
             self.probdist_end =  tf.zeros(shape=[batch_size,self.FLAGS.context_len],dtype=tf.float32)
             
-            #Predict on end within 35 of end
-            slice_tensor = tf.cond(answer_len<self.FLAGS.context_len-start,true_fn=lambda x: self.FLAGS.context_len-start,false_fn=lambda x: answer_len)
-            inputs_for_end[:,slice_tensor] = self.probdist_start[:,start:start+slice_tensor]
-            masks_for_end[:,0:min(answer_len,self.FLAGS.context_len-start)] = 1
+            #Predict on end within 35 of end   
+            inputs_for_end[:,:answer_len] = self.probdist_start[:,start:start+answer_len]
+            masks_for_end[:,0:answer_len] = 1
             logits = tf.contrib.layers.fully_connected(inputs_for_end, num_outputs=30, activation_fn=None) 
             print 'end logits', logits
             #logits = tf.squeeze(logits, axis=[2]) # shape (batch_size, seq_len)
             # Take softmax over sequence
             logits_end, probdist_end = masked_softmax(logits, masks_for_end, 1)
-            self.logits_end[:,start:min(start+answer_len,self.FLAGS.context_len-start)] = logits_end[:,0:min(answer_len,self.FLAGS.context_len-start)]
-            self.probdist_end[:,start:min(start+answer_len,self.FLAGS.context_len-start)] = probdist_end[:,0:min(answer_len,self.FLAGS.context_len-start)]
+            self.logits_end[:,start:start+answer_len] = logits_end[:,0:answer_len]
+            self.probdist_end[:,start:start+answer_len] = probdist_end[:,0:answer_len]
             
         self.infer_start = start
         self.infer_end   = start + tf.argmax(probdist_end,axis=1)
