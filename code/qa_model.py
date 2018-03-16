@@ -173,9 +173,11 @@ class QAModel(object):
         print 'Build the projection layer'
         projection_layer = tf.layers.Dense(self.FLAGS.context_len, use_bias=False)
         print 'Build the decoder module'
+        initial_state = ans_ptr_lstm_wrap.zero_state(dtype=tf.float32, batch_size=ans_ptr_batch_size)
+        initial_state = initial_state.clone(cell_state = tf.get_variable('initial_cell', shape=(self.FLAGS.hidden_size)))
         ans_ptr_decoder = tf.contrib.seq2seq.BasicDecoder(
                 ans_ptr_lstm_wrap, ans_ptr_helper,
-                initial_state=ans_ptr_lstm_wrap.zero_state(dtype=tf.float32, batch_size=ans_ptr_batch_size),
+                initial_state=initial_state,
                 output_layer=projection_layer)
         
         #Run the dynamic decoder
@@ -199,7 +201,7 @@ class QAModel(object):
                     tf.fill([ans_ptr_batch_size], self.FLAGS.context_len), self.FLAGS.context_len+1)
         inference_decoder = tf.contrib.seq2seq.BasicDecoder(
                 ans_ptr_lstm_wrap, inference_helper,
-                initial_state=ans_ptr_lstm_wrap.zero_state(dtype=tf.float32, batch_size=ans_ptr_batch_size),
+                initial_state=initial_state,
                 output_layer=projection_layer)
         infer_outputs, _ , _ = tf.contrib.seq2seq.dynamic_decode(inference_decoder,maximum_iterations=2)
         self.infer_outputs = infer_outputs
