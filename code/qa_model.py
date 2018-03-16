@@ -200,10 +200,12 @@ class QAModel(object):
         print 'Build the decoder module'
         ans_ptr_decoder = tf.contrib.seq2seq.BasicDecoder(
                 ans_ptr_lstm, ans_ptr_helper,
-                initial_state=ans_ptr_lstm.zero_state(dtype=tf.float32, batch_size=self.FLAGS.batch_size),
+                initial_state=ans_ptr_lstm.zero_state(dtype=tf.int32, batch_size=self.FLAGS.batch_size),
                 output_layer=projection_layer)
         
         #Run the dynamic decoder
+        print 'AnsPtrDecoder: ', ans_ptr_decoder
+        print 'AnsPtrDecoder: ', 
         print 'Build the dynamic_decode op'
         outputs, _ = tf.contrib.seq2seq.dynamic_decode(ans_ptr_decoder,maximum_iterations=2)
         logits = outputs.rnn_output
