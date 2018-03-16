@@ -204,12 +204,14 @@ class QAModel(object):
                 output_layer=projection_layer)
         
         #Run the dynamic decoder
-        print 'AnsPtrDecoder: ', 
         print 'Build the dynamic_decode op'
-        outputs, _ = tf.contrib.seq2seq.dynamic_decode(ans_ptr_decoder,maximum_iterations=2)
-        logits = outputs.rnn_output
-        print('outputs', outputs)
+        final_outputs, final_state, final_sequence_lengths = tf.contrib.seq2seq.dynamic_decode(ans_ptr_decoder,maximum_iterations=2)
+        print('final outputs', final_outputs)
+        print('final_state', final_state)
+        print('final_sequence_lengths',final_sequence_lengths)
+        logits = final_outputs.rnn_output
         print('logits',logits)
+        print('logits shape',logits.shape)
         
         print 'Process the outputs'
 
