@@ -232,6 +232,7 @@ class QAModel(object):
             argmax_mask = tf.cast(tf.tile(tf.reshape(tf.range(0,self.FLAGS.context_len,1),[1,self.FLAGS.context_len]),[batch_size,1]),tf.int32)          
             print 'argmax mask', argmax_mask
             end_mask = tf.where(argmax_mask<start,tf.zeros_like(self.context_mask), self.context_mask )
+            self.end_mask= end_mask
             self.logits_end, self.probdist_end = softmax_layer_start.build_graph(blended_reps_final, end_mask)
             
         
@@ -299,10 +300,11 @@ class QAModel(object):
         input_feed[self.keep_prob] = 1.0 - self.FLAGS.dropout # apply dropout
 
         # output_feed contains the things we want to fetch.
-        output_feed = [self.updates, self.summaries, self.loss, self.global_step, self.param_norm, self.gradient_norm]
+        output_feed = [self.updates, self.summaries, self.loss, self.global_step, self.param_norm, self.gradient_norm,self.end_mask]
 
         # Run the model
-        [_, summaries, loss, global_step, param_norm, gradient_norm] = session.run(output_feed, input_feed)
+        [_, summaries, loss, global_step, param_norm, gradient_norm,end_mask] = session.run(output_feed, input_feed)
+        print 'end_mask',end_mask
 
         # All summaries in the graph are added to Tensorboard
         summary_writer.add_summary(summaries, global_step)
@@ -372,15 +374,13 @@ class QAModel(object):
           start_pos, end_pos: both numpy arrays shape (batch_size).
             The most likely start and end positions for each example in the batch.
         """
-        input_feed = {}
-        input_feed[self.context_ids] = batch.context_ids
-        input_feed[self.context_mask] = batch.context_mask
-        input_feed[self.qn_ids] = batch.qn_ids
-        input_feed[self.qn_mask] = batch.qn_mask
+        # Get start_dist and end_dist, both shape (batch_size, context_len)
+        start_dist, end_dist = self.get_prob_dists(session, batch)
 
-        output_feed = [self.infer_start, self.infer_end]
-        [start_pos, end_pos] = session.run(output_feed, input_feed)
-    
+        # Take argmax to get start_pos and end_post, both shape (batch_size)
+        start_pos = np.argmax(start_dist, axis=1)
+        end_pos = np.argmax(end_dist, axis=1)
+
         return start_pos, end_pos
 
 
