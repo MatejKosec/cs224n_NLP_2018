@@ -162,7 +162,7 @@ class QAModel(object):
         
         #Wrap the cell in attention
         print 'Wrap the LSTM in attention'
-        ans_ptr_lstm = tf.contrib.seq2seq.AttentionWrapper(cell=ans_ptr_lstm, attention_mechanism=ans_ptr_attn)
+        ans_ptr_lstm_wrap = tf.contrib.seq2seq.AttentionWrapper(cell=ans_ptr_lstm, attention_mechanism=ans_ptr_attn)
         
         #Construct the training helper
         print 'Consturcted the trainiing helper'
@@ -173,7 +173,7 @@ class QAModel(object):
         projection_layer = tf.layers.Dense(self.FLAGS.context_len, use_bias=False)
         print 'Build the decoder module'
         ans_ptr_decoder = tf.contrib.seq2seq.BasicDecoder(
-                ans_ptr_lstm, ans_ptr_helper,
+                ans_ptr_lstm_wrap, ans_ptr_helper,
                 initial_state=ans_ptr_lstm.zero_state(dtype=tf.float32, batch_size=ans_ptr_batch_size),
                 output_layer=projection_layer)
         
@@ -190,6 +190,20 @@ class QAModel(object):
         print 'Process the outputs'
         self.logits_start, self.probdist_start =  masked_softmax(tf.reshape(logits[:,0,:],shape=[-1,self.FLAGS.context_len]),self.context_mask,1)
         self.logits_end, self.probdist_end =  masked_softmax(tf.reshape(logits[:,1,:],shape=[-1,self.FLAGS.context_len]),self.context_mask,1)
+        
+        
+        #NOW FOR THE INFERENCE MODEL USING BEAM SEARCH
+        inference_helper = tf.contrib.seq2seq.GreedyEmbeddingHelper(
+                    lambda x: tf.one_hot(x, self.FLAGS.context_len),
+                    tf.fill([ans_ptr_batch_size], self.FLAGS.context_len+1), self.FLAGS.context_len+2)
+        inference_decoder = tf.contrib.seq2seq.BasicDecoder(
+                ans_ptr_lstm_wrap, inference_helper,
+                initial_state=ans_ptr_lstm.zero_state(dtype=tf.float32, batch_size=ans_ptr_batch_size),
+                output_layer=projection_layer)
+        infer_outputs, _ , _ = tf.contrib.seq2seq.dynamic_decode(inference_decoder,maximum_iterations=2)
+        self.infer_start = infer_outputs.sample_id[0]
+        self.infer_end   = infer_outputs.sample_id[1]
+
 
         print 'Done building the AnsPtr'.center(80,'=')
         #=================================SOFTMAX OUTPUT=======================
@@ -341,13 +355,15 @@ class QAModel(object):
           start_pos, end_pos: both numpy arrays shape (batch_size).
             The most likely start and end positions for each example in the batch.
         """
-        # Get start_dist and end_dist, both shape (batch_size, context_len)
-        start_dist, end_dist = self.get_prob_dists(session, batch)
+        input_feed = {}
+        input_feed[self.context_ids] = batch.context_ids
+        input_feed[self.context_mask] = batch.context_mask
+        input_feed[self.qn_ids] = batch.qn_ids
+        input_feed[self.qn_mask] = batch.qn_mask
 
-        # Take argmax to get start_pos and end_post, both shape (batch_size)
-        start_pos = np.argmax(start_dist, axis=1)
-        end_pos = np.argmax(end_dist, axis=1)
-
+        output_feed = [self.infer_start, self.infer_end]
+        [start_pos, end_pos] = session.run(output_feed, input_feed)
+        
         return start_pos, end_pos
 
 
