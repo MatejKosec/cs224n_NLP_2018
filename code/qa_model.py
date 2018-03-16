@@ -146,35 +146,9 @@ class QAModel(object):
         # Note, tf.contrib.layers.fully_connected applies a ReLU non-linarity here by default
         blended_reps_final = tf.contrib.layers.fully_connected(blended_reps, num_outputs=self.FLAGS.hidden_size) # blended_reps_final is shape (batch_size, context_len, hidden_size)
         #=================================ANSWER POINTER=======================
-        #INFERENCE MODEL
-        """
-        #Useful implementation references: https://www.tensorflow.org/tutorials/seq2seq and https://github.com/tensorflow/nmt#decoder
-        #Width of the beam search (for end conditioned on start) 
-        beam_search_width = 10 #suggested value by google's NMT tutorial
-        #Need to tile the input with the beam search
-        ans_ptr_input= tf.contrib.seq2seq.tile_batch(blended_reps_final, multiplier=beam_search_width)
-        #Also tile the sequence lengths 
-        sequence_lengths = tf.contrib.seq2seq.tile_batch(tf.reduce_sum(self.context_mask,axis=1), multiplier=beam_search_width)
-        #Define the attention mechanism
-        ans_ptr_attn = tf.contrib.seq2seq.BahdanauAttention(num_units=self.FLAGS.hidden_size,\
-                                                            memory=ans_ptr_input,\
-                                                            memory_sequence_length=sequence_lengths)
-        #Now construct a cell for the decoder        
-        ans_ptr_lstm = tf.contrib.rnn.BasicLSTMCell(self.FLAGS.hidden_size)
-        
-        #Wrap the cell in attention
-        ans_ptr_lstm = tf.contrib.seq2seq.AttentionWrapper(cell=ans_ptr_lstm, attention_mechanism=ans_ptr_attn)
-        
-        #Construct the training helper
-        
-        #build the decoder module
-        
-        #Run the dynamic decoder
-        
-        #Get the start and end of the predictions from the dynmic decoder output
-        """
         print 'Building the AnsPtr'.center(80,'=')
         #TRAIN MODEL
+        ans_ptr_batch_size = blended_reps_final.shape.as_list()[0]
         ans_ptr_input= blended_reps_final
         #Also tile the sequence lengths 
         sequence_lengths =tf.reduce_sum(self.context_mask,axis=1)
@@ -200,7 +174,7 @@ class QAModel(object):
         print 'Build the decoder module'
         ans_ptr_decoder = tf.contrib.seq2seq.BasicDecoder(
                 ans_ptr_lstm, ans_ptr_helper,
-                initial_state=ans_ptr_lstm.zero_state(dtype=tf.float32, batch_size=self.FLAGS.batch_size),
+                initial_state=ans_ptr_lstm.zero_state(dtype=tf.float32, batch_size=ans_ptr_batch_size),
                 output_layer=projection_layer)
         
         #Run the dynamic decoder
