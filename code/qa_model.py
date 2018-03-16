@@ -201,6 +201,7 @@ class QAModel(object):
                 initial_state=ans_ptr_lstm_wrap.zero_state(dtype=tf.float32, batch_size=ans_ptr_batch_size),
                 output_layer=projection_layer)
         infer_outputs, _ , _ = tf.contrib.seq2seq.dynamic_decode(inference_decoder,maximum_iterations=2)
+        self.infer_outputs = infer_outputs
         self.infer_start = infer_outputs.sample_id[0]
         self.infer_end   = infer_outputs.sample_id[1]
 
@@ -361,8 +362,9 @@ class QAModel(object):
         input_feed[self.qn_ids] = batch.qn_ids
         input_feed[self.qn_mask] = batch.qn_mask
 
-        output_feed = [self.infer_start, self.infer_end]
-        [start_pos, end_pos] = session.run(output_feed, input_feed)
+        output_feed = [self.infer_outputs,self.infer_start, self.infer_end]
+        [infer_outputs, start_pos, end_pos] = session.run(output_feed, input_feed)
+        print 'Infer outputs', infer_outputs
         return start_pos, end_pos
 
 
