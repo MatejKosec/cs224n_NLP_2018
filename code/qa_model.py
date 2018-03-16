@@ -148,7 +148,7 @@ class QAModel(object):
         #=================================ANSWER POINTER=======================
         print 'Building the AnsPtr'.center(80,'=')
         #TRAIN MODEL
-        ans_ptr_batch_size = blended_reps_final.shape.as_list()[0]
+        ans_ptr_batch_size = self.context_ids.as_list()[0]
         ans_ptr_input= blended_reps_final
         #Also tile the sequence lengths 
         sequence_lengths =tf.reduce_sum(self.context_mask,axis=1)
