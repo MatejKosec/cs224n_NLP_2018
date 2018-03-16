@@ -365,7 +365,7 @@ class QAModel(object):
 
         output_feed = [self.infer_outputs,self.infer_start, self.infer_end]
         [infer_outputs, start_pos, end_pos] = session.run(output_feed, input_feed)
-        print 'Infer outputs', infer_outputs
+        #print 'Infer outputs', infer_outputs
         return start_pos, end_pos
 
 
