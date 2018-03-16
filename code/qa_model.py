@@ -162,7 +162,7 @@ class QAModel(object):
             index_mask = tf.tile(tf.reshape(tf.range(0,self.FLAGS.context_len,1),[1,self.FLAGS.context_len]),[batch_size,1])
             print 'argmax start', argmax_start
             end_mask = tf.cast(index_mask<argmax_start,tf.int32)
-            end_mask = tf.minimum(end_mask, self.context_mask)
+            #end_mask = tf.minimum(end_mask, self.context_mask)
             print 'context_mask', self.context_mask
         with vs.variable_scope("EndDist"):    
             softmax_layer_end = SimpleSoftmaxLayer()
@@ -394,7 +394,7 @@ class QAModel(object):
         for batch in get_batch_generator(self.word2id, context_path, qn_path, ans_path, self.FLAGS.batch_size, context_len=self.FLAGS.context_len, question_len=self.FLAGS.question_len, discard_long=False):
 
             pred_start_pos, pred_end_pos = self.get_start_end_pos(session, batch)
-            print 'Pred start pos', pred_start_pos, ', pred end pos', pred_end_pos
+            #print 'Pred start pos', pred_start_pos, ', pred end pos', pred_end_pos
 
             # Convert the start and end positions to lists length batch_size
             pred_start_pos = pred_start_pos.tolist() # list length batch_size
