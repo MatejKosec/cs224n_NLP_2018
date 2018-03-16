@@ -182,10 +182,10 @@ class QAModel(object):
                                                             memory=ans_ptr_input,\
                                                             memory_sequence_length=sequence_lengths)
         #Now construct a cell for the decoder        
-        ans_ptr_lstm = tf.contrib.rnn.BasicLSTMCell(self.FLAGS.hidden_size,name='ans_ptr_lstm')
+        ans_ptr_lstm = tf.contrib.rnn.BasicLSTMCell(self.FLAGS.hidden_size)
         
         #Wrap the cell in attention
-        ans_ptr_lstm = tf.contrib.seq2seq.AttentionWrapper(cell=ans_ptr_lstm, attention_mechanism=ans_ptr_attn,name='ans_ptr_attn')
+        ans_ptr_lstm = tf.contrib.seq2seq.AttentionWrapper(cell=ans_ptr_lstm, attention_mechanism=ans_ptr_attn)
         
         #Construct the training helper
         ans_ptr_helper = tf.contrib.seq2seq.TrainingHelper(self.ans_span, tf.ones_like(sequence_lengths)*2) #Always decode seuqnce of 2
