@@ -86,11 +86,11 @@ class QAModel(object):
         # Add placeholders for inputs.
         # These are all batch-first: the None corresponds to batch_size and
         # allows you to run the same model with variable batch_size
-        self.context_ids = tf.placeholder(tf.int32, shape=[None, self.FLAGS.context_len], name='Context_ids')
-        self.context_mask = tf.placeholder(tf.int32, shape=[None, self.FLAGS.context_len], name='context_mask')
-        self.qn_ids = tf.placeholder(tf.int32, shape=[None, self.FLAGS.question_len], name='qn_ids')
-        self.qn_mask = tf.placeholder(tf.int32, shape=[None, self.FLAGS.question_len], name='qn_mask')
-        self.ans_span = tf.placeholder(tf.int32, shape=[None, 2], name='Ans_span')
+        self.context_ids = tf.placeholder(tf.int32, shape=[None, self.FLAGS.context_len])
+        self.context_mask = tf.placeholder(tf.int32, shape=[None, self.FLAGS.context_len])
+        self.qn_ids = tf.placeholder(tf.int32, shape=[None, self.FLAGS.question_len])
+        self.qn_mask = tf.placeholder(tf.int32, shape=[None, self.FLAGS.question_len])
+        self.ans_span = tf.placeholder(tf.int32, shape=[None, 2])
 
         # Add a placeholder to feed in the keep probability (for dropout).
         # This is necessary so that we can instruct the model to use dropout when training, but not when testing
@@ -131,8 +131,8 @@ class QAModel(object):
         # Note: here the RNNEncoder is shared (i.e. the weights are the same)
         # between the context and the question.
         encoder = RNNEncoder(self.FLAGS.hidden_size, self.keep_prob)
-        context_hiddens, context_states = encoder.build_graph(self.context_embs, self.context_mask) # (batch_size, context_len, hidden_size*2)
-        question_hiddens, question_states = encoder.build_graph(self.qn_embs, self.qn_mask) # (batch_size, question_len, hidden_size*2)
+        context_hiddens = encoder.build_graph(self.context_embs, self.context_mask) # (batch_size, context_len, hidden_size*2)
+        question_hiddens = encoder.build_graph(self.qn_embs, self.qn_mask) # (batch_size, question_len, hidden_size*2)
 
         # Use context hidden states to attend to question hidden states
         attn_layer = BasicAttn(self.keep_prob, self.FLAGS.hidden_size*2, self.FLAGS.hidden_size*2)
@@ -145,99 +145,18 @@ class QAModel(object):
         # Note, blended_reps_final corresponds to b' in the handout
         # Note, tf.contrib.layers.fully_connected applies a ReLU non-linarity here by default
         blended_reps_final = tf.contrib.layers.fully_connected(blended_reps, num_outputs=self.FLAGS.hidden_size) # blended_reps_final is shape (batch_size, context_len, hidden_size)
-        #=================================ANSWER POINTER=======================
-        """
-        print 'Building the AnsPtr'.center(80,'=')
-        #TRAIN MODEL
-        ans_ptr_batch_size = tf.shape(self.context_ids)[0]
-        ans_ptr_input= blended_reps_final
-        #Also tile the sequence lengths 
-        sequence_lengths =tf.reduce_sum(self.context_mask,axis=1)
-        #Define the attention mechanism
-        ans_ptr_attn = tf.contrib.seq2seq.BahdanauAttention(num_units=self.FLAGS.hidden_size,\
-                                                            memory=ans_ptr_input,\
-                                                            memory_sequence_length=sequence_lengths)
-        #Now construct a cell for the decoder
-        print 'Build the decoder LSTM'
-        ans_ptr_lstm = tf.contrib.rnn.BasicLSTMCell(self.FLAGS.hidden_size)
-        
-        #Wrap the cell in attention
-        print 'Wrap the LSTM in attention'
-        ans_ptr_lstm_wrap = tf.contrib.seq2seq.AttentionWrapper(cell=ans_ptr_lstm, attention_mechanism=ans_ptr_attn)
-        
-        #Construct the training helper
-        print 'Consturcted the trainiing helper'
-        inputs_to_trainer= tf.concat([tf.fill([ans_ptr_batch_size,1], self.FLAGS.context_len),self.ans_span],axis=1)
-        ans_ptr_helper = tf.contrib.seq2seq.TrainingHelper(tf.one_hot(inputs_to_trainer,self.FLAGS.context_len), tf.ones_like(sequence_lengths)*2) #Always decode seuqnce of 2
-        
-        
-        print 'Build the projection layer'
-        projection_layer = tf.layers.Dense(self.FLAGS.context_len, use_bias=False)
-        print 'Build the decoder module'
-        print 'Context states', context_states
-        initial_state = ans_ptr_lstm_wrap.zero_state(dtype=tf.float32, batch_size=ans_ptr_batch_size)
-        print 'Initial state: ', initial_state
-        initial_state = initial_state.clone(cell_state = tf.contrib.rnn.LSTMStateTuple(*question_states))
-        ans_ptr_decoder = tf.contrib.seq2seq.BasicDecoder(
-                ans_ptr_lstm_wrap, ans_ptr_helper,
-                initial_state=initial_state,
-                output_layer=projection_layer)
-        
-        #Run the dynamic decoder
-        print 'Build the dynamic_decode op'
-        final_outputs, final_state, final_sequence_lengths = tf.contrib.seq2seq.dynamic_decode(ans_ptr_decoder,maximum_iterations=2)
-        print('final outputs', final_outputs)
-        print('final_state', final_state)
-        print('final_sequence_lengths',final_sequence_lengths)
-        logits = final_outputs.rnn_output
-        print('logits',logits)
-        print('logits shape',logits.shape)
-        
-        print 'Process the outputs'
-        self.logits_start, self.probdist_start =  masked_softmax(tf.reshape(logits[:,0,:],shape=[-1,self.FLAGS.context_len]),self.context_mask,1)
-        self.logits_end, self.probdist_end =  masked_softmax(tf.reshape(logits[:,1,:],shape=[-1,self.FLAGS.context_len]),self.context_mask,1)
-        
-        
-        #NOW FOR THE INFERENCE MODEL USING GREEDY SEARCH
-        inference_helper = tf.contrib.seq2seq.GreedyEmbeddingHelper(
-                    lambda x: tf.one_hot(x, self.FLAGS.context_len),
-                    tf.fill([ans_ptr_batch_size], self.FLAGS.context_len), self.FLAGS.context_len+1)
-        inference_decoder = tf.contrib.seq2seq.BasicDecoder(
-                ans_ptr_lstm_wrap, inference_helper,
-                initial_state=initial_state,
-                output_layer=projection_layer)
-        infer_outputs, _ , _ = tf.contrib.seq2seq.dynamic_decode(inference_decoder,maximum_iterations=2)
-        self.infer_outputs = infer_outputs
-        self.infer_start = infer_outputs.sample_id[:,0]
-        self.infer_end   = infer_outputs.sample_id[:,1]
-
-
-        print 'Done building the AnsPtr'.center(80,'=')
-        """
-        #=================================SOFTMAX OUTPUT=======================
 
         # Use softmax layer to compute probability distribution for start location
         # Note this produces self.logits_start and self.probdist_start, both of which have shape (batch_size, context_len)
-        batch_size = tf.shape(self.context_ids)[0]
         with vs.variable_scope("StartDist"):
             softmax_layer_start = SimpleSoftmaxLayer()
             self.logits_start, self.probdist_start = softmax_layer_start.build_graph(blended_reps_final, self.context_mask)
 
-        #Use softmax layer to compute probability distribution for end location
-        #Note this produces self.logits_end and self.probdist_end, both of which have shape (batch_size, context_len)
+        # Use softmax layer to compute probability distribution for end location
+        # Note this produces self.logits_end and self.probdist_end, both of which have shape (batch_size, context_len)
         with vs.variable_scope("EndDist"):
-            start = tf.cast(tf.tile(tf.reshape(tf.argmax(self.probdist_start,axis=1),shape=[batch_size,1]),[1,self.FLAGS.context_len] ),tf.int32)
-            print 'start', start
-            argmax_mask = tf.cast(tf.tile(tf.reshape(tf.range(0,self.FLAGS.context_len,1),[1,self.FLAGS.context_len]),[batch_size,1]),tf.int32)          
-            print 'argmax mask', argmax_mask
-            end_mask = tf.where(argmax_mask<start,tf.zeros_like(self.context_mask), self.context_mask )
-            self.end_mask= end_mask
-            
             softmax_layer_end = SimpleSoftmaxLayer()
-            self.logits_end, self.probdist_end = softmax_layer_end.build_graph(blended_reps_final, end_mask)
-            
-        
-            
+            self.logits_end, self.probdist_end = softmax_layer_end.build_graph(blended_reps_final, self.context_mask)
 
 
     def add_loss(self):
@@ -301,11 +220,10 @@ class QAModel(object):
         input_feed[self.keep_prob] = 1.0 - self.FLAGS.dropout # apply dropout
 
         # output_feed contains the things we want to fetch.
-        output_feed = [self.updates, self.summaries, self.loss, self.global_step, self.param_norm, self.gradient_norm,self.end_mask]
+        output_feed = [self.updates, self.summaries, self.loss, self.global_step, self.param_norm, self.gradient_norm]
 
         # Run the model
-        [_, summaries, loss, global_step, param_norm, gradient_norm,end_mask] = session.run(output_feed, input_feed)
-        #print 'end_mask',end_mask
+        [_, summaries, loss, global_step, param_norm, gradient_norm] = session.run(output_feed, input_feed)
 
         # All summaries in the graph are added to Tensorboard
         summary_writer.add_summary(summaries, global_step)
