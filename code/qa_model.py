@@ -86,11 +86,11 @@ class QAModel(object):
         # Add placeholders for inputs.
         # These are all batch-first: the None corresponds to batch_size and
         # allows you to run the same model with variable batch_size
-        self.context_ids = tf.placeholder(tf.int32, shape=[None, self.FLAGS.context_len])
-        self.context_mask = tf.placeholder(tf.int32, shape=[None, self.FLAGS.context_len])
-        self.qn_ids = tf.placeholder(tf.int32, shape=[None, self.FLAGS.question_len])
-        self.qn_mask = tf.placeholder(tf.int32, shape=[None, self.FLAGS.question_len])
-        self.ans_span = tf.placeholder(tf.int32, shape=[None, 2])
+        self.context_ids = tf.placeholder(tf.int32, shape=[None, self.FLAGS.context_len], name='Context_ids')
+        self.context_mask = tf.placeholder(tf.int32, shape=[None, self.FLAGS.context_len], name='context_mask')
+        self.qn_ids = tf.placeholder(tf.int32, shape=[None, self.FLAGS.question_len], name='qn_ids')
+        self.qn_mask = tf.placeholder(tf.int32, shape=[None, self.FLAGS.question_len], name='qn_mask')
+        self.ans_span = tf.placeholder(tf.int32, shape=[None, 2], name='Ans_span')
 
         # Add a placeholder to feed in the keep probability (for dropout).
         # This is necessary so that we can instruct the model to use dropout when training, but not when testing
