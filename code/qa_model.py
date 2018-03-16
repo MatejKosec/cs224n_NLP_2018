@@ -192,10 +192,10 @@ class QAModel(object):
         self.logits_end, self.probdist_end =  masked_softmax(tf.reshape(logits[:,1,:],shape=[-1,self.FLAGS.context_len]),self.context_mask,1)
         
         
-        #NOW FOR THE INFERENCE MODEL USING BEAM SEARCH
+        #NOW FOR THE INFERENCE MODEL USING GREEDY SEARCH
         inference_helper = tf.contrib.seq2seq.GreedyEmbeddingHelper(
                     lambda x: tf.one_hot(x, self.FLAGS.context_len),
-                    tf.fill([ans_ptr_batch_size], self.FLAGS.context_len+1), self.FLAGS.context_len+2)
+                    tf.fill([ans_ptr_batch_size], 0), self.FLAGS.context_len+2)
         inference_decoder = tf.contrib.seq2seq.BasicDecoder(
                 ans_ptr_lstm_wrap, inference_helper,
                 initial_state=ans_ptr_lstm_wrap.zero_state(dtype=tf.float32, batch_size=ans_ptr_batch_size),
@@ -363,7 +363,6 @@ class QAModel(object):
 
         output_feed = [self.infer_start, self.infer_end]
         [start_pos, end_pos] = session.run(output_feed, input_feed)
-        
         return start_pos, end_pos
 
 
@@ -448,6 +447,7 @@ class QAModel(object):
         for batch in get_batch_generator(self.word2id, context_path, qn_path, ans_path, self.FLAGS.batch_size, context_len=self.FLAGS.context_len, question_len=self.FLAGS.question_len, discard_long=False):
 
             pred_start_pos, pred_end_pos = self.get_start_end_pos(session, batch)
+            print 'Pred start pos', pred_start_pos, ', pred end pos', pred_end_pos
 
             # Convert the start and end positions to lists length batch_size
             pred_start_pos = pred_start_pos.tolist() # list length batch_size
