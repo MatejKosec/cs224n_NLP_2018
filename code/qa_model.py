@@ -173,6 +173,7 @@ class QAModel(object):
         
         #Get the start and end of the predictions from the dynmic decoder output
         """
+        print('Building the AnsPtr'.center(80,'='))
         #TRAIN MODEL
         ans_ptr_input= blended_reps_final
         #Also tile the sequence lengths 
@@ -200,11 +201,11 @@ class QAModel(object):
                 output_layer=projection_layer)
         
         #Run the dynamic decoder
-        logging.info('ans ptr decoder: ', ans_ptr_decoder)
+        print('ans ptr decoder: ', ans_ptr_decoder)
         outputs, _ = tf.contrib.seq2seq.dynamic_decode(ans_ptr_decoder,maximum_iterations=2)
         logits = outputs.rnn_output
-        logging.info('outputs', outputs)
-        logging.info('logits',logits)
+        print('outputs', outputs)
+        print('logits',logits)
         
 
         
