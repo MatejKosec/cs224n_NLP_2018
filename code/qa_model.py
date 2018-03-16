@@ -155,16 +155,15 @@ class QAModel(object):
 
         # Use softmax layer to compute probability distribution for end location
         # Note this produces self.logits_end and self.probdist_end, both of which have shape (batch_size, context_len)
-        with vs.variable_scope("EndDist"):
             argmax_start = tf.cast(tf.tile(tf.reshape(tf.argmax(self.probdist_start,axis=1),shape=[batch_size,1]),[1,self.FLAGS.context_len] ),tf.int32)
             print 'start', argmax_start
             index_mask = tf.tile(tf.reshape(tf.range(0,self.FLAGS.context_len,1),[1,self.FLAGS.context_len]),[batch_size,1])
             print 'argmax start', argmax_start
-            end_mask = tf.where(index_mask<argmax_start,0, 1)
+            end_mask = tf.where(index_mask<argmax_start,tf.zeros_like(self.context_mask), self.context_mask)
             print 'context_mask', self.context_mask
-            
+        with vs.variable_scope("EndDist"):    
             softmax_layer_end = SimpleSoftmaxLayer()
-            self.logits_end, self.probdist_end = softmax_layer_end.build_graph(blended_reps_final, tf.minimum(end_mask,self.context_mask))
+            self.logits_end, self.probdist_end = softmax_layer_end.build_graph(blended_reps_final, end_mask)
 
 
     def add_loss(self):
