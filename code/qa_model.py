@@ -165,7 +165,9 @@ class QAModel(object):
             #end_mask = tf.minimum(end_mask, self.context_mask)
             #print 'context_mask', self.context_mask
         with vs.variable_scope("EndDist"):    
-            end_input = tf.concat([blended_reps_final,tf.reshape(self.probdist_start,[-1,self.FLAGS.context_len,1])],axis=2)
+            end_input1 = tf.tile(tf.reshape(self.probdist_start,[-1,self.FLAGS.context_len,1]),[1,1,10])
+            end_input2 = tf.tile(tf.reshape(self.logits_start,[-1,self.FLAGS.context_len,1]),[1,1,10])
+            end_input = tf.concat([blended_reps_final,end_input1,end_input2],axis=2)
             softmax_layer_end = SimpleSoftmaxLayer()
             self.logits_end, self.probdist_end = softmax_layer_end.build_graph(end_input, self.context_mask)
 
