@@ -164,7 +164,7 @@ class QAModel(object):
             self.end_mask= end_mask
             
             softmax_layer_end = SimpleSoftmaxLayer()
-            self.logits_end, self.probdist_end = softmax_layer_end.build_graph(blended_reps_final, self.context_mask)
+            self.logits_end, self.probdist_end = softmax_layer_end.build_graph(blended_reps_final, end_mask)
 
 
     def add_loss(self):
