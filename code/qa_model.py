@@ -173,7 +173,7 @@ class QAModel(object):
         
         #Get the start and end of the predictions from the dynmic decoder output
         """
-        print('Building the AnsPtr'.center(80,'='))
+        print 'Building the AnsPtr'.center(80,'=')
         #TRAIN MODEL
         ans_ptr_input= blended_reps_final
         #Also tile the sequence lengths 
@@ -182,31 +182,35 @@ class QAModel(object):
         ans_ptr_attn = tf.contrib.seq2seq.BahdanauAttention(num_units=self.FLAGS.hidden_size,\
                                                             memory=ans_ptr_input,\
                                                             memory_sequence_length=sequence_lengths)
-        #Now construct a cell for the decoder        
+        #Now construct a cell for the decoder
+        print 'Build the decoder LSTM'
         ans_ptr_lstm = tf.contrib.rnn.BasicLSTMCell(self.FLAGS.hidden_size)
         
         #Wrap the cell in attention
+        print 'Wrap the LSTM in attention'
         ans_ptr_lstm = tf.contrib.seq2seq.AttentionWrapper(cell=ans_ptr_lstm, attention_mechanism=ans_ptr_attn)
         
         #Construct the training helper
+        print 'Consturcted the trainiing helper'
         ans_ptr_helper = tf.contrib.seq2seq.TrainingHelper(self.ans_span, tf.ones_like(sequence_lengths)*2) #Always decode seuqnce of 2
         
-        #build the decoder module
-        projection_layer = tf.layers.Dense(self.FLAGS.context_len, use_bias=False,name='Projection layer')
-        #Set the initial state
         
+        print 'Build the projection layer'
+        projection_layer = tf.layers.Dense(self.FLAGS.context_len, use_bias=False,name='Projection layer')
+        print 'Build the decoder module'
         ans_ptr_decoder = tf.contrib.seq2seq.BasicDecoder(
                 ans_ptr_lstm, ans_ptr_helper,
                 initial_state=ans_ptr_lstm.zero_state(dtype=tf.float32, batch_size=self.FLAGS.batch_size),
                 output_layer=projection_layer)
         
         #Run the dynamic decoder
-        print('ans ptr decoder: ', ans_ptr_decoder)
+        print 'Build the dynamic_decode op'
         outputs, _ = tf.contrib.seq2seq.dynamic_decode(ans_ptr_decoder,maximum_iterations=2)
         logits = outputs.rnn_output
         print('outputs', outputs)
         print('logits',logits)
         
+        print 'Process the outputs'
 
         
         #=================================SOFTMAX OUTPUT=======================
