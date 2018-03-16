@@ -166,8 +166,8 @@ class QAModel(object):
         
         #Construct the training helper
         print 'Consturcted the trainiing helper'
-        inputs_to_trainer= tf.concat([tf.fill([ans_ptr_batch_size,1], self.FLAGS.context_len+1),self.ans_span,],axis=1)
-        ans_ptr_helper = tf.contrib.seq2seq.TrainingHelper(tf.one_hot(inputs_to_trainer,self.FLAGS.context_len+2), tf.ones_like(sequence_lengths)*2) #Always decode seuqnce of 2
+        inputs_to_trainer= tf.concat([tf.fill([ans_ptr_batch_size,1], self.FLAGS.context_len),self.ans_span],axis=1)
+        ans_ptr_helper = tf.contrib.seq2seq.TrainingHelper(tf.one_hot(inputs_to_trainer,self.FLAGS.context_len), tf.ones_like(sequence_lengths)*2) #Always decode seuqnce of 2
         
         
         print 'Build the projection layer'
@@ -196,7 +196,7 @@ class QAModel(object):
         #NOW FOR THE INFERENCE MODEL USING GREEDY SEARCH
         inference_helper = tf.contrib.seq2seq.GreedyEmbeddingHelper(
                     lambda x: tf.one_hot(x, self.FLAGS.context_len),
-                    tf.fill([ans_ptr_batch_size], self.FLAGS.context_len+1), self.FLAGS.context_len+2)
+                    tf.fill([ans_ptr_batch_size], self.FLAGS.context_len), self.FLAGS.context_len+1)
         inference_decoder = tf.contrib.seq2seq.BasicDecoder(
                 ans_ptr_lstm_wrap, inference_helper,
                 initial_state=ans_ptr_lstm_wrap.zero_state(dtype=tf.float32, batch_size=ans_ptr_batch_size),
