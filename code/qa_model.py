@@ -235,7 +235,7 @@ class QAModel(object):
             self.probdist_end =  tf.zeros(shape=[batch_size,self.FLAGS.context_len],dtype=tf.float32)
             
             #Predict on end within 35 of end
-            slice_tensor = tf.cond(answer_len<self.FLAGS.context_len-start,true_fn=self.FLAGS.context_len-start,flase_fn=answer_len)
+            slice_tensor = tf.cond(answer_len<self.FLAGS.context_len-start,true_fn=self.FLAGS.context_len-start,false_fn=answer_len)
             inputs_for_end[:,slice_tensor] = self.probdist_start[:,start:start+slice_tensor]
             masks_for_end[:,0:min(answer_len,self.FLAGS.context_len-start)] = 1
             logits = tf.contrib.layers.fully_connected(inputs_for_end, num_outputs=30, activation_fn=None) 
