@@ -192,7 +192,7 @@ class QAModel(object):
         
         #Construct the training helper
         print 'Consturcted the trainiing helper'
-        ans_ptr_helper = tf.contrib.seq2seq.TrainingHelper(self.ans_span, tf.ones_like(sequence_lengths)*2) #Always decode seuqnce of 2
+        ans_ptr_helper = tf.contrib.seq2seq.TrainingHelper(tf.one_hot(self.ans_span,self.FLAGS.context_len), tf.ones_like(sequence_lengths)*2) #Always decode seuqnce of 2
         
         
         print 'Build the projection layer'
@@ -200,11 +200,10 @@ class QAModel(object):
         print 'Build the decoder module'
         ans_ptr_decoder = tf.contrib.seq2seq.BasicDecoder(
                 ans_ptr_lstm, ans_ptr_helper,
-                initial_state=ans_ptr_lstm.zero_state(dtype=tf.int32, batch_size=self.FLAGS.batch_size),
+                initial_state=ans_ptr_lstm.zero_state(dtype=tf.float32, batch_size=self.FLAGS.batch_size),
                 output_layer=projection_layer)
         
         #Run the dynamic decoder
-        print 'AnsPtrDecoder: ', ans_ptr_decoder
         print 'AnsPtrDecoder: ', 
         print 'Build the dynamic_decode op'
         outputs, _ = tf.contrib.seq2seq.dynamic_decode(ans_ptr_decoder,maximum_iterations=2)
