@@ -131,8 +131,8 @@ class QAModel(object):
         # Note: here the RNNEncoder is shared (i.e. the weights are the same)
         # between the context and the question.
         encoder = RNNEncoder(self.FLAGS.hidden_size, self.keep_prob)
-        context_hiddens = encoder.build_graph(self.context_embs, self.context_mask) # (batch_size, context_len, hidden_size*2)
-        question_hiddens = encoder.build_graph(self.qn_embs, self.qn_mask) # (batch_size, question_len, hidden_size*2)
+        context_hiddens, context_states = encoder.build_graph(self.context_embs, self.context_mask) # (batch_size, context_len, hidden_size*2)
+        question_hiddens, question_states = encoder.build_graph(self.qn_embs, self.qn_mask) # (batch_size, question_len, hidden_size*2)
 
         # Use context hidden states to attend to question hidden states
         attn_layer = BasicAttn(self.keep_prob, self.FLAGS.hidden_size*2, self.FLAGS.hidden_size*2)
@@ -174,9 +174,7 @@ class QAModel(object):
         projection_layer = tf.layers.Dense(self.FLAGS.context_len, use_bias=False)
         print 'Build the decoder module'
         initial_state = ans_ptr_lstm_wrap.zero_state(dtype=tf.float32, batch_size=ans_ptr_batch_size)
-        c_s = tf.tile(tf.get_variable('c_initial_cell', shape=(self.FLAGS.hidden_size)), [ans_ptr_batch_size])
-        h_s = tf.tile(tf.get_variable('h_initial_cell', shape=(self.FLAGS.hidden_size)), [ans_ptr_batch_size])
-        initial_state = initial_state.clone(cell_state = [c_s,h_s])
+        initial_state = initial_state.clone(cell_state = context_states)
         ans_ptr_decoder = tf.contrib.seq2seq.BasicDecoder(
                 ans_ptr_lstm_wrap, ans_ptr_helper,
                 initial_state=initial_state,
