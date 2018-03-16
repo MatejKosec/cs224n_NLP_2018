@@ -188,7 +188,7 @@ class QAModel(object):
         ans_ptr_lstm = tf.contrib.seq2seq.AttentionWrapper(cell=ans_ptr_lstm, attention_mechanism=ans_ptr_attn)
         
         #Construct the training helper
-        ans_ptr_helper = tf.contrib.seq2seq.TrainingHelper(decoder_emb_inp, tf.ones_like(sequence_lengths)*2) #Always decode seuqnce of 2
+        ans_ptr_helper = tf.contrib.seq2seq.TrainingHelper(self.ans_span, tf.ones_like(sequence_lengths)*2) #Always decode seuqnce of 2
         
         #build the decoder module
         projection_layer = tf.layers.Dense(self.FLAGS.contex_len, use_bias=False)
