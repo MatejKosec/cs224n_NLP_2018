@@ -226,14 +226,14 @@ class QAModel(object):
         #Use softmax layer to compute probability distribution for end location
         #Note this produces self.logits_end and self.probdist_end, both of which have shape (batch_size, context_len)
         with vs.variable_scope("EndDist"):
-            softmax_layer_start = SimpleSoftmaxLayer()
+            softmax_layer_end = SimpleSoftmaxLayer()
             start = tf.cast(tf.tile(tf.reshape(tf.argmax(self.probdist_start,axis=1),shape=[batch_size,1]),[1,self.FLAGS.context_len] ),tf.int32)
             print 'start', start
             argmax_mask = tf.cast(tf.tile(tf.reshape(tf.range(0,self.FLAGS.context_len,1),[1,self.FLAGS.context_len]),[batch_size,1]),tf.int32)          
             print 'argmax mask', argmax_mask
             end_mask = tf.where(argmax_mask<start,tf.zeros_like(self.context_mask), self.context_mask )
             self.end_mask= end_mask
-            self.logits_end, self.probdist_end = softmax_layer_start.build_graph(blended_reps_final, end_mask)
+            self.logits_end, self.probdist_end = softmax_layer_end.build_graph(blended_reps_final, end_mask)
             
         
             
@@ -304,7 +304,7 @@ class QAModel(object):
 
         # Run the model
         [_, summaries, loss, global_step, param_norm, gradient_norm,end_mask] = session.run(output_feed, input_feed)
-        print 'end_mask',end_mask
+        #print 'end_mask',end_mask
 
         # All summaries in the graph are added to Tensorboard
         summary_writer.add_summary(summaries, global_step)
