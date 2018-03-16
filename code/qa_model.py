@@ -161,7 +161,8 @@ class QAModel(object):
             print 'start', argmax_start
             index_mask = tf.tile(tf.reshape(tf.range(0,self.FLAGS.context_len,1),[1,self.FLAGS.context_len]),[batch_size,1])
             print 'argmax start', argmax_start
-            end_mask = tf.where(index_mask<argmax_start,tf.zeros_like(self.context_mask), self.context_mask)
+            end_mask = tf.cast(index_mask<argmax_start,tf.int32)
+            end_mask = tf.minimum(end_mask, self.context_mask)
             print 'context_mask', self.context_mask
         with vs.variable_scope("EndDist"):    
             softmax_layer_end = SimpleSoftmaxLayer()
