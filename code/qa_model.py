@@ -214,8 +214,8 @@ class QAModel(object):
         print('logits shape',logits.shape)
         
         print 'Process the outputs'
-        self.logits_start, self.probdist_start =  masked_softmax(tf.reshape(logits[:,0,:],shape=[-1,self.FALSE.context_len]),self.context_mask,1)
-        self.logits_end, self.probdist_end =  masked_softmax(tf.reshape(logits[:,1,:],shape=[-1,self.FALSE.context_len]),self.context_mask,1)
+        self.logits_start, self.probdist_start =  masked_softmax(tf.reshape(logits[:,0,:],shape=[-1,self.FLAGS.context_len]),self.context_mask,1)
+        self.logits_end, self.probdist_end =  masked_softmax(tf.reshape(logits[:,1,:],shape=[-1,self.FLAGS.context_len]),self.context_mask,1)
 
         print 'Done building the AnsPtr'.center(80,'=')
         #=================================SOFTMAX OUTPUT=======================
