@@ -229,7 +229,7 @@ class QAModel(object):
             softmax_layer_start = SimpleSoftmaxLayer()
             start = tf.cast(tf.argmax(self.probdist_start,axis=1),tf.int32)
             argmax_mask = tf.cast(tf.tile(tf.range(0,self.FLAGS.context_len,1),[batch_size]),tf.int32)          
-            end_mask = tf.where(argmax_mask<start,0, self.context_mask )
+            end_mask = tf.where(argmax_mask<start,tf.zeros_like(self.context_mask), self.context_mask )
             self.logits_end, self.probdist_end = softmax_layer_start.build_graph(blended_reps_final, end_mask)
             
         
