@@ -167,7 +167,7 @@ class QAModel(object):
         with vs.variable_scope("EndDist"):    
             end_input = tf.concat([blended_reps_final,tf.reshape(self.probdist_start,[-1,self.FLAGS.context_len,1])],axis=2)
             softmax_layer_end = SimpleSoftmaxLayer()
-            self.logits_end, self.probdist_end = softmax_layer_end.build_graph(end_input, )
+            self.logits_end, self.probdist_end = softmax_layer_end.build_graph(end_input, self.context_mask)
 
 
     def add_loss(self):
