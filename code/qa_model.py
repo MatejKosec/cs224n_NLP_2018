@@ -176,10 +176,7 @@ class QAModel(object):
         print 'Context states', context_states
         initial_state = ans_ptr_lstm_wrap.zero_state(dtype=tf.float32, batch_size=ans_ptr_batch_size)
         print 'Initial state: ', initial_state
-        c = tf.get_variable('initial_state_c', shape=[self.FLAGS.hidden_size])
-        h = tf.get_variable('initial_state_h', shape=[self.FLAGS.hidden_size])
-        initial_state = initial_state.clone(cell_state = tf.contrib.rnn.LSTMStateTuple(c,h))
-        #initial_state = initial_state.clone(cell_state = tf.contrib.rnn.LSTMStateTuple(*context_states))
+        initial_state = initial_state.clone(cell_state = tf.contrib.rnn.LSTMStateTuple(*question_states))
         ans_ptr_decoder = tf.contrib.seq2seq.BasicDecoder(
                 ans_ptr_lstm_wrap, ans_ptr_helper,
                 initial_state=initial_state,
