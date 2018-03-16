@@ -191,22 +191,21 @@ class QAModel(object):
         ans_ptr_helper = tf.contrib.seq2seq.TrainingHelper(self.ans_span, tf.ones_like(sequence_lengths)*2) #Always decode seuqnce of 2
         
         #build the decoder module
-        projection_layer = tf.layers.Dense(self.FLAGS.context_len, use_bias=False)
+        projection_layer = tf.layers.Dense(self.FLAGS.context_len, use_bias=False,name='Projection layer')
         #Set the initial state
-        initial_state = ans_ptr_lstm.zero_state(dtype=tf.float32, batch_size=self.FLAGS.batch_size)
+        
         ans_ptr_decoder = tf.contrib.seq2seq.BasicDecoder(
-                ans_ptr_lstm, ans_ptr_helper, initial_state=initial_state,
+                ans_ptr_lstm, ans_ptr_helper,
+                initial_state=ans_ptr_lstm.zero_state(dtype=tf.float32, batch_size=self.FLAGS.batch_size),
                 output_layer=projection_layer)
         
         #Run the dynamic decoder
-        print('ans ptr decoder: ', ans_ptr_decoder)
+        logging.info('ans ptr decoder: ', ans_ptr_decoder)
         outputs, _ = tf.contrib.seq2seq.dynamic_decode(ans_ptr_decoder,maximum_iterations=2)
         logits = outputs.rnn_output
-        print('outputs', outputs)
-        print('logits',logits)
+        logging.info('outputs', outputs)
+        logging.info('logits',logits)
         
-        #Get the start and end of the predictions from the dynmic decoder output
-        self.logits_end, self.probdist_end = softmax_layer_end.build_graph(blended_reps_final, self.context_mask)
 
         
         #=================================SOFTMAX OUTPUT=======================
