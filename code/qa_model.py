@@ -191,7 +191,7 @@ class QAModel(object):
         ans_ptr_helper = tf.contrib.seq2seq.TrainingHelper(self.ans_span, tf.ones_like(sequence_lengths)*2) #Always decode seuqnce of 2
         
         #build the decoder module
-        projection_layer = tf.layers.Dense(self.FLAGS.contex_len, use_bias=False)
+        projection_layer = tf.layers.Dense(self.FLAGS.context_len, use_bias=False)
         ans_ptr_decoder = tf.contrib.seq2seq.BasicDecoder(
                 ans_ptr_lstm, ans_ptr_helper, ans_ptr_input,
                 output_layer=projection_layer)
