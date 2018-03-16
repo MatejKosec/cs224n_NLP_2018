@@ -155,7 +155,9 @@ class QAModel(object):
 
         # Use softmax layer to compute probability distribution for end location
         # Note this produces self.logits_end and self.probdist_end, both of which have shape (batch_size, context_len)
-            argmax_start = tf.cast(tf.tile(tf.reshape(tf.argmax(self.probdist_start,axis=1),shape=[batch_size,1]),[1,self.FLAGS.context_len] ),tf.int32)
+            argmax_start = tf.argmax(self.probdist_start,axis=1)
+            print 'start', argmax_start
+            argmax_start = tf.cast(tf.tile(tf.reshape(argmax_start,shape=[batch_size,1]),[1,self.FLAGS.context_len] ),tf.int32)
             print 'start', argmax_start
             index_mask = tf.tile(tf.reshape(tf.range(0,self.FLAGS.context_len,1),[1,self.FLAGS.context_len]),[batch_size,1])
             print 'argmax start', argmax_start
