@@ -182,21 +182,24 @@ class QAModel(object):
                                                             memory=ans_ptr_input,\
                                                             memory_sequence_length=sequence_lengths)
         #Now construct a cell for the decoder        
-        ans_ptr_lstm = tf.contrib.rnn.BasicLSTMCell(self.FLAGS.hidden_size)
+        ans_ptr_lstm = tf.contrib.rnn.BasicLSTMCell(self.FLAGS.hidden_size,name='ans_ptr_lstm')
         
         #Wrap the cell in attention
-        ans_ptr_lstm = tf.contrib.seq2seq.AttentionWrapper(cell=ans_ptr_lstm, attention_mechanism=ans_ptr_attn)
+        ans_ptr_lstm = tf.contrib.seq2seq.AttentionWrapper(cell=ans_ptr_lstm, attention_mechanism=ans_ptr_attn,name='ans_ptr_attn')
         
         #Construct the training helper
         ans_ptr_helper = tf.contrib.seq2seq.TrainingHelper(self.ans_span, tf.ones_like(sequence_lengths)*2) #Always decode seuqnce of 2
         
         #build the decoder module
         projection_layer = tf.layers.Dense(self.FLAGS.context_len, use_bias=False)
+        #Set the initial state
+        initial_state = ans_ptr_lstm.zero_state(dtype=tf.float32, batch_size=self.FLAGS.batch_size)
         ans_ptr_decoder = tf.contrib.seq2seq.BasicDecoder(
-                ans_ptr_lstm, ans_ptr_helper, ans_ptr_input,
+                ans_ptr_lstm, ans_ptr_helper, initial_state=initial_state,
                 output_layer=projection_layer)
         
         #Run the dynamic decoder
+        print('ans ptr decoder: ', ans_ptr_decoder)
         outputs, _ = tf.contrib.seq2seq.dynamic_decode(ans_ptr_decoder,maximum_iterations=2)
         logits = outputs.rnn_output
         print('outputs', outputs)
