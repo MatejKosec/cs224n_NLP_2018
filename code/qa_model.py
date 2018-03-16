@@ -227,8 +227,9 @@ class QAModel(object):
         #Note this produces self.logits_end and self.probdist_end, both of which have shape (batch_size, context_len)
         with vs.variable_scope("EndDist"):
             softmax_layer_start = SimpleSoftmaxLayer()
-            start = tf.argmax(self.probdist_start,axis=1)            
-            end_mask = tf.where(tf.tile(tf.range(0,self.FLAGS.context_len,1),[batch_size])<start,0, self.context_mask )
+            start = tf.argmax(self.probdist_start,axis=1)
+            argmax_mask = tf.cast(tf.tile(tf.range(0,self.FLAGS.context_len,1),[batch_size]),tf.int32)          
+            end_mask = tf.where(argmax_mask<start,0, self.context_mask )
             self.logits_end, self.probdist_end = softmax_layer_start.build_graph(blended_reps_final, end_mask)
             
         
