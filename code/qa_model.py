@@ -174,7 +174,7 @@ class QAModel(object):
         projection_layer = tf.layers.Dense(self.FLAGS.context_len, use_bias=False)
         print 'Build the decoder module'
         initial_state = ans_ptr_lstm_wrap.zero_state(dtype=tf.float32, batch_size=ans_ptr_batch_size)
-        initial_state = initial_state.clone(cell_state = tf.tile(tf.get_variable('initial_cell', shape=(self.FLAGS.hidden_size)), ans_ptr_batch_size))
+        initial_state = initial_state.clone(cell_state = tf.tile(tf.get_variable('initial_cell', shape=(1,self.FLAGS.hidden_size)), ans_ptr_batch_size))
         ans_ptr_decoder = tf.contrib.seq2seq.BasicDecoder(
                 ans_ptr_lstm_wrap, ans_ptr_helper,
                 initial_state=initial_state,
