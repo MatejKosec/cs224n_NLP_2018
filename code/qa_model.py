@@ -205,9 +205,11 @@ class QAModel(object):
             loss_end = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=self.logits_end, labels=self.ans_span[:, 1])
             self.loss_end = tf.reduce_mean(loss_end)
             tf.summary.scalar('loss_end', self.loss_end)
-
+            
+            self.loss_reg = tf.add_n([ tf.nn.l2_loss(v) for v in vars if 'bias' not in v.name ]) * 0.00001
+            tf.summary.scalar('loss_reg', self.loss_reg)
             # Add the two losses
-            self.loss = self.loss_start + self.loss_end
+            self.loss = self.loss_start + self.loss_end + self.loss_reg
             tf.summary.scalar('loss', self.loss)
 
 
