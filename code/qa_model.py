@@ -207,7 +207,7 @@ class QAModel(object):
             tf.summary.scalar('loss_end', self.loss_end)
             
             trainable_vars   = tf.trainable_variables() 
-            self.loss_reg = tf.add_n([ tf.nn.l2_loss(v) for v in trainable_vars if 'bias' not in v.name ]) * 0.00001
+            self.loss_reg = tf.add_n([ tf.nn.l2_loss(v) for v in trainable_vars if 'bias' not in v.name ]) * 0.0005
             tf.summary.scalar('loss_reg', self.loss_reg)
             # Add the two losses
             self.loss = self.loss_start + self.loss_end + self.loss_reg
@@ -329,6 +329,7 @@ class QAModel(object):
                 for j in xrange(i,min(i+15,context_len)):
                     score = s_prob[i]*e_prob[j]
                     if score > max_score:
+                        max_score=score
                         span = [i,j]
             start_pos.append(span[0])
             end_pos.append(span[1])
