@@ -329,7 +329,8 @@ class QAModel(object):
                         span = [i,j]
             start_pos.append(span[0])
             end_pos.append(span[1])
-
+        start_pos = np.array(start_pos)
+        end_pos = np.array(end_pos)
         return start_pos, end_pos
 
 
