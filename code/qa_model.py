@@ -206,7 +206,8 @@ class QAModel(object):
             self.loss_end = tf.reduce_mean(loss_end)
             tf.summary.scalar('loss_end', self.loss_end)
             
-            self.loss_reg = tf.add_n([ tf.nn.l2_loss(v) for v in vars if 'bias' not in v.name ]) * 0.00001
+            trainable_vars   = tf.trainable_variables() 
+            self.loss_reg = tf.add_n([ tf.nn.l2_loss(v) for v in trainable_vars if 'bias' not in v.name ]) * 0.00001
             tf.summary.scalar('loss_reg', self.loss_reg)
             # Add the two losses
             self.loss = self.loss_start + self.loss_end + self.loss_reg
@@ -417,7 +418,7 @@ class QAModel(object):
         for batch in get_batch_generator(self.word2id, context_path, qn_path, ans_path, self.FLAGS.batch_size, context_len=self.FLAGS.context_len, question_len=self.FLAGS.question_len, discard_long=False):
 
             pred_start_pos, pred_end_pos = self.get_start_end_pos(session, batch)
-            print 'Pred start pos', pred_start_pos, ', pred end pos', pred_end_pos
+            #print 'Pred start pos', pred_start_pos, ', pred end pos', pred_end_pos
 
             # Convert the start and end positions to lists length batch_size
             pred_start_pos = pred_start_pos.tolist() # list length batch_size
