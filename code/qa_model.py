@@ -415,7 +415,7 @@ class QAModel(object):
         for batch in get_batch_generator(self.word2id, context_path, qn_path, ans_path, self.FLAGS.batch_size, context_len=self.FLAGS.context_len, question_len=self.FLAGS.question_len, discard_long=False):
 
             pred_start_pos, pred_end_pos = self.get_start_end_pos(session, batch)
-            #print 'Pred start pos', pred_start_pos, ', pred end pos', pred_end_pos
+            print 'Pred start pos', pred_start_pos, ', pred end pos', pred_end_pos
 
             # Convert the start and end positions to lists length batch_size
             pred_start_pos = pred_start_pos.tolist() # list length batch_size
