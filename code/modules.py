@@ -206,40 +206,29 @@ class BiDirAttn(object):
           Note: value_vec_size = 2 * hidden_size
 
         Outputs:
-          output: Tensor shape (batch_size, num_keys, hidden_size).
+          output: Tensor shape (batch_size, num_keys, hidden_size * 8).
             The bidirectional attention output.
         """
 
         with vs.variable_scope("BiDirAttn"):
             # Compute similarity matrix
-            # w_sim_t = tf.get_variable("w_sim_t", shape=(1, values.get_shape().as_list()[2] * 3), dtype=tf.float32, initializer=tf.contrib.layers.xavier_initializer()) # (1, 6 * hidden_size)
-            w_sim = tf.get_variable("w_sim", shape=(values.get_shape().as_list()[2] * 3, 1), dtype=tf.float32, initializer=tf.contrib.layers.xavier_initializer()) # (1, 6 * hidden_size)
+            w_sim = tf.get_variable("w_sim", shape=(values.get_shape().as_list()[2] * 3, 1), dtype=tf.float32, initializer=tf.contrib.layers.xavier_initializer()) # (6 * hidden_size, 1)
 
-            # keys_tiled = tf.tile(tf.expand_dims(keys, axis=2), multiples=(1, 1, values.get_shape().as_list()[1], 1)) # (batch_size, num_keys, num_values, 2 * hidden_size)
-            # values_tiled = tf.tile(tf.expand_dims(values, axis=1), multiples=(1, keys.get_shape().as_list()[1], 1, 1)) # (batch_size, num_keys, num_values, 2 * hidden_size)
-            
             sim_scores = tf.multiply(tf.expand_dims(keys, axis=2), tf.expand_dims(values, axis=1)) # element-wise multiplication -- (batch_size, num_keys, num_values, 2 * hidden_size)
             
-            reshaped_keys = tf.reshape(keys, [-1, keys.get_shape().as_list()[2]])
-            reshaped_values = tf.reshape(values, [-1, values.get_shape().as_list()[2]])
-            reshaped_sim_scores = tf.reshape(sim_scores, [-1, keys.get_shape().as_list()[2]])
+            reshaped_keys = tf.reshape(keys, [-1, keys.get_shape().as_list()[2]]) # (batch_size * num_keys, 2 * hidden_size)
+            reshaped_values = tf.reshape(values, [-1, values.get_shape().as_list()[2]]) # (batch_size * num_values, 2 * hidden_size)
+            reshaped_sim_scores = tf.reshape(sim_scores, [-1, keys.get_shape().as_list()[2]]) # (batch_size * num_keys * num_values, 2 * hidden_size)
             
-            reshaped_keys_weighted = tf.matmul(reshaped_keys, w_sim[:keys.get_shape().as_list()[2], :])
-            reshaped_values_weighted = tf.matmul(reshaped_values, w_sim[values.get_shape().as_list()[2]:values.get_shape().as_list()[2] * 2, :])
-            reshaped_sim_scores_weighted = tf.matmul(reshaped_sim_scores, w_sim[values.get_shape().as_list()[2] * 2:values.get_shape().as_list()[2] * 3, :])
+            reshaped_keys_weighted = tf.matmul(reshaped_keys, w_sim[:keys.get_shape().as_list()[2], :]) # (batch_size * num_keys, 1)
+            reshaped_values_weighted = tf.matmul(reshaped_values, w_sim[values.get_shape().as_list()[2]:values.get_shape().as_list()[2] * 2, :]) # (batch_size * num_values, 1)
+            reshaped_sim_scores_weighted = tf.matmul(reshaped_sim_scores, w_sim[values.get_shape().as_list()[2] * 2:values.get_shape().as_list()[2] * 3, :]) # (batch_size * num_keys * num_values, 1)
 
-            keys_weighted = tf.reshape(reshaped_keys_weighted, [-1, keys.shape[1], 1])
-            values_weighted = tf.reshape(reshaped_values_weighted, [-1, 1, values.shape[1]])
-            sim_scores_weighted = tf.reshape(reshaped_sim_scores_weighted, [-1, keys.shape[1], values.shape[1]])
+            keys_weighted = tf.reshape(reshaped_keys_weighted, [-1, keys.shape[1], 1]) # (batch_size, num_keys, 1)
+            values_weighted = tf.reshape(reshaped_values_weighted, [-1, 1, values.shape[1]]) # (batch_size, 1, num_values)
+            sim_scores_weighted = tf.reshape(reshaped_sim_scores_weighted, [-1, keys.shape[1], values.shape[1]]) # (batch_size, num_keys, num_values)
             
-            # keys_weighted = tf.reshape(reshaped_keys_weighted, [keys.get_shape().as_list()[0], keys.get_shape().as_list()[1], values.get_shape().as_list()[1]])
-            # values_weighted = tf.reshape(reshaped_values_weighted, [values.get_shape().as_list()[0], keys.get_shape().as_list()[1], values.get_shape().as_list()[1]])
-            # sim_scores_weighted = tf.reshape(reshaped_sim_scores_weighted, [keys.get_shape().as_list()[0], keys.get_shape().as_list()[1], values.get_shape().as_list()[1]])
-
-            sim = keys_weighted + values_weighted + sim_scores_weighted
-
-            # unweighted_sim = tf.concat([keys_tiled, values_tiled, sim_scores], axis=3) # (batch_size, num_keys, num_values, 6 * hidden_size)
-            # sim = tf.reshape(tf.tensordot(w_sim_t, unweighted_sim, axes=[[1], [3]]), [-1, keys.get_shape().as_list()[1], values.get_shape().as_list()[1]]) # (1, batch_size, num_keys, num_values) --> (batch_size, num_keys, num_values)
+            sim = keys_weighted + values_weighted + sim_scores_weighted # (batch_size, num_keys, num_values)
 
             # Context to question (C2Q) attention 
             sim_mask = tf.expand_dims(values_mask, 1) # shape (batch_size, 1, num_values)
