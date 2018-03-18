@@ -1,0 +1,807 @@
+This code was developed and tested on TensorFlow 1.4.1. Your TensorFlow version: 1.4.1
+Loading GLoVE vectors from file: ../data/glove.6B.100d.txt
+Initializing the QAModel...
+Looking for model at ../experiments/bidir-15-v2/best_checkpoint...
+Reading model parameters from ../experiments/bidir-15-v2/best_checkpoint/qa_best.ckpt-112000
+Refilling batches...
+Refilling batches took 0.54 seconds
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 145
+following the election of the uk labour party to government in 1997 , the uk formally subscribed to the agreement on social policy , which allowed it to be included with minor amendments as the social chapter of the 1997 treaty of amsterdam . the uk subsequently adopted the main legislation previously agreed under the agreement on social policy , the 1994 works council directive , which required workforce consultation in businesses , and the [41m[45m[32m[1m1996[0m[39m[49m[49m parental leave directive . in the 10 years following the 1997 treaty of amsterdam and adoption of the social chapter the european union has undertaken policy initiatives in various social policy areas , including labour and industry relations , equal opportunity , health and safety , public health , protection of children , the disabled and elderly , poverty , migrant workers , education , training and youth .
+[33m[1m            QUESTION: when was the parental leave directive created ?[0m[39m
+[33m[1m         TRUE ANSWER: 1996[0m[39m
+[33m[1m    PREDICTED ANSWER: 1996[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 145
+fresno ( _/ˈfrɛznoʊ/_ _frez-noh_ ) , the county seat of fresno county , is a city in the u.s. state of california . as of 2015 , the city 's population was _520,159_ , making it the fifth-largest city in california , the largest inland city in california and the _34th-largest_ in the nation . fresno is in the center of the san joaquin valley and is the largest city in the central valley , which contains the san joaquin valley . it is approximately [45m[32m[1m220[0m[39m[49m [41m[32m[1mmiles[0m[39m[49m [32m[1m([0m[39m [32m[1m350[0m[39m [32m[1mkm[0m[39m [32m[1m)[0m[39m northwest of los angeles , 170 miles ( 270 km ) south of the state capital , sacramento , or 185 miles ( 300 km ) south of san francisco . the name fresno means " ash tree " in spanish , and an ash leaf is featured on the city 's flag .
+[33m[1m            QUESTION: how far is fresno from los angeles ?[0m[39m
+[33m[1m         TRUE ANSWER: 220 miles ( 350 km )[0m[39m
+[33m[1m    PREDICTED ANSWER: 220 miles[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.667[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 99
+as of august 2010 , victoria had [41m1,548[49m public schools , [32m[1m489[0m[39m catholic schools and [45m214[49m independent schools . just under _540,800_ students were enrolled in public schools , and just over _311,800_ in private schools . over 61 per cent of private students attend catholic schools . more than 462,000 students were enrolled in primary schools and more than 390,000 in secondary schools . retention rates for the final two years of secondary school were 77 per cent for public school students and 90 per cent for private school students . victoria has about _63,519_ full-time teachers .
+[33m[1m            QUESTION: how many catholic schools were in victoria ?[0m[39m
+[33m[1m         TRUE ANSWER: 489[0m[39m
+[33m[1m    PREDICTED ANSWER: [0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 256
+in the spring of 1975 , fred pierce , the newly appointed president of abc television , convinced fred silverman to become the first president and director of programming of the independent television production subsidiary abc entertainment , created from the network 's namesake programming division . in 1974 , abc premiered the detective series _s.w.a.t_ . that same year , the network made the decision to compete with nbc 's morning news-talk program today . its first attempt at such competition was am america ; however , that show 's success was not straightforward . one of its affiliates , wcvb-tv premiered morning show good day ! . first premiering in [41m1973[49m as good morning ! , it was groundbreaking for being entirely produced on the road and broadcasting from locations outside of the boston area . also , in the summer of 1975 , abc discovered that its cleveland affiliate wews-tv was producing its own morning program the morning exchange , which debuted in 1972 and was now locally pre-empting am america ; it was the first morning show to utilize a set modeled after a living room , and established a concept now commonplace among network morning shows in which news and weather updates were featured at the top and bottom of each hour . discovering that their formats seemed to appeal to their viewers , the network became the first to adopt them for a new national morning show , good morning america , which debuted on [45m[32m[1mnovember[0m[39m[49m [32m[1m3[0m[39m [32m[1m,[0m[39m [32m[1m1975[0m[39m .
+[33m[1m            QUESTION: when did good morning america first debut ?[0m[39m
+[33m[1m         TRUE ANSWER: november 3 , 1975[0m[39m
+[33m[1m    PREDICTED ANSWER: [0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 158
+on 31 october 1517 , luther wrote to his bishop , [45m[32m[1malbert[0m[39m[49m [32m[1mof[0m[39m [41m[32m[1mmainz[0m[39m[49m , protesting the sale of indulgences . he enclosed in his letter a copy of his " disputation of martin luther on the power and efficacy of indulgences " , which came to be known as the ninety-five theses . hans _hillerbrand_ writes that luther had no intention of confronting the church , but saw his disputation as a scholarly objection to church practices , and the tone of the writing is accordingly " searching , rather than doctrinaire . " _hillerbrand_ writes that there is nevertheless an undercurrent of challenge in several of the theses , particularly in thesis 86 , which asks : " why does the pope , whose wealth today is greater than the wealth of the richest crassus , build the basilica of st. peter with the money of poor believers rather than with his own money ? "
+[33m[1m            QUESTION: in 1517 who was luther 's bishop ?[0m[39m
+[33m[1m         TRUE ANSWER: albert of mainz[0m[39m
+[33m[1m    PREDICTED ANSWER: albert of mainz[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 525
+since its founding , the eu has operated among an increasing plurality of national and globalising legal systems . this has meant both the european court of justice and the highest national courts have had to develop principles to resolve conflicts of laws between different systems . within the eu itself , the court of justice 's view is that if eu law conflicts with a provision of national law , then eu law has primacy . in the first major case in [41m[45m[32m[1m1964[0m[39m[49m[49m , costa v enel , a milanese lawyer , and former shareholder of an energy company , named mr costa refused to pay his electricity bill to enel , as a protest against the nationalisation of the italian energy corporations . he claimed the italian nationalisation law conflicted with the treaty of rome , and requested a reference be made to both the italian constitutional court and the court of justice under tfeu article 267 . the italian constitutional court gave an opinion that because the nationalisation law was from 1962 , and the treaty was in force from 1958 , costa had no claim . by contrast , the court of justice held that ultimately the treaty of rome in no way prevented energy nationalisation , and in any case under the treaty provisions only the commission could have brought a claim , not mr costa . however , in principle , mr costa was entitled to plead that the treaty conflicted with national law , and the court would have a duty to consider his claim to make a reference if there would be no appeal against its decision . the court of justice , repeating its view in van _gend_ en loos , said member states " albeit within limited spheres , have restricted their sovereign rights and created a body of law applicable both to their nationals and to themselves " on the " basis of reciprocity " . eu law would not " be overridden by domestic legal provisions , however framed ... without the legal basis of the community itself being called into question . " this meant any " subsequent unilateral act " of the member state inapplicable . similarly , in _amministrazione_ delle _finanze_ v _simmenthal_ spa , a company , _simmenthal_ spa , claimed that a public health inspection fee under an italian law of 1970 for importing beef from france to italy was contrary to two regulations from 1964 and 1968 . in " accordance with the principle of the precedence of community law , " said the court of justice , the " directly applicable measures of the institutions " ( such as the regulations in the case ) " render automatically inapplicable any conflicting provision of current national law " . this was necessary to prevent a " corresponding denial " of treaty " obligations undertaken unconditionally and irrevocably by member states " , that could " imperil the very foundations of the " eu . but despite the views of the court of justice , the national courts of member states have not accepted the same analysis .
+[33m[1m            QUESTION: when did costa v enel take place ?[0m[39m
+[33m[1m         TRUE ANSWER: 1964[0m[39m
+[33m[1m    PREDICTED ANSWER: 1964[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 191
+luther had published his german translation of the new testament in 1522 , and he and his collaborators completed the translation of the old testament in [41m[45m[32m[1m1534[0m[39m[49m[49m , when the whole bible was published . he continued to work on refining the translation until the end of his life . others had translated the bible into german , but luther tailored his translation to his own doctrine . when he was criticised for inserting the word " alone " after " faith " in romans 3:28 , he replied in part : " [ t ] he text itself and the meaning of st. paul urgently require and demand it . for in that very passage he is dealing with the main point of christian doctrine , namely , that we are justified by faith in christ without any works of the law . ... but when works are so completely cut away – and that must mean that faith alone justifies – whoever would speak plainly and clearly about this cutting away of works will have to say , _'faith_ alone justifies us , and not works ' . "
+[33m[1m            QUESTION: when was the old testament translation finished ?[0m[39m
+[33m[1m         TRUE ANSWER: 1534[0m[39m
+[33m[1m    PREDICTED ANSWER: 1534[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 157
+the city developed around the roman settlement pons aelius and was named after the castle built in 1080 by robert curthose , william the conqueror 's eldest son . the city grew as an important centre for the wool trade in the 14th century , and later became a major coal mining area . the port developed in the 16th century and , along with the shipyards lower down the river tyne , was amongst the world 's largest shipbuilding and _ship-repairing_ centres . newcastle 's economy includes corporate headquarters , learning , digital technology , retail , tourism and cultural centres , from which the city contributes _£13_ billion towards the united kingdom 's gva . among its icons are newcastle brown ale ; newcastle united football club ; and the tyne bridge . it has hosted the world 's most popular half [41m[45mmarathon[49m[49m , [32m[1mthe[0m[39m [32m[1mgreat[0m[39m [32m[1mnorth[0m[39m [32m[1mrun[0m[39m , since it began in 1981 .
+[33m[1m            QUESTION: what globally popular half marathon began in 1981 ?[0m[39m
+[33m[1m         TRUE ANSWER: the great north run[0m[39m
+[33m[1m    PREDICTED ANSWER: marathon[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 192
+various princes of the holy land arrived in limassol at the same time , in particular guy de lusignan . all declared their support for richard provided that he support guy against his rival conrad of montferrat . the local barons abandoned isaac , who considered making peace with richard , joining him on the crusade , and offering his daughter in marriage to the person named by richard . but isaac changed his mind and tried to escape . richard then proceeded to conquer the whole island , his troops being led by guy de lusignan . isaac surrendered and was confined with [45m[32m[1msilver[0m[39m[49m [41mchains[49m , because richard had promised that he would not place him in irons . by 1 june , richard had conquered the whole island . his exploit was well publicized and contributed to his reputation ; he also derived significant financial gains from the conquest of the island . richard left for acre on 5 june , with his allies . before his departure , he named two of his norman generals , richard de _camville_ and robert de thornham , as governors of cyprus .
+[33m[1m            QUESTION: what were isaac 's chains made out of ?[0m[39m
+[33m[1m         TRUE ANSWER: silver[0m[39m
+[33m[1m    PREDICTED ANSWER: silver chains[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.667[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 121
+luther had been suffering from ill health for years , including ménière 's disease , vertigo , fainting , tinnitus , and a cataract in one eye . from 1531 to 1546 , his health deteriorated further . the years of struggle with rome , the antagonisms with and among his fellow reformers , and the scandal which ensued from the bigamy of the philip of hesse incident , in which luther had played a leading role , all may have contributed . in 1536 , he began to suffer from [32m[1mkidney[0m[39m [32m[1mand[0m[39m [32m[1mbladder[0m[39m [32m[1mstones[0m[39m , and arthritis , and an ear infection ruptured an ear drum . in december 1544 , he began to feel the effects of [41m[45mangina[49m[49m .
+[33m[1m            QUESTION: what did luther begin to experience in 1536 ?[0m[39m
+[33m[1m         TRUE ANSWER: kidney and bladder stones[0m[39m
+[33m[1m    PREDICTED ANSWER: angina[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 257
+there were many religions practiced during the yuan dynasty , such as buddhism , islam , and christianity . the establishment of the yuan dynasty had dramatically increased the number of muslims in china . however , unlike the western khanates , the yuan dynasty never converted to islam . instead , kublai khan , the founder of the yuan dynasty , favored buddhism , especially the tibetan variants . as a result , [32m[1mtibetan[0m[39m [32m[1mbuddhism[0m[39m was established as the de facto state religion . the top-level department and government agency known as the [45mbureau[49m of buddhist and tibetan affairs ( _xuanzheng_ [41myuan[49m ) was set up in _khanbaliq_ ( modern beijing ) to supervise buddhist monks throughout the empire . since kublai khan only esteemed the sakya sect of tibetan buddhism , other religions became less important . he and his successors kept a sakya imperial preceptor ( _dishi_ ) at court . before the end of the yuan dynasty , 14 leaders of the sakya sect had held the post of imperial preceptor , thereby enjoying special power . furthermore , mongol patronage of buddhism resulted in a number of monuments of buddhist art . mongolian buddhist translations , almost all from tibetan originals , began on a large scale after 1300 . many mongols of the upper class such as the jalayir and the _oronar_ nobles as well as the emperors also patronized confucian scholars and institutions . a considerable number of confucian and chinese historical works were translated into the mongolian language .
+[33m[1m            QUESTION: what was the yuan 's unofficial state religion ?[0m[39m
+[33m[1m         TRUE ANSWER: tibetan buddhism[0m[39m
+[33m[1m    PREDICTED ANSWER: bureau of buddhist and tibetan affairs ( xuanzheng yuan[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.200[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 211
+the dalek race , which first appeared in the show 's second serial in 1963 , are doctor who 's oldest villains . the daleks are _kaleds_ from the planet skaro , mutated by the scientist [41m[45m[32m[1mdavros[0m[39m[49m[49m and housed in mechanical armour shells for mobility . the actual creatures resemble octopi with large , pronounced brains . their armour shells have a single _eye-stalk_ , a _sink-plunger-like_ device that serves the purpose of a hand , and a directed-energy weapon . their main weakness is their _eyestalk_ ; attacks upon them using various weapons can blind a dalek , making it go mad . their chief role in the series plot , as they frequently remark in their instantly recognisable metallic voices , is to " exterminate " all _non-dalek_ beings . they even attack the time lords in the time war , as shown during the 50th anniversary of the show . they continue to be a recurring _'monster_ ' within the doctor who franchise , their most recent appearances being in the 2015 episodes " the witch 's familiar " and " hell bent " . davros has also been a recurring figure since his debut in genesis of the daleks , although played by several different actors .
+[33m[1m            QUESTION: what scientist created the daleks , by mutation ?[0m[39m
+[33m[1m         TRUE ANSWER: davros[0m[39m
+[33m[1m    PREDICTED ANSWER: davros[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 46
+westwood one will carry the game throughout north america , with kevin harlan as play-by-play announcer , boomer esiason and dan fouts as color analysts , and [45m[32m[1mjames[0m[39m[49m [32m[1mlofton[0m[39m and mark malone as sideline reporters . jim [41mgray[49m will anchor the pre-game and halftime coverage .
+[33m[1m            QUESTION: who shared sideline reporting duties with mark malone ?[0m[39m
+[33m[1m         TRUE ANSWER: james lofton[0m[39m
+[33m[1m    PREDICTED ANSWER: james lofton and mark malone as sideline reporters . jim gray[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.333[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 67
+norman architecture typically stands out as a new stage in the architectural history of the regions they subdued . they spread a unique romanesque idiom to england and italy , and the _encastellation_ of these regions with keeps in their north french style fundamentally altered the military landscape . their style was characterised by [45m[32m[1mrounded[0m[39m[49m [41marches[49m , particularly over windows and doorways , and massive proportions .
+[33m[1m            QUESTION: what kind of arches does norman architecture have ?[0m[39m
+[33m[1m         TRUE ANSWER: rounded[0m[39m
+[33m[1m    PREDICTED ANSWER: rounded arches[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.667[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 183
+charles avison , the leading british composer of concertos in the 18th century , was born in newcastle upon tyne in [41m[45m1709[49m[49m and died there in [32m[1m1770[0m[39m . basil hume , archbishop of westminster , was born in the city in 1923 . vice admiral cuthbert collingwood , 1st baron collingwood , was born in the city . ironmaster , metallurgist , and member of parliament isaac lowthian bell was born in the city in 1816 . other notable people born in or associated with newcastle include : engineer and industrialist lord armstrong , engineer and father of the modern steam railways george stephenson , his son , also an engineer , robert stephenson , engineer and inventor of the steam turbine sir charles parsons , inventor of the incandescent light bulb sir joseph swan , modernist poet basil bunting , and lord chief justice peter taylor . portuguese writer eça de queiroz was a diplomat in newcastle from late 1874 until april _1879—his_ most productive literary period . former prime minister of thailand abhisit vejjajiva , was born in the city .
+[33m[1m            QUESTION: what year did charles avison die in newcastle ?[0m[39m
+[33m[1m         TRUE ANSWER: 1770[0m[39m
+[33m[1m    PREDICTED ANSWER: 1709[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 128
+anti-inflammatory drugs are often used to control the effects of inflammation . glucocorticoids are the most powerful of these drugs ; however , these drugs can have many undesirable side effects , such as central obesity , hyperglycemia , osteoporosis , and their use must be tightly controlled . lower doses of anti-inflammatory drugs are often used in conjunction with cytotoxic or immunosuppressive drugs such as [45mmethotrexate[49m or [41mazathioprine[49m . cytotoxic drugs inhibit the immune response by killing dividing cells such as activated t cells . however , the killing is indiscriminate and other constantly dividing cells and their organs are affected , which causes toxic side effects . immunosuppressive drugs such as [32m[1mcyclosporin[0m[39m prevent t cells from responding to signals correctly by inhibiting signal transduction pathways .
+[33m[1m            QUESTION: what is an example of an immunosuppressive drug that prevents t cell activity by altering signal transduction pathways ?[0m[39m
+[33m[1m         TRUE ANSWER: cyclosporin[0m[39m
+[33m[1m    PREDICTED ANSWER: methotrexate or azathioprine[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 98
+[32m[1mthe[0m[39m [32m[1mprinciple[0m[39m [32m[1mof[0m[39m [41m[45m[32m[1mcross-cutting[0m[39m[49m[49m [32m[1mrelationships[0m[39m pertains to the formation of faults and the age of the sequences through which they cut . faults are younger than the rocks they cut ; accordingly , if a fault is found that penetrates some formations but not those on top of it , then the formations that were cut are older than the fault , and the ones that are not cut must be younger than the fault . finding the key bed in these situations may help determine whether the fault is a normal fault or a thrust fault .
+[33m[1m            QUESTION: what principle relates to the formation of faults and the age of the sequences through which they cut ?[0m[39m
+[33m[1m         TRUE ANSWER: the principle of cross-cutting relationships[0m[39m
+[33m[1m    PREDICTED ANSWER: cross-cutting[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.400[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 616
+the free movement of workers regulation articles 1 to 7 set out the main provisions on equal treatment of workers . first , articles 1 to 4 generally require that workers can take up employment , conclude contracts , and not suffer discrimination compared to nationals of the member state . in a famous case , the belgian football association v bosman , a belgian footballer named jean-marc bosman claimed that he should be able to transfer from _r.f.c_ . de liège to usl dunkerque when his contract finished , regardless of whether dunkerque could afford to pay liège the habitual transfer fees . the court of justice held " the transfer rules constitute [ d ] an obstacle to free movement " and were unlawful unless they could be justified in the public interest , but this was unlikely . in groener v minister for education the court of justice accepted that a requirement to speak gaelic to teach in a dublin design college could be justified as part of the public policy of promoting the irish language , but only if the measure was not disproportionate . by contrast in _angonese_ v cassa di risparmio di bolzano spa a bank in bolzano , italy , was not allowed to require mr _angonese_ to have a bilingual certificate that could only be obtained in bolzano . the court of justice , giving " horizontal " direct effect to tfeu article 45 , reasoned that people from other countries would have little chance of acquiring the certificate , and because it was " impossible to submit proof of the required linguistic knowledge by any other means " , the measure was disproportionate . second , article 7 ( 2 ) requires equal treatment in respect of tax . in _finanzamt_ köln altstadt v _schumacker_ the court of justice held that it contravened tfeu art 45 to deny tax benefits ( e.g . for married couples , and social insurance expense deductions ) to a man who worked in germany , but was resident in belgium when other german residents got the benefits . by contrast in weigel v _finanzlandesdirektion_ für vorarlberg the court of justice rejected mr weigel 's claim that a re-registration charge upon bringing his car to austria violated his right to free movement . although the tax was " likely to have a negative bearing on the decision of migrant workers to exercise their right to freedom of movement " , because the charge applied equally to austrians , in absence of eu legislation on the matter it had to be regarded as justified . third , people must receive equal treatment regarding " social advantages " , although the court has approved residential qualifying periods . in [45m[32m[1mhendrix[0m[39m[49m [32m[1mv[0m[39m [32m[1memployee[0m[39m insurance institute the court of justice held that a dutch [41mnational[49m was not entitled to continue receiving incapacity benefits when he moved to belgium , because the benefit was " closely linked to the socio-economic situation " of the netherlands . conversely , in _geven_ v land nordrhein-westfalen the court of justice held that a dutch woman living in the netherlands , but working between 3 and 14 hours a week in germany , did not have a right to receive german child benefits , even though the wife of a man who worked full-time in germany but was resident in austria could . the general justifications for limiting free movement in tfeu article 45 ( 3 ) are " public policy , public security or public health " , and there is also a general exception in article 45 ( 4 ) for " employment in the public service " .
+[33m[1m            QUESTION: in which case was a dutch national not entitled to continue receiving benefits when he moved to belgium ?[0m[39m
+[33m[1m         TRUE ANSWER: hendrix v employee[0m[39m
+[33m[1m    PREDICTED ANSWER: hendrix v employee insurance institute the court of justice held that a dutch national[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.400[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 110
+are prime for any natural number [45mn.[49m here represents [32m[1mthe[0m[39m [32m[1mfloor[0m[39m [41m[32m[1mfunction[0m[39m[49m , i.e. , largest integer not greater than the number in question . the latter formula can be shown using bertrand 's postulate ( proven first by chebyshev ) , which states that there always exists at least one prime number p with n < p < 2n _−_ 2 , for any natural number n > 3 . however , computing a or μ requires the knowledge of infinitely many primes to begin with . another formula is based on wilson 's theorem and generates the number 2 many times and all other primes exactly once .
+[33m[1m            QUESTION: what is name of the function used for the largest integer not greater than the number in question ?[0m[39m
+[33m[1m         TRUE ANSWER: the floor function[0m[39m
+[33m[1m    PREDICTED ANSWER: n. here represents the floor function[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.571[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 123
+in terms of housing stock , the authority is one of few authorities to see the proportion of detached homes rise in the 2010 census ( to 7.8 % ) , in this instance this was coupled with a similar rise in flats and waterside apartments to 25.6 % , and the proportion of converted or shared houses in 2011 renders this dwelling type within the highest of the five colour-coded brackets at 5.9 % , and on a par with oxford and reading , greater than manchester and liverpool and below a handful of historic densely occupied , arguably [41m[45moverinflated[49m[49m markets in the local authorities : harrogate , cheltenham , bath , inner london , hastings , brighton and [32m[1mtunbridge[0m[39m [32m[1mwells[0m[39m [32m[1m.[0m[39m
+[33m[1m            QUESTION: what market other than harrogate , cheltenham , bath , inner london , hastings and brighton is overinflated ?[0m[39m
+[33m[1m         TRUE ANSWER: tunbridge wells .[0m[39m
+[33m[1m    PREDICTED ANSWER: overinflated[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 175
+in the fall quarter of 2014 , the university of chicago enrolled [41m[45m_5,792_[49m[49m students in the college , 3,468 students in its four graduate divisions , _5,984_ students in its professional schools , and [32m[1m_15,244_[0m[39m students overall . in the 2012 spring quarter , international students comprised almost 19 % of the overall study body , over 26 % of students were domestic ethnic minorities , and about 44 % of enrolled students were female . admissions to the university of chicago is highly selective . the middle 50 % band of sat scores for the undergraduate class of 2015 , excluding the writing section , was _1420–1530_ , the average mcat score for entering students in the pritzker school of medicine in 2011 was 36 , and the median lsat score for entering students in the law school in 2011 was 171 . in 2015 , the college of the university of chicago had an acceptance rate of 7.8 % for the class of 2019 , the lowest in the college 's history .
+[33m[1m            QUESTION: in the fall quarter of 2014 , how many students signed up for the university 's in total ?[0m[39m
+[33m[1m         TRUE ANSWER: 15,244[0m[39m
+[33m[1m    PREDICTED ANSWER: 5,792[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 255
+when rock units are placed under horizontal compression , they shorten and become thicker . because rock units , other than muds , do not significantly change in volume , this is accomplished in two primary ways : through faulting and folding . in the shallow crust , where brittle deformation can occur , thrust faults form , which cause deeper rock to move on top of shallower rock . because deeper rock is often older , as noted by the principle of superposition , this can result in older rocks moving on top of younger ones . movement along faults can result in folding , either because the faults are not planar or because rock layers are dragged along , forming drag folds as slip occurs along the fault . deeper in the earth , rocks behave plastically , and fold instead of faulting . these folds can either be those where the material in the center of the fold buckles upwards , creating " _antiforms_ " , or where it buckles downwards , creating " _synforms_ " . if the tops of the rock units within the folds remain pointing upwards , they are called [45m[32m[1manticlines[0m[39m[49m [32m[1mand[0m[39m [32m[1m_synclines_[0m[39m , respectively . if some of the units in the fold are facing downward , the structure is called an overturned anticline or [41msyncline[49m , and if all of the rock units are overturned or the correct _up-direction_ is unknown , they are simply called by the most general terms , _antiforms_ and _synforms_ .
+[33m[1m            QUESTION: if the tops of the rock units within the folds remain pointing upwards , they are called what ?[0m[39m
+[33m[1m         TRUE ANSWER: anticlines and synclines[0m[39m
+[33m[1m    PREDICTED ANSWER: anticlines and synclines , respectively . if some of the units in the fold are facing downward , the structure is called an overturned anticline or syncline[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.261[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 106
+some of the income was dispensed in the form of aid to other underdeveloped nations whose economies had been caught between higher oil prices and lower prices for their own export commodities , amid shrinking western demand . much went for arms purchases that exacerbated political tensions , particularly in the [45m[32m[1mmiddle[0m[39m[49m [41m[32m[1meast[0m[39m[49m . saudi arabia spent over 100 billion dollars in the ensuing decades for helping spread its fundamentalist interpretation of islam , known as wahhabism , throughout the world , via religious charities such _al-haramain_ foundation , which often also distributed funds to violent sunni extremist groups such as al-qaeda and the taliban .
+[33m[1m            QUESTION: some of the income went to the purchase of arms which exacerbated political tension especially in which area ?[0m[39m
+[33m[1m         TRUE ANSWER: middle east[0m[39m
+[33m[1m    PREDICTED ANSWER: middle east[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 166
+by the opening of the 2008 general conference , total umc membership was estimated at [45m11.4[49m [41mmillion[49m , with about [32m[1m7.9[0m[39m [32m[1mmillion[0m[39m in the u.s. and 3.5 million overseas . significantly , about 20 % of the conference delegates were from africa , with filipinos and europeans making up another 10 % . during the conference , the delegates voted to finalize the induction of the methodist church of the ivory coast and its 700,000 members into the denomination . given current trends in the _umc—with_ overseas churches growing , especially in africa , and u.s. churches collectively losing about 1,000 members a _week—it_ has been estimated that africans will make up at least 30 % of the delegates at the 2012 general conference , and it is also possible that 40 % of the delegates will be from outside the u.s. one congolese bishop has estimated that typical sunday attendance of the umc is higher in his country than in the entire united states .
+[33m[1m            QUESTION: by the opening of the 2008 general conference , what was the total umc membership in the u.s. ?[0m[39m
+[33m[1m         TRUE ANSWER: 7.9 million[0m[39m
+[33m[1m    PREDICTED ANSWER: 11.4 million[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.500[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 33
+the league eventually narrowed the bids to three sites : new orleans ' [45m[32m[1mmercedes-benz[0m[39m[49m [41m[32m[1msuperdome[0m[39m[49m , miami 's sun life stadium , and the san francisco bay area 's levi 's stadium .
+[33m[1m            QUESTION: what was the name of new orleans ' superdome at the time that super bowl 50 took place ?[0m[39m
+[33m[1m         TRUE ANSWER: mercedes-benz superdome[0m[39m
+[33m[1m    PREDICTED ANSWER: mercedes-benz superdome[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 147
+the smaller galleries cover korea , the himalayan kingdoms and south east asia . korean displays include _green-glazed_ ceramics , silk embroideries from officials ' robes and gleaming boxes inlaid with mother-of-pearl made between 500 ad and 2000 . himalayan items include important early nepalese bronze sculptures , repoussé work and embroidery . tibetan art from the 14th to the 19th century is represented by notable _14th-_ and 15th-century religious images in wood and bronze , scroll paintings and ritual objects . [41m[45mart[49m[49m from thailand , burma , cambodia , indonesia and sri lanka in gold , silver , bronze , stone , terracotta and ivory represents these rich and complex cultures , the displays span the 6th to 19th centuries . refined [32m[1mhindu[0m[39m [32m[1mand[0m[39m [32m[1mbuddhist[0m[39m [32m[1msculptures[0m[39m reflect the influence of india ; items on show include _betel-nut_ cutters , ivory combs and bronze palanquin hooks .
+[33m[1m            QUESTION: the influence of india can be seen in which religious art objects from thailand , burma and cambodia ?[0m[39m
+[33m[1m         TRUE ANSWER: hindu and buddhist sculptures[0m[39m
+[33m[1m    PREDICTED ANSWER: art[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 94
+the first four saturn i test flights were launched from _lc-34_ , with only live first stages , carrying dummy upper stages filled with water . the first flight with a live s-iv was launched from _lc-37_ . this was followed by five launches of boilerplate csms ( designated _as-101_ through _as-105_ ) into orbit in 1964 and 1965 . the last three of these further supported the apollo program by also carrying pegasus [41msatellites[49m , which verified the [45msafety[49m of the _translunar_ environment by measuring the [32m[1mfrequency[0m[39m [32m[1mand[0m[39m [32m[1mseverity[0m[39m [32m[1mof[0m[39m [32m[1mmicrometeorite[0m[39m [32m[1mimpacts[0m[39m .
+[33m[1m            QUESTION: what did pegasus satellites measure to propose the safety of the environment in space and on the moon ?[0m[39m
+[33m[1m         TRUE ANSWER: frequency and severity of micrometeorite impacts[0m[39m
+[33m[1m    PREDICTED ANSWER: [0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 50
+the _8-_ and 10-county definitions are not used for the greater [32m[1msouthern[0m[39m [32m[1mcalifornia[0m[39m [32m[1m_megaregion_[0m[39m , one of the 11 _megaregions_ of the united states . the _megaregion_ 's area is more expansive , extending east into las vegas , nevada , and south across the mexican border into [41m[45mtijuana[49m[49m .
+[33m[1m            QUESTION: what is the name of the region that is not defined by the eight or 10 county definitions ?[0m[39m
+[33m[1m         TRUE ANSWER: southern california megaregion[0m[39m
+[33m[1m    PREDICTED ANSWER: tijuana[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 159
+to measure the difficulty of solving a computational problem , one may wish to see how much time the best algorithm requires to solve the problem . however , the running time may , in general , depend on the instance . in particular , larger instances will require more time to solve . thus the time required to solve a problem ( or the space required , or any measure of complexity ) is calculated as a function of the size of the instance . this is usually taken to be the size of the input in bits . complexity theory is interested in how algorithms scale with [32m[1man[0m[39m [32m[1mincrease[0m[39m [32m[1min[0m[39m [32m[1mthe[0m[39m [32m[1minput[0m[39m [41m[32m[1msize[0m[39m[49m . for instance , in the problem of finding whether a graph is connected , how much more time does it take to solve a problem for a graph with [45m2n[49m vertices compared to the time taken for a graph with n vertices ?
+[33m[1m            QUESTION: complexity theory seeks to define the relationship between the scale of algorithms with respect to what other variable ?[0m[39m
+[33m[1m         TRUE ANSWER: an increase in the input size[0m[39m
+[33m[1m    PREDICTED ANSWER: [0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 100
+[32m[1mduring[0m[39m [32m[1mthe[0m[39m [32m[1m_mid-eocene_[0m[39m , it is believed that the drainage basin of the amazon was split along the middle of the continent by the purus arch . water on the eastern side flowed toward the atlantic , while to the west water flowed toward the pacific across the amazonas basin . as the andes mountains rose , however , a large basin was created that enclosed a lake ; now known as the solimões basin . within the last [45m_5–10_[49m million [41myears[49m , this accumulating water broke through the purus arch , joining the easterly flow toward the atlantic .
+[33m[1m            QUESTION: when was the drainage basin of the amazon believed to have split in the middle of south america ?[0m[39m
+[33m[1m         TRUE ANSWER: during the mid-eocene[0m[39m
+[33m[1m    PREDICTED ANSWER: 5–10 million years[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 98
+the central region , consisting of present-day hebei , shandong , shanxi , the south-eastern part of present-day inner mongolia and the henan areas to the north of the yellow river , was considered the most important region of the dynasty and directly governed by the central secretariat ( or zhongshu sheng ) at [41m[45m[32m[1m_khanbaliq_[0m[39m[49m[49m ( modern beijing ) ; similarly , another top-level administrative department called the bureau of buddhist and tibetan affairs ( or _xuanzheng_ yuan ) held administrative rule over the whole of modern-day tibet and a part of sichuan , qinghai and kashmir .
+[33m[1m            QUESTION: where was the central secretariat based ?[0m[39m
+[33m[1m         TRUE ANSWER: khanbaliq[0m[39m
+[33m[1m    PREDICTED ANSWER: khanbaliq[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 82
+_euglenophytes_ are a group of [32m[1mcommon[0m[39m [41m[45m[32m[1mflagellated[0m[39m[49m[49m protists that contain chloroplasts derived from a green alga . _euglenophyte_ chloroplasts have three _membranes—it_ is thought that the membrane of the primary endosymbiont was lost , leaving the cyanobacterial membranes , and the secondary host 's _phagosomal_ membrane . _euglenophyte_ chloroplasts have a _pyrenoid_ and thylakoids stacked in groups of three . starch is stored in the form of _paramylon_ , which is contained in membrane-bound granules in the cytoplasm of the _euglenophyte_ .
+[33m[1m            QUESTION: what kind of protists are euglenophytes ?[0m[39m
+[33m[1m         TRUE ANSWER: common flagellated[0m[39m
+[33m[1m    PREDICTED ANSWER: flagellated[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.667[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 276
+homes from the early 20th century line this boulevard in the heart of the historic alta vista tract . the section of huntington boulevard between first street on the west to cedar avenue on the east is the home to many large , stately homes . the original development of this area began circa 1910 , on 190 acres of what had been an alfalfa field . the alta vista tract , as the land would become known , was mapped by [45m[32m[1mwilliam[0m[39m[49m [41m[32m[1mstranahan[0m[39m[49m for the pacific improvement corporation , and was officially platted in 1911 . the tract 's boundaries were balch avenue on the south , cedar avenue on the east , the rear property line of platt avenue ( east of sixth street ) and platt avenue ( west of sixth street ) on the north , and first street on the west . the subdivision was annexed to the city in january 1912 , in an election that was the first in which women voted in the community . at the time of its admission to the city , the alta vista tract was uninhabited but landscaped , although the trees had to be watered by tank wagon . in 1914 developers billings & _meyering_ acquired the tract , completed street development , provided the last of the necessary municipal improvements including water service , and began marketing the property with fervor . a mere half decade later the tract had 267 homes . this rapid development was no doubt hastened by the fresno traction company right-of-way along huntington boulevard , which provided streetcar connections between downtown and the county hospital .
+[33m[1m            QUESTION: who mapped the alta vista tract ?[0m[39m
+[33m[1m         TRUE ANSWER: william stranahan[0m[39m
+[33m[1m    PREDICTED ANSWER: william stranahan[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 137
+the rhine ( romansh : rein , german : rhein , french : le rhin , dutch : rijn ) is a european river that begins in the swiss canton of graubünden in the southeastern swiss alps , forms part of the _swiss-austrian_ , _swiss-liechtenstein_ border , swiss-german and then the franco-german border , then flows through the rhineland and eventually empties into the north sea in the [45m[32m[1mnetherlands[0m[39m[49m . the biggest city on the river rhine is cologne , [41mgermany[49m with a population of more than 1,050,000 people . it is the second-longest river in central and western europe ( after the danube ) , at about 1,230 km ( 760 mi ) , [ note 2 ] [ note 1 ] with an average discharge of about 2,900 m3/s ( 100,000 cu ft/s ) .
+[33m[1m            QUESTION: what country does the rhine empty ?[0m[39m
+[33m[1m         TRUE ANSWER: netherlands[0m[39m
+[33m[1m    PREDICTED ANSWER: netherlands . the biggest city on the river rhine is cologne , germany[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.200[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 111
+luther 's hymns were frequently evoked by [45mparticular[49m [32m[1mevents[0m[39m [32m[1min[0m[39m [32m[1mhis[0m[39m [32m[1mlife[0m[39m and the unfolding reformation . this behavior started with his learning of the execution of johann esch and heinrich _voes_ , the first individuals to be martyred by the roman catholic church for lutheran views , prompting luther to write the hymn " ein [41mneues[49m lied wir _heben_ an " ( " a new song we raise " ) , which is generally known in english by john c. messenger 's translation by the title and first line " flung to the heedless winds " and sung to the tune _ibstone_ composed in 1875 by maria c. _tiddeman_ .
+[33m[1m            QUESTION: what caused luther to write hymns ?[0m[39m
+[33m[1m         TRUE ANSWER: events in his life[0m[39m
+[33m[1m    PREDICTED ANSWER: particular events in his life and the unfolding reformation . this behavior started with his learning of the execution of johann esch and heinrich voes , the first individuals to be martyred by the roman catholic church for lutheran views , prompting luther to write the hymn " ein neues[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.178[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 101
+chloroplasts have their own dna , often abbreviated as [41m[45m[32m[1m_ctdna_[0m[39m[49m[49m [32m[1m,[0m[39m [32m[1mor[0m[39m [32m[1m_cpdna_[0m[39m . it is also known as the _plastome_ . its existence was first proved in 1962 , and first sequenced in _1986—when_ two japanese research teams sequenced the chloroplast dna of liverwort and tobacco . since then , hundreds of chloroplast dnas from various species have been sequenced , but they 're mostly those of land plants and green _algae—glaucophytes_ , red algae , and other algal groups are extremely underrepresented , potentially introducing some bias in views of " typical " chloroplast dna structure and content .
+[33m[1m            QUESTION: what is chloroplast dna abbreviated as ?[0m[39m
+[33m[1m         TRUE ANSWER: ctdna , or cpdna[0m[39m
+[33m[1m    PREDICTED ANSWER: ctdna[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.500[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 157
+the chinese medical tradition of the yuan had " four great schools " that the yuan inherited from the jin dynasty . all four schools were based on the same intellectual foundation , but advocated different theoretical approaches toward medicine . under the mongols , the practice of chinese medicine spread to other parts of the empire . chinese physicians were brought along military campaigns by the mongols as they expanded towards the west . chinese medical techniques such as [45m[32m[1macupuncture[0m[39m[49m [32m[1m,[0m[39m [32m[1mmoxibustion[0m[39m [32m[1m,[0m[39m [32m[1mpulse[0m[39m [41m[32m[1mdiagnosis[0m[39m[49m [32m[1m,[0m[39m [32m[1mand[0m[39m [32m[1mvarious[0m[39m [32m[1mherbal[0m[39m [32m[1mdrugs[0m[39m [32m[1mand[0m[39m [32m[1melixirs[0m[39m were transmitted westward to the middle east and the rest of the empire . several medical advances were made in the yuan period . the physician wei yilin ( _1277–1347_ ) invented a suspension method for reducing dislocated joints , which he performed using anesthetics . the mongol physician hu sihui described the importance of a healthy diet in a 1330 medical treatise .
+[33m[1m            QUESTION: what techniques did chinese medicine include ?[0m[39m
+[33m[1m         TRUE ANSWER: acupuncture , moxibustion , pulse diagnosis , and various herbal drugs and elixirs[0m[39m
+[33m[1m    PREDICTED ANSWER: acupuncture , moxibustion , pulse diagnosis[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.571[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 129
+[32m[1mfrederick[0m[39m [32m[1mwilliam[0m[39m , elector of brandenburg , invited huguenots to settle in his realms , and a number of their descendants rose to positions of prominence in prussia . several prominent german military , cultural , and political figures were ethnic huguenot , including poet theodor fontane , general hermann von françois , the hero of the first world war battle of tannenberg , luftwaffe general and fighter ace adolf galland , luftwaffe flying ace hans-joachim marseille , and famed u-boat captain lothar von arnauld de la _perière_ . the last prime minister of the ( east ) german democratic republic , lothar de maizière , is also a descendant of a huguenot family , as is the german federal minister of the interior , [45mthomas[49m de [41mmaizière[49m .
+[33m[1m            QUESTION: what german ruler invited huguenot immigration ?[0m[39m
+[33m[1m         TRUE ANSWER: frederick william[0m[39m
+[33m[1m    PREDICTED ANSWER: thomas de maizière[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 120
+the length of the rhine is conventionally measured in " _rhine-kilometers_ " ( _rheinkilometer_ ) , a scale introduced in 1939 which runs from the old rhine bridge at constance ( 0 km ) to hoek van holland ( _1036.20_ km ) . [45mthe[49m river length is significantly shortened from the river 's natural course due to number of [32m[1mcanalisation[0m[39m [41m[32m[1mprojects[0m[39m[49m completed in the 19th and 20th century . [ note 7 ] the " total length of the rhine " , to the inclusion of lake constance and the alpine rhine is more difficult to measure objectively ; it was cited as 1,232 kilometres ( 766 miles ) by the dutch _rijkswaterstaat_ in 2010 . [ note 1 ]
+[33m[1m            QUESTION: what has shortened the rhine river ?[0m[39m
+[33m[1m         TRUE ANSWER: canalisation projects[0m[39m
+[33m[1m    PREDICTED ANSWER: the river length is significantly shortened from the river 's natural course due to number of canalisation projects[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.222[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 188
+in the presidential elections , president kibaki under the party of national unity ran for re-election against [45mthe[49m main opposition party , [32m[1mthe[0m[39m [32m[1morange[0m[39m [32m[1mdemocratic[0m[39m [32m[1mmovement[0m[39m [32m[1m([0m[39m [32m[1modm[0m[39m [32m[1m)[0m[39m . the elections were seen to have been flawed with international observers saying that they were below international standards . after a split which took a crucial 8 % of the votes away from the odm to the newly formed orange democratic _movement-kenya_ ( _odm-k_ ) 's candidate , kalonzo [41mmusyoka[49m , the race tightened between odm candidate raila odinga and kibaki . as the count came into the electoral commission of kenya ( eck ) headquarters , odinga was shown to have a slight , and then substantial lead as the results from his strongholds came in early . as the eck continued to count the votes , kibaki closed the gap and then overtook his opponent by a substantial margin after votes from his stronghold arrived later . this led to protests and open discrediting of the eck for complicity and to odinga declaring himself the " people 's president " and calling for a recount .
+[33m[1m            QUESTION: who did president kibaki run against ?[0m[39m
+[33m[1m         TRUE ANSWER: the orange democratic movement ( odm )[0m[39m
+[33m[1m    PREDICTED ANSWER: the main opposition party , the orange democratic movement ( odm ) . the elections were seen to have been flawed with international observers saying that they were below international standards . after a split which took a crucial 8 % of the votes away from the odm to the newly formed orange democratic movement-kenya ( odm-k ) 's candidate , kalonzo musyoka[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.160[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 158
+the unproven riemann hypothesis , dating from [41m[45m[32m[1m1859[0m[39m[49m[49m , states that except for s = _−2_ , _−4_ , ... , all zeroes of the _ζ-function_ have real part equal to 1/2 . the connection to prime numbers is that it essentially says that the primes are as regularly distributed as possible . [ clarification needed ] from a physical viewpoint , it roughly states that the irregularity in the distribution of primes only comes from random noise . from a mathematical viewpoint , it roughly states that the asymptotic distribution of primes ( about _x/log_ x of numbers less than x are primes , the prime number theorem ) also holds for much shorter intervals of length about the square root of x ( for intervals near x ) . this hypothesis is generally believed to be correct . in particular , the simplest assumption is that primes should have no significant irregularities without good reason .
+[33m[1m            QUESTION: when was the riemann hypothesis proposed ?[0m[39m
+[33m[1m         TRUE ANSWER: 1859[0m[39m
+[33m[1m    PREDICTED ANSWER: 1859[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 125
+a number of huguenots served as mayors in dublin , cork , youghal and waterford in the 17th and 18th centuries . numerous signs of huguenot presence can still be seen with names still in use , and with areas of the main towns and cities named after the people who settled there . examples include the huguenot district and french church street in cork city ; and d'olier street in dublin , named after [32m[1ma[0m[39m [45m[32m[1mhigh[0m[39m[49m [32m[1msheriff[0m[39m [32m[1mand[0m[39m [32m[1mone[0m[39m [32m[1mof[0m[39m [32m[1mthe[0m[39m [32m[1mfounders[0m[39m [32m[1mof[0m[39m [32m[1mthe[0m[39m [32m[1mbank[0m[39m [32m[1mof[0m[39m [41m[32m[1mireland[0m[39m[49m . a french church in portarlington dates back to 1696 , and was built to serve the significant new huguenot community in the town . at the time , they constituted the majority of the townspeople .
+[33m[1m            QUESTION: d'olier street is named after whom ?[0m[39m
+[33m[1m         TRUE ANSWER: a high sheriff and one of the founders of the bank of ireland[0m[39m
+[33m[1m    PREDICTED ANSWER: high sheriff and one of the founders of the bank of ireland[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 70
+on 30 july 1891 , at the age of 35 , tesla became a naturalized citizen of the united states , and established his south [45mfifth[49m avenue [41mlaboratory[49m , and later another at 46 e. houston street , in [32m[1mnew[0m[39m [32m[1myork[0m[39m . he lit electric lamps wirelessly at both locations , demonstrating the potential of wireless power transmission . in the same year , he patented the tesla coil .
+[33m[1m            QUESTION: where was tesla 's laboratory established ?[0m[39m
+[33m[1m         TRUE ANSWER: new york[0m[39m
+[33m[1m    PREDICTED ANSWER: fifth avenue laboratory[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 69
+cbs provided digital streams of the game via [41m[45m[32m[1mcbssports.com[0m[39m[49m[49m , and the cbs sports apps on tablets , windows 10 , xbox one and other digital media players ( such as _chromecast_ and roku ) . due to verizon communications exclusivity , streaming on smartphones was only provided to verizon wireless customers via the nfl mobile service . the espn deportes spanish broadcast was made available through _watchespn_ .
+[33m[1m            QUESTION: what cbs website provided a stream ?[0m[39m
+[33m[1m         TRUE ANSWER: cbssports.com[0m[39m
+[33m[1m    PREDICTED ANSWER: cbssports.com[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 122
+for certain physical scenarios , it is impossible to model forces as being due to gradient of [41m[45mpotentials[49m[49m . this is often due to _macrophysical_ considerations that yield forces as arising from a macroscopic statistical average of microstates . for example , [32m[1mfriction[0m[39m is caused by the gradients of numerous electrostatic potentials between the atoms , but manifests as a force model that is independent of any macroscale position vector . _nonconservative_ forces other than friction include other contact forces , tension , compression , and drag . however , for any sufficiently detailed description , all these forces are the results of conservative ones since each of these macroscopic forces are the net results of the gradients of microscopic potentials .
+[33m[1m            QUESTION: what do electrostatic gradiient potentials create ?[0m[39m
+[33m[1m         TRUE ANSWER: friction[0m[39m
+[33m[1m    PREDICTED ANSWER: potentials[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 164
+the plain moraine plateau has only a few natural and artificial ponds and also groups of clay pits . the pattern of the vistula terraces is asymmetrical . the left side consist mainly of two levels : the highest one contains former flooded terraces and the lowest one the flood plain terrace . the contemporary flooded terrace still has visible valleys and ground depressions with water systems coming from the vistula old – riverbed . they consist of still quite natural streams and lakes as well as the pattern of drainage ditches . the right side of warsaw has a different pattern of geomorphological forms . there are several levels of the plain vistula terraces ( flooded as well as former flooded once ) and only small part and not so visible moraine escarpment . aeolian sand with a number of dunes parted by peat swamps or small ponds cover the highest terrace . these are mainly [41m[45mforested[49m[49m areas ( [32m[1mpine[0m[39m forest ) .
+[33m[1m            QUESTION: what type of forested areas can be found on the highest terrace ?[0m[39m
+[33m[1m         TRUE ANSWER: pine[0m[39m
+[33m[1m    PREDICTED ANSWER: forested[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 107
+the reason for the majority rule is the high risk of a conflict of interest and/or the avoidance of [45mabsolute[49m [41mpowers[49m . otherwise , the physician has a financial self-interest in " diagnosing " as many conditions as possible , and in exaggerating their seriousness , because he or she can then sell more medications to the patient . such self-interest directly conflicts with the patient 's interest in obtaining cost-effective medication and avoiding the unnecessary use of medication that may have side-effects . this system reflects much similarity to [32m[1mthe[0m[39m [32m[1mchecks[0m[39m [32m[1mand[0m[39m [32m[1mbalances[0m[39m [32m[1msystem[0m[39m [32m[1mof[0m[39m [32m[1mthe[0m[39m [32m[1mu.s.[0m[39m [32m[1mand[0m[39m [32m[1mmany[0m[39m [32m[1mother[0m[39m [32m[1mgovernments[0m[39m [32m[1m.[0m[39m [ citation needed ]
+[33m[1m            QUESTION: what do rules about conflict of interest involving doctors diagnosing patients resemble ?[0m[39m
+[33m[1m         TRUE ANSWER: the checks and balances system of the u.s. and many other governments .[0m[39m
+[33m[1m    PREDICTED ANSWER: absolute powers[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 113
+the adaptive immune system evolved in early [41m[45m[32m[1mvertebrates[0m[39m[49m[49m and allows for a stronger immune response as well as immunological memory , where each pathogen is " remembered " by a signature antigen . the adaptive immune response is antigen-specific and requires the recognition of specific " non-self " antigens during a process called antigen presentation . antigen specificity allows for the generation of responses that are tailored to specific pathogens or _pathogen-infected_ cells . the ability to mount these tailored responses is maintained in the body by " memory cells " . should a pathogen infect the body more than once , these specific memory cells are used to quickly eliminate it .
+[33m[1m            QUESTION: in what types of organisms did the adaptive immune system first evolve ?[0m[39m
+[33m[1m         TRUE ANSWER: vertebrates[0m[39m
+[33m[1m    PREDICTED ANSWER: vertebrates[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 112
+networks affiliates approved a two-year affiliate agreement in 2002 . in september , disney chairman/ceo michael eisner outlined a proposed realignment of the abc broadcast network day parts with the similar unit in its cable channels : abc saturday mornings with disney channels ( toon & playhouse ) , abc daytime with soapnet and abc prime time with abc family . 2002 saw the debut of the network 's first hit reality series , the bachelor ( the [45m_elimination-style_[49m dating show 's success led to a spinoff , [32m[1mthe[0m[39m [41m[32m[1mbachelorette[0m[39m[49m , which premiered the following year , as well as two additional spinoffs that later debuted in the early 2010s ) .
+[33m[1m            QUESTION: what reality series was the first spinoff of the bachelor for abc ?[0m[39m
+[33m[1m         TRUE ANSWER: the bachelorette[0m[39m
+[33m[1m    PREDICTED ANSWER: elimination-style dating show 's success led to a spinoff , the bachelorette[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.200[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 106
+the capabilities approach – sometimes called the human development approach – looks at income inequality and poverty as form of [45m“[49m [32m[1mcapability[0m[39m [32m[1mdeprivation[0m[39m [41m”[49m . unlike neoliberalism , which “ defines well-being as utility maximization ” , economic growth and income are considered a means to an end rather than the end itself . its goal is to “ wid [ en ] people ’ s choices and the level of their achieved well-being ” through increasing _functionings_ ( the things a person values doing ) , capabilities ( the freedom to enjoy _functionings_ ) and agency ( the ability to pursue valued goals ) .
+[33m[1m            QUESTION: what does the capabilities approach look at poverty as a form of ?[0m[39m
+[33m[1m         TRUE ANSWER: capability deprivation[0m[39m
+[33m[1m    PREDICTED ANSWER: “ capability deprivation ”[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.667[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 154
+the other category of schools are those run and partly or fully funded by private individuals , private organizations and religious groups . the ones that accept government funds are called _'aided_ ' schools . the private _'un-aided_ ' schools are fully funded by private parties . the standard and the quality of education is quite high . technically , these would be categorized as private schools , but many of them have the name " public school " appended to them , e.g. , the galaxy public school in kathmandu . most of the middle-class families send their children to such schools , which might be in their own city or far off , like boarding schools . the medium of education is [41m[45m[32m[1menglish[0m[39m[49m[49m , but as a compulsory subject , nepali and/or the state 's official language is also taught . preschool education is mostly limited to organized neighbourhood nursery schools .
+[33m[1m            QUESTION: in nepalese private schools , what is the primary language of instruction ?[0m[39m
+[33m[1m         TRUE ANSWER: english[0m[39m
+[33m[1m    PREDICTED ANSWER: english[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 219
+the glass collection covers 4000 years of glass making , and has over 6000 items from africa , britain , europe , america and asia . the earliest glassware on display comes from ancient egypt and continues through the ancient roman , medieval , renaissance covering areas such as venetian glass and bohemian glass and more recent periods , including art nouveau glass by [32m[1mlouis[0m[39m [32m[1mcomfort[0m[39m [32m[1mtiffany[0m[39m [32m[1mand[0m[39m [32m[1mémile[0m[39m [32m[1m_gallé_[0m[39m , the art deco style is represented by several examples by [45mrené[49m lalique . there are many examples of crystal chandeliers both english , displayed in the british galleries and foreign for example venetian ( attributed to giuseppe _briati_ ) dated _c1750_ are in the collection . the stained glass collection is possibly the finest in the world , covering the medieval to modern periods , and covering europe as well as britain . several examples of english 16th-century heraldic glass is displayed in the british galleries . many well-known designers of stained glass are represented in the collection including , from the 19th century : dante gabriel rossetti , edward burne-jones and william morris . there is also an example of frank lloyd wright 's work in the collection . 20th-century designers include harry clarke , john piper , patrick _reyntiens_ , veronica whall and brian [41mclarke[49m .
+[33m[1m            QUESTION: the art noveau style of glassware is represented by which two artists ?[0m[39m
+[33m[1m         TRUE ANSWER: louis comfort tiffany and émile gallé[0m[39m
+[33m[1m    PREDICTED ANSWER: rené lalique . there are many examples of crystal chandeliers both english , displayed in the british galleries and foreign for example venetian ( attributed to giuseppe briati ) dated c1750 are in the collection . the stained glass collection is possibly the finest in the world , covering the medieval to modern periods , and covering europe as well as britain . several examples of english 16th-century heraldic glass is displayed in the british galleries . many well-known designers of stained glass are represented in the collection including , from the 19th century : dante gabriel rossetti , edward burne-jones and william morris . there is also an example of frank lloyd wright 's work in the collection . 20th-century designers include harry clarke , john piper , patrick reyntiens , veronica whall and brian clarke[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.017[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 94
+civil disobedience is usually defined as pertaining to a citizen 's relation to the state and its laws , as distinguished from a constitutional [41mimpasse[49m in which two public agencies , especially two equally sovereign branches of government , conflict . for instance , if the head of government of a country were to refuse to enforce a decision of that country 's highest court , it would not be civil disobedience , [45msince[49m [32m[1mthe[0m[39m [32m[1mhead[0m[39m [32m[1mof[0m[39m [32m[1mgovernment[0m[39m [32m[1mwould[0m[39m [32m[1mbe[0m[39m [32m[1macting[0m[39m [32m[1min[0m[39m [32m[1mher[0m[39m [32m[1mor[0m[39m [32m[1mhis[0m[39m [32m[1mcapacity[0m[39m [32m[1mas[0m[39m [32m[1mpublic[0m[39m [32m[1mofficial[0m[39m rather than private citizen .
+[33m[1m            QUESTION: when would a person be considered to be excising a constitutional impasse ?[0m[39m
+[33m[1m         TRUE ANSWER: the head of government would be acting in her or his capacity as public official[0m[39m
+[33m[1m    PREDICTED ANSWER: [0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 166
+[41mharvard[49m operates several arts , cultural , and scientific museums . the harvard art museums comprises three museums . the arthur m. sackler museum includes collections of ancient , asian , islamic and later indian art , the _busch-reisinger_ museum , formerly the germanic museum , covers central and northern european art , and the fogg museum of art , covers western art from the middle ages to the present emphasizing italian early renaissance , british pre-raphaelite , and 19th-century french art . [45mthe[49m harvard museum of natural history includes the harvard mineralogical museum , harvard university herbaria featuring the _blaschka_ glass flowers exhibit , and the museum of comparative zoology . other museums include the carpenter center for the visual arts , designed by le corbusier , housing the film archive , the [32m[1mpeabody[0m[39m [32m[1mmuseum[0m[39m [32m[1mof[0m[39m [32m[1marchaeology[0m[39m [32m[1mand[0m[39m [32m[1methnology[0m[39m , specializing in the cultural history and civilizations of the western hemisphere , and the semitic museum featuring artifacts from excavations in the middle east .
+[33m[1m            QUESTION: what museum specializes in cultural history and civilizations of the western hemisphere ?[0m[39m
+[33m[1m         TRUE ANSWER: peabody museum of archaeology and ethnology[0m[39m
+[33m[1m    PREDICTED ANSWER: [0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 127
+after each team punted , panthers quarterback cam newton appeared to complete a 24-yard pass jerricho cotchery , but the call was ruled an incompletion and upheld after a replay challenge . cbs analyst and retired referee [45m[32m[1mmike[0m[39m[49m [41m[32m[1mcarey[0m[39m[49m stated he disagreed with the call and felt the review clearly showed the pass was complete . a few plays later , on _3rd-and-10_ from the 15-yard line , linebacker von miller knocked the ball out of newton 's hands while sacking him , and malik jackson recovered it in the end zone for a broncos touchdown , giving the team a _10–0_ lead . this was the first fumble return touchdown in a super bowl since super bowl xxviii at the end of the 1993 season .
+[33m[1m            QUESTION: what analyst did not agree with the ruling of the incomplete pass ?[0m[39m
+[33m[1m         TRUE ANSWER: mike carey[0m[39m
+[33m[1m    PREDICTED ANSWER: mike carey[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 195
+the amazon rainforest ( portuguese : floresta _amazônica_ or amazônia ; spanish : selva _amazónica_ , _amazonía_ or usually amazonia ; french : forêt _amazonienne_ ; dutch : _amazoneregenwoud_ ) , also known in english as amazonia or the amazon jungle , is a moist broadleaf forest that covers most of the amazon basin of south america . this basin encompasses 7,000,000 square kilometres ( 2,700,000 sq mi ) , of which 5,500,000 square kilometres ( 2,100,000 sq mi ) are covered by the rainforest . this region includes territory belonging to nine nations . the majority of the forest is contained within brazil , with 60 % of the rainforest , followed by peru with 13 % , colombia with 10 % , and with minor amounts in venezuela , ecuador , bolivia , guyana , suriname and french guiana . states or departments in four nations contain " amazonas " in their names . the amazon represents over half of the planet 's remaining rainforests , and comprises the largest and most biodiverse tract of tropical rainforest in the world , with an estimated 390 billion individual trees divided into [41m[45m[32m[1m16,000[0m[39m[49m[49m species .
+[33m[1m            QUESTION: how many species of trees can be found in the amazon rainforest ?[0m[39m
+[33m[1m         TRUE ANSWER: 16,000[0m[39m
+[33m[1m    PREDICTED ANSWER: 16,000[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 171
+for the next three hundred years , scotland was directly governed by the parliament of great britain and the subsequent parliament of the united kingdom , both seated at westminster , and the [32m[1mlack[0m[39m [32m[1mof[0m[39m [32m[1ma[0m[39m [45m[32m[1mparliament[0m[39m[49m [32m[1mof[0m[39m [41m[32m[1mscotland[0m[39m[49m remained an important element in scottish national identity . suggestions for a _'devolved_ ' parliament were made before 1914 , but were shelved due to the outbreak of the first world war . a sharp rise in nationalism in scotland during the late 1960s fuelled demands for some form of home rule or complete independence , and in 1969 prompted the incumbent labour government of harold wilson to set up the _kilbrandon_ commission to consider the british constitution . one of the principal objectives of the commission was to examine ways of enabling more self-government for scotland , within the unitary state of the united kingdom . _kilbrandon_ published his report in 1973 recommending the establishment of a directly elected scottish assembly to legislate for the majority of domestic scottish affairs .
+[33m[1m            QUESTION: what remained an important issue in scottish national identity for many years ?[0m[39m
+[33m[1m         TRUE ANSWER: lack of a parliament of scotland[0m[39m
+[33m[1m    PREDICTED ANSWER: parliament of scotland[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.750[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 125
+for a long time , number theory in general , and the study of prime numbers in particular , was seen as the canonical example of pure mathematics , with no applications outside of the self-interest of studying the topic with the exception of use of prime numbered gear teeth to distribute wear evenly . in particular , number theorists such as british mathematician g. h. hardy prided themselves on doing work that had absolutely no military significance . however , this vision was shattered in the 1970s , when it was publicly announced that prime numbers could be used as the basis for the creation of public key cryptography algorithms . prime numbers are also used for [45m[32m[1mhash[0m[39m[49m [32m[1mtables[0m[39m and pseudorandom number [41mgenerators[49m .
+[33m[1m            QUESTION: besides public key cryptography , what is another application for prime numbers ?[0m[39m
+[33m[1m         TRUE ANSWER: hash tables[0m[39m
+[33m[1m    PREDICTED ANSWER: hash tables and pseudorandom number generators[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.500[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 200
+there have also been many references to doctor who in popular culture and other science fiction , including star trek : the next generation ( " the neutral zone " ) and leverage . in the channel 4 series [45m[32m[1mqueer[0m[39m[49m [32m[1mas[0m[39m [41m[32m[1mfolk[0m[39m[49m ( created by later doctor who executive producer russell t. davies ) , the character of vince was portrayed as an avid doctor who fan , with references appearing many times throughout in the form of clips from the programme . in a similar manner , the character of oliver on coupling ( created and written by current show runner steven moffat ) is portrayed as a doctor who collector and enthusiast . references to doctor who have also appeared in the young adult fantasy novels brisingr and high wizardry , the video game rock band , the soap opera eastenders , the adult swim comedy show robot chicken , the family guy episodes " blue harvest " and " 420 " , and the game runescape . it has also be referenced in destroy all humans ! 2 , by civilians in the game 's variation of england , and in apollo justice : ace attorney .
+[33m[1m            QUESTION: what series was created by former doctor who producer russell t. davies ?[0m[39m
+[33m[1m         TRUE ANSWER: queer as folk[0m[39m
+[33m[1m    PREDICTED ANSWER: queer as folk[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 155
+since 1974 , abc has generally aired dick clark 's new year 's rockin ' eve on new year 's eve ( hosted first by its creator dick clark , and later by his successor ryan seacrest ) ; the only exception was in 1999 , when abc put it on a one-year hiatus to provide coverage of the international millennium festivities , though clark 's traditional countdown from times square was still featured within the coverage . abc has also aired the miss america pageant from 1954 to 1956 , 1997 to 2005 ( with the television rights being assumed by [41m[45mcable[49m[49m channel [32m[1mtlc[0m[39m in 2006 , when the pageant moved from its longtime homebase in atlantic city to las vegas , before returning to atlantic city in 2013 ) and since 2011 . under its current contract with the miss america organization , abc will continue to broadcast the pageant through 2016 .
+[33m[1m            QUESTION: what network assumed the rights to the miss america pageant in 2006 ?[0m[39m
+[33m[1m         TRUE ANSWER: tlc[0m[39m
+[33m[1m    PREDICTED ANSWER: cable[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 117
+luther 's 1524 creedal hymn " wir _glauben_ all an einen gott " ( " we all believe in one true god " ) is a _three-stanza_ confession of faith prefiguring luther 's 1529 three-part explanation of the apostles ' creed in the small catechism . luther 's hymn , adapted and expanded from an earlier [45m[32m[1mgerman[0m[39m[49m [32m[1mcreedal[0m[39m [41m[32m[1mhymn[0m[39m[49m , gained widespread use in vernacular lutheran liturgies as early as 1525 . sixteenth-century lutheran hymnals also included " wir _glauben_ all " among the catechetical hymns , although 18th-century hymnals tended to label the hymn as trinitarian rather than catechetical , and 20th-century lutherans rarely use the hymn because of the perceived difficulty of its tune .
+[33m[1m            QUESTION: what earlier hymn was luther 's adapted from ?[0m[39m
+[33m[1m         TRUE ANSWER: german creedal hymn[0m[39m
+[33m[1m    PREDICTED ANSWER: german creedal hymn[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 106
+embedded in the thylakoid membranes are important protein complexes which carry out the light reactions of photosynthesis . photosystem ii and photosystem i contain light-harvesting complexes with chlorophyll and carotenoids that absorb light energy and use it to [32m[1menergize[0m[39m [41m[32m[1melectrons[0m[39m[49m . molecules in the thylakoid membrane use the energized electrons to [45mpump[49m hydrogen ions into the thylakoid space , decreasing the ph and turning it acidic . atp synthase is a large protein complex that harnesses the concentration gradient of the hydrogen ions in the thylakoid space to generate atp energy as the hydrogen ions flow back out into the _stroma—much_ like a dam turbine .
+[33m[1m            QUESTION: what does chlorophyll use light energy to do ?[0m[39m
+[33m[1m         TRUE ANSWER: energize electrons[0m[39m
+[33m[1m    PREDICTED ANSWER: [0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 131
+in another incident , around 1177 , he was captured in a [41m[45mraid[49m[49m and held prisoner by his father 's former allies , the _tayichi'ud_ . the _tayichi'ud_ enslaved temüjin ( reportedly [32m[1mwith[0m[39m [32m[1ma[0m[39m [32m[1m_cangue_[0m[39m [32m[1m,[0m[39m [32m[1ma[0m[39m [32m[1msort[0m[39m [32m[1mof[0m[39m [32m[1mportable[0m[39m [32m[1mstocks[0m[39m ) , but with the help of a sympathetic guard , the father of _chilaun_ ( who later became a general of genghis khan ) , he was able to escape from the ger ( yurt ) in the middle of the night by hiding in a river crevice . [ citation needed ] it was around this time that _jelme_ and _bo'orchu_ , two of genghis khan 's future generals , joined forces with him . temüjin 's reputation also became widespread after his escape from the _tayichi'ud_ .
+[33m[1m            QUESTION: how was temüjin kept imprisoned by the tayichi'ud ?[0m[39m
+[33m[1m         TRUE ANSWER: with a cangue , a sort of portable stocks[0m[39m
+[33m[1m    PREDICTED ANSWER: raid[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 187
+barred by the government from settling in new france , huguenots led by [45m[32m[1m_jessé_[0m[39m[49m [32m[1mde[0m[39m [41m[32m[1mforest[0m[39m[49m , sailed to north america in 1624 and settled instead in the dutch colony of new netherland ( later incorporated into new york and new jersey ) ; as well as great britain 's colonies , including nova scotia . a number of new amsterdam 's families were of huguenot origin , often having emigrated as refugees to the netherlands in the previous century . in 1628 the huguenots established a congregation as l'église française à la _nouvelle-amsterdam_ ( the french church in new amsterdam ) . this parish continues today as l'eglise du saint-esprit , part of the episcopal ( anglican ) communion , and welcomes francophone new yorkers from all over the world . upon their arrival in new amsterdam , huguenots were offered land directly across from manhattan on long island for a permanent settlement and chose the harbor at the end of newtown creek , becoming the first europeans to live in brooklyn , then known as _boschwick_ , in the neighborhood now known as bushwick .
+[33m[1m            QUESTION: who led the north american huguenot colonial expedition ?[0m[39m
+[33m[1m         TRUE ANSWER: jessé de forest[0m[39m
+[33m[1m    PREDICTED ANSWER: jessé de forest[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 74
+the connection between macroscopic _nonconservative_ forces and microscopic conservative forces is described by detailed treatment with statistical mechanics . in macroscopic closed systems , [45m_nonconservative_[49m forces act to change the internal energies of the system , and are often associated with the transfer of heat . according to the second law of thermodynamics , [32m[1m_nonconservative_[0m[39m [32m[1mforces[0m[39m necessarily result in energy transformations within closed systems from ordered to more random conditions as entropy [41mincreases[49m .
+[33m[1m            QUESTION: what makes energy changes in a closed system ?[0m[39m
+[33m[1m         TRUE ANSWER: nonconservative forces[0m[39m
+[33m[1m    PREDICTED ANSWER: nonconservative forces act to change the internal energies of the system , and are often associated with the transfer of heat . according to the second law of thermodynamics , nonconservative forces necessarily result in energy transformations within closed systems from ordered to more random conditions as entropy increases[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.091[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 128
+islamists have asked the question , " if islam is a way of life , how can we say that those who want to live by its principles in legal , social , political , economic , and political spheres of life are not muslims , but islamists and believe in islamism , not [ just ] islam ? " similarly , a writer for the international crisis group maintains that " the conception of _'political_ islam ' " is a creation of americans to explain the iranian islamic revolution and apolitical islam was a historical fluke of the " short-lived era of the heyday of secular arab nationalism [45m[32m[1mbetween[0m[39m[49m [32m[1m1945[0m[39m [32m[1mand[0m[39m [41m[32m[1m1970[0m[39m[49m " , and it is _quietist/non-political_ islam , not islamism , that requires explanation .
+[33m[1m            QUESTION: when was the heyday of secular arab nationalism ?[0m[39m
+[33m[1m         TRUE ANSWER: between 1945 and 1970[0m[39m
+[33m[1m    PREDICTED ANSWER: between 1945 and 1970[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 72
+cbs broadcast super bowl 50 in the u.s. , and charged an average of $ 5 million for a 30-second commercial during the game . the super bowl 50 halftime show was headlined by [45mthe[49m british rock group [41m[32m[1mcoldplay[0m[39m[49m with special guest performers beyoncé and bruno mars , who headlined the super bowl xlvii and super bowl xlviii halftime shows , respectively . it was the third-most watched u.s. broadcast ever .
+[33m[1m            QUESTION: who lead the super bowl 50 halftime performance ?[0m[39m
+[33m[1m         TRUE ANSWER: coldplay[0m[39m
+[33m[1m    PREDICTED ANSWER: the british rock group coldplay[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.400[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 576
+while the commission has a monopoly on initiating legislation , the european parliament and the council of the european union have powers of amendment and veto during the legislative process . according to the treaty on european union articles 9 and 10 , the eu observes " the principle of equality of its citizens " and is meant to be founded on " representative democracy " . in practice , equality and democracy are deficient because the elected representatives in the parliament can not initiate legislation against the commission 's wishes , citizens of smallest countries have ten times the voting weight in parliament as citizens of the largest countries , and " qualified majorities " or consensus of the council are required to legislate . the justification for this " democratic deficit " under the treaties is usually thought to be that completion integration of the european economy and political institutions required the technical coordination of experts , while popular understanding of the eu developed and nationalist sentiments declined post-war . over time , this has meant the parliament gradually assumed more voice : from being an unelected assembly , to its first direct elections in [41m[45m[32m[1m1979[0m[39m[49m[49m , to having increasingly more rights in the legislative process . citizens ' rights are therefore limited compared to the democratic polities within all european member states : under teu article 11 citizens and associations have the rights such as publicising their views and submit an initiative that must be considered by the commission with one million signatures . tfeu article 227 contains a further right for citizens to petition the parliament on issues which affect them . parliament elections , take place every five years , and votes for members of the european parliament in member states must be organised by proportional representation or a single transferable vote . there are 750 meps and their numbers are " _degressively_ proportional " according to member state size . this means - although the council is meant to be the body representing member states - in the parliament citizens of smaller member states have more voice than citizens in larger member states . meps divide , as they do in national parliaments , along political party lines : the conservative european people 's party is currently the largest , and the party of european socialists leads the opposition . parties do not receive public funds from the eu , as the court of justice held in parti _écologiste_ " les verts " v parliament that this was entirely an issue to be regulated by the member states . the parliament 's powers include calling inquiries into maladministration or appoint an ombudsman pending any court proceedings . it can require the commission respond to questions and by a two-thirds majority can censure the whole commission ( as happened to the santer commission in 1999 ) . in some cases , the parliament has explicit consultation rights , which the commission must genuinely follow . however its role participation in the legislative process still remains limited because no member can actually or pass legislation without the commission and council , meaning power ( " _kratia_ " ) is not in the hands of directly elected representatives of the people ( " demos " ) : in the eu it is not yet true that " the administration is in the hands of the many and not of the few . "
+[33m[1m            QUESTION: when did the first direct elections take place ?[0m[39m
+[33m[1m         TRUE ANSWER: 1979[0m[39m
+[33m[1m    PREDICTED ANSWER: 1979[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 55
+in england , the period of norman architecture immediately succeeds that of the [32m[1manglo-saxon[0m[39m and precedes the early gothic . in southern italy , the normans incorporated elements of islamic , lombard , and byzantine building techniques into their own , initiating a unique style known as [45m_norman-arab_[49m [41marchitecture[49m within the kingdom of sicily .
+[33m[1m            QUESTION: what architecture type came before norman in england ?[0m[39m
+[33m[1m         TRUE ANSWER: anglo-saxon[0m[39m
+[33m[1m    PREDICTED ANSWER: norman-arab architecture[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 117
+the serials the deadly assassin and mawdryn undead and the 1996 tv film would later establish that a time lord can only regenerate [45m[32m[1m12[0m[39m[49m [41mtimes[49m , for a total of 13 incarnations . this line became stuck in the public consciousness despite not often being repeated , and was recognised by producers of the show as a plot obstacle for when the show finally had to regenerate the doctor a thirteenth time . the episode " the time of the doctor " depicted the doctor acquiring a new cycle of regenerations , starting from the twelfth doctor , due to the eleventh doctor being the product of the doctor 's twelfth regeneration from his original set .
+[33m[1m            QUESTION: how many times can a time lord regenerate ?[0m[39m
+[33m[1m         TRUE ANSWER: 12[0m[39m
+[33m[1m    PREDICTED ANSWER: 12 times[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.667[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 194
+a study in england showed a 0.3 % prevalence of sexual abuse by any professional , a group that included priests , religious leaders , and case workers as well as teachers . it is important to note , however , that the british study referenced above is the only one of its kind and consisted of " a random ... probability sample of [32m[1m2,869[0m[39m young people between the ages of 18 and 24 in a computer-assisted study " and that the questions referred to " sexual abuse with a professional , " not necessarily a teacher . it is therefore logical to conclude that information on the percentage of abuses by teachers in the united kingdom is not explicitly available and therefore not necessarily reliable . the aauw study , however , posed questions about fourteen types of sexual harassment and various degrees of frequency and included only abuses by teachers . " the sample was drawn from a list of [41m[45m80,000[49m[49m schools to create a stratified two-stage sample design of 2,065 8th to 11th grade students " its reliability was gauged at 95 % with a 4 % margin of error .
+[33m[1m            QUESTION: how many people were involved in the study ?[0m[39m
+[33m[1m         TRUE ANSWER: 2,869[0m[39m
+[33m[1m    PREDICTED ANSWER: 80,000[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 99
+education in wales differs in certain respects from education elsewhere in the united kingdom . for example , a significant number of students all over wales are educated either wholly or largely through the medium of welsh : in 2008/09 , 22 per cent of classes in maintained primary schools used welsh as the sole or main medium of instruction . welsh medium education is available to all age groups through nurseries , schools , colleges and universities and in adult education ; lessons in the language itself are compulsory for all pupils [32m[1muntil[0m[39m [32m[1mthe[0m[39m [32m[1mage[0m[39m [32m[1mof[0m[39m [41m[45m[32m[1m16[0m[39m[49m[49m .
+[33m[1m            QUESTION: how long are students required to learn welsh ?[0m[39m
+[33m[1m         TRUE ANSWER: until the age of 16[0m[39m
+[33m[1m    PREDICTED ANSWER: 16[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.400[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 132
+luther 's hymns inspired composers to write music . johann sebastian bach included several verses as [45mchorales[49m in his cantatas and based [32m[1mchorale[0m[39m [41m[32m[1mcantatas[0m[39m[49m entirely on them , namely christ lag in todes _banden_ , bwv 4 , as early as possibly 1707 , in his second annual cycle ( 1724 to 1725 ) ach gott , vom himmel sieh _darein_ , bwv 2 , christ unser herr zum jordan kam , bwv 7 , nun komm , der heiden heiland , bwv 62 , _gelobet_ _seist_ du , jesu christ , bwv 91 , and aus tiefer not schrei ich zu dir , bwv 38 , later ein feste burg ist unser gott , bwv 80 , and in 1735 _wär_ gott nicht mit uns diese zeit , bwv 14 .
+[33m[1m            QUESTION: what did bach base entirely on luther chorales ?[0m[39m
+[33m[1m         TRUE ANSWER: chorale cantatas[0m[39m
+[33m[1m    PREDICTED ANSWER: chorales in his cantatas and based chorale cantatas[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.400[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 135
+instability troubled the early years of kublai khan 's reign . _ogedei_ 's grandson [41m[45mkaidu[49m[49m refused to submit to kublai and threatened the western frontier of kublai 's domain . the hostile but weakened song dynasty remained an obstacle in the south . kublai secured the northeast border in 1259 by installing the hostage prince [32m[1m_wonjong_[0m[39m as the ruler of korea , making it a mongol tributary state . kublai was also threatened by domestic unrest . li tan , the son-in-law of a powerful official , instigated a revolt against mongol rule in 1262 . after successfully suppressing the revolt , kublai curbed the influence of the han chinese advisers in his court . he feared that his dependence on chinese officials left him vulnerable to future revolts and defections to the song .
+[33m[1m            QUESTION: who did kublai make the ruler of korea ?[0m[39m
+[33m[1m         TRUE ANSWER: wonjong[0m[39m
+[33m[1m    PREDICTED ANSWER: kaidu[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 122
+itv tyne tees was based at city road for over 40 years after its launch in january 1959 . in 2005 it moved to [32m[1ma[0m[39m [32m[1mnew[0m[39m [32m[1mfacility[0m[39m on the [45mwatermark[49m business [41mpark[49m next to the metrocentre in gateshead . the entrance to studio 5 at the city road complex gave its name to the 1980s music television programme , the tube . bbc north east and cumbria is located to the north of the city on barrack road , spital tongues , in a building known , as the result of its colouring , as the pink palace . it is from here that the corporation broadcasts the look north television regional news programme and local radio station bbc radio newcastle .
+[33m[1m            QUESTION: where did itv tyne tees move in 2005 ?[0m[39m
+[33m[1m         TRUE ANSWER: a new facility[0m[39m
+[33m[1m    PREDICTED ANSWER: watermark business park[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 164
+warsaw is located on two main _geomorphologic_ formations : the plain moraine plateau and the vistula valley with its asymmetrical pattern of different terraces . the vistula river is the specific axis of warsaw , which divides the city into two parts , left and right . the left one is situated both on the moraine plateau ( 10 to 25 m ( 32.8 to 82.0 ft ) above vistula level ) and on the vistula terraces ( max . 6.5 m ( 21.3 ft ) above vistula level ) . the significant element of the relief , in this part of warsaw , is the edge of moraine plateau called [45m[32m[1mwarsaw[0m[39m[49m [41m[32m[1mescarpment[0m[39m[49m . it is 20 to 25 m ( 65.6 to 82.0 ft ) high in the old town and central district and about 10 m ( 32.8 ft ) in the north and south of warsaw . it goes through the city and plays an important role as a landmark .
+[33m[1m            QUESTION: what is the edge of the moraine plateau called ?[0m[39m
+[33m[1m         TRUE ANSWER: warsaw escarpment[0m[39m
+[33m[1m    PREDICTED ANSWER: warsaw escarpment[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 325
+the judicial branch of the eu has played an important role in the development of eu law , by assuming the task of interpreting the treaties , and accelerating economic and political integration . today the court of justice of the european union ( _cjeu_ ) is the main judicial body , within which there is a higher european court of justice ( commonly abbreviated as ecj ) that deals with cases that contain more public importance , and a general court that deals with issues of detail but without general importance . there is also a civil service tribunal to deal with eu staff issues , and then a separate court of auditors . under the treaty on european union article 19 ( 2 ) there is one judge from each member state , [41m[45m[32m[1m28[0m[39m[49m[49m at present , who are supposed to " possess the qualifications required for appointment to the highest judicial offices " ( or for the general court , the " ability required for appointment to high judicial office " ) . a president is elected by the judges for three years . under teu article 19 ( 3 ) is to be the ultimate court to interpret questions of eu law . in fact , most eu law is applied by member state courts ( the english court of appeal , the german bundesgerichtshof , the belgian cour du travail , etc . ) but they can refer questions to the eu court for a preliminary ruling . the _cjeu_ 's duty is to " ensure that in the interpretation and application of the treaties the law is observed " , although realistically it has the ability to expand and develop the law according to the principles it deems to be appropriate . arguably this has been done through both seminal and controversial judgments , including van _gend_ en loos , mangold v helm , and kadi v commission .
+[33m[1m            QUESTION: how many total judges are there in the eu ?[0m[39m
+[33m[1m         TRUE ANSWER: 28[0m[39m
+[33m[1m    PREDICTED ANSWER: 28[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 119
+several public-key cryptography algorithms , such as rsa and [32m[1mthe[0m[39m [32m[1m_diffie–hellman_[0m[39m [32m[1mkey[0m[39m [41m[32m[1mexchange[0m[39m[49m , are based on large prime numbers ( for example , 512-bit primes are frequently used for rsa and _1024-bit_ primes are typical for _diffie–hellman._ ) . rsa relies on the assumption that it is much easier ( i.e. , more efficient ) to perform the multiplication of two ( large ) numbers x and y than to calculate x and y ( assumed coprime ) if only the product xy is known . the _diffie–hellman_ key exchange relies on the fact that there are efficient algorithms for [45mmodular[49m exponentiation , while the reverse operation the discrete logarithm is thought to be a hard problem .
+[33m[1m            QUESTION: what is another type of public key cryptography algorithm ?[0m[39m
+[33m[1m         TRUE ANSWER: the diffie–hellman key exchange[0m[39m
+[33m[1m    PREDICTED ANSWER: [0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 90
+the 17th century [45m[32m[1mroyal[0m[39m[49m [32m[1mujazdów[0m[39m [41m[32m[1mcastle[0m[39m[49m currently houses centre for contemporary art , with some permanent and temporary exhibitions , concerts , shows and creative workshops . the centre currently realizes about 500 projects a year . _zachęta_ national gallery of art , the oldest exhibition site in warsaw , with a tradition stretching back to the mid-19th century organises exhibitions of modern art by polish and international artists and promotes art in many other ways . since 2011 warsaw gallery weekend is held on last weekend of september .
+[33m[1m            QUESTION: what castle currently houses the centre for contemporary art ?[0m[39m
+[33m[1m         TRUE ANSWER: royal ujazdów castle[0m[39m
+[33m[1m    PREDICTED ANSWER: royal ujazdów castle[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 102
+maududi also believed that muslim society could not be islamic without sharia , and islam required the establishment of [32m[1man[0m[39m [45m[32m[1mislamic[0m[39m[49m [41m[32m[1mstate[0m[39m[49m . this state should be a " _theo-democracy_ , " based on the principles of : tawhid ( unity of god ) , risala ( prophethood ) and _khilafa_ ( caliphate ) . although maududi talked about islamic revolution , by " revolution " he meant not the violence or populist policies of the iranian revolution , but the gradual changing the hearts and minds of individuals from the top of society downward through an educational process or _da'wah_ .
+[33m[1m            QUESTION: maududi believed that islam needed what to be established ?[0m[39m
+[33m[1m         TRUE ANSWER: an islamic state[0m[39m
+[33m[1m    PREDICTED ANSWER: islamic state[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 103
+in the [32m[1mearly[0m[39m [41m[45m[32m[1m1970s[0m[39m[49m[49m , abc completed its transition to color ; the decade as a whole would mark a turning point for abc , as it began to pass cbs and nbc in the ratings to become the first place network . it also began to use behavioral and demographic data to better determine what types of sponsors to sell advertising slots to and provide programming that would appeal towards certain audiences . abc 's gains in audience share were greatly helped by the fact that several smaller markets had grown large enough to allow full-time affiliations from all three networks .
+[33m[1m            QUESTION: in what decade did abc finish transitioning to color ?[0m[39m
+[33m[1m         TRUE ANSWER: early 1970s[0m[39m
+[33m[1m    PREDICTED ANSWER: 1970s[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.667[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 124
+the historic heart of newcastle is the grainger town area . established on classical streets built by richard grainger , a builder and developer , between 1835 and 1842 , some of newcastle upon tyne 's finest buildings and streets lie within this area of the city centre including grainger market , theatre royal , grey street , grainger street and clayton street . these buildings are predominantly [45m[32m[1mfour[0m[39m[49m [32m[1mstories[0m[39m [41mhigh[49m , with vertical dormers , domes , turrets and spikes . richard grainger was said to _'have_ found newcastle of bricks and timber and left it in stone ' . of grainger town 's 450 buildings , 244 are listed , of which 29 are grade i and 49 are grade _ii*_ .
+[33m[1m            QUESTION: how high are many of the buildings with turrets ?[0m[39m
+[33m[1m         TRUE ANSWER: four stories[0m[39m
+[33m[1m    PREDICTED ANSWER: four stories high[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.800[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 167
+both b cells and t cells carry receptor molecules that recognize specific targets . t cells recognize a " non-self " target , such as a pathogen , only after antigens ( small fragments of the pathogen ) have been processed and presented in combination with a " self " receptor called a major histocompatibility complex ( mhc ) molecule . there are two major subtypes of t cells : [45mthe[49m [32m[1mkiller[0m[39m [32m[1mt[0m[39m [32m[1mcell[0m[39m [32m[1mand[0m[39m [32m[1mthe[0m[39m [32m[1mhelper[0m[39m [32m[1mt[0m[39m [41m[32m[1mcell[0m[39m[49m . in addition there are regulatory t cells which have a role in modulating immune response . killer t cells only recognize antigens coupled to class i mhc molecules , while helper t cells and regulatory t cells only recognize antigens coupled to class ii mhc molecules . these two mechanisms of antigen presentation reflect the different roles of the two types of t cell . a third , minor subtype are the _γδ_ t cells that recognize intact antigens that are not bound to mhc receptors .
+[33m[1m            QUESTION: what are the two major subtypes of t cells ?[0m[39m
+[33m[1m         TRUE ANSWER: killer t cell and the helper t cell[0m[39m
+[33m[1m    PREDICTED ANSWER: the killer t cell and the helper t cell[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 110
+tesla was the fourth of five children . he had an older brother named dane and three sisters , milka , angelina and marica . dane was killed in a horse-riding accident when nikola was five . in 1861 , tesla attended the " lower " or " primary " school in _smiljan_ where he studied german , arithmetic , and religion . in 1862 , the tesla family moved to gospić , austrian empire , where tesla 's father worked as a [41m[45m[32m[1mpastor[0m[39m[49m[49m . nikola completed " lower " or " primary " school , followed by the " lower real gymnasium " or " normal school . "
+[33m[1m            QUESTION: what job did tesla 's father have in gospic ?[0m[39m
+[33m[1m         TRUE ANSWER: pastor[0m[39m
+[33m[1m    PREDICTED ANSWER: pastor[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 83
+in july 1888 , brown and peck negotiated a licensing deal with george westinghouse for tesla 's polyphase induction motor and transformer designs for [32m[1m$[0m[39m [32m[1m60,000[0m[39m [32m[1min[0m[39m [32m[1mcash[0m[39m [32m[1mand[0m[39m [32m[1mstock[0m[39m [32m[1mand[0m[39m [32m[1ma[0m[39m [32m[1mroyalty[0m[39m [32m[1mof[0m[39m [32m[1m$[0m[39m [32m[1m2.50[0m[39m [32m[1mper[0m[39m [32m[1mac[0m[39m [32m[1mhorsepower[0m[39m [32m[1mproduced[0m[39m [32m[1mby[0m[39m [32m[1meach[0m[39m [32m[1mmotor[0m[39m . westinghouse also hired tesla for one year for the large fee of [45m$[49m [41m2,000[49m ( $ 52,700 in today 's dollars ) per month to be a consultant at the westinghouse electric & manufacturing company 's pittsburgh labs .
+[33m[1m            QUESTION: how much did westinghouse pay for tesla 's designs ?[0m[39m
+[33m[1m         TRUE ANSWER: $ 60,000 in cash and stock and a royalty of $ 2.50 per ac horsepower produced by each motor[0m[39m
+[33m[1m    PREDICTED ANSWER: $ 2,000[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 120
+luther secretly returned to wittenberg on 6 march 1522 . he wrote to the elector : " during my absence , satan has entered my sheepfold , and committed [45mravages[49m which i can not repair by [41mwriting[49m , but only by my personal presence and living word . " for eight days in lent , beginning on _invocavit_ sunday , 9 march , luther preached eight sermons , which became known as the " _invocavit_ sermons " . in these sermons , he hammered home the primacy of core christian values such as love , patience , charity , and freedom , and reminded the citizens to [32m[1mtrust[0m[39m [32m[1mgod[0m[39m [32m[1m's[0m[39m [32m[1mword[0m[39m rather than violence to bring about necessary change .
+[33m[1m            QUESTION: how did luther want people to bring about change ?[0m[39m
+[33m[1m         TRUE ANSWER: trust god 's word[0m[39m
+[33m[1m    PREDICTED ANSWER: ravages which i can not repair by writing[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 174
+on october 6 , 1973 , syria and egypt , with support from other arab nations , launched a surprise attack on israel , on yom kippur . this [32m[1mrenewal[0m[39m [32m[1mof[0m[39m [32m[1mhostilities[0m[39m [32m[1min[0m[39m [32m[1mthe[0m[39m [32m[1m_arab–israeli_[0m[39m [32m[1mconflict[0m[39m released the underlying economic pressure on oil [41mprices[49m . at the time , iran was the world 's second-largest oil exporter and a close us ally . weeks later , the shah of iran said in an interview : " [45mof[49m course [ the price of oil ] is going to rise ... certainly ! and how ! ... you 've [ western nations ] increased the price of the wheat you sell us by 300 percent , and the same for sugar and cement ... you buy our crude oil and sell it back to us , refined as petrochemicals , at a hundred times the price you 've paid us ... it 's only fair that , from now on , you should pay more for oil . let 's say ten times more . "
+[33m[1m            QUESTION: why did the shah of iran gave an interview ?[0m[39m
+[33m[1m         TRUE ANSWER: renewal of hostilities in the arab–israeli conflict[0m[39m
+[33m[1m    PREDICTED ANSWER: [0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 99
+[41m[45m[32m[1mbills[0m[39m[49m[49m can be introduced to parliament in a number of ways ; the scottish government can introduce new laws or amendments to existing laws as a bill ; a committee of the parliament can present a bill in one of the areas under its remit ; a member of the scottish parliament can introduce a bill as a private member ; or a private bill can be submitted to parliament by an outside proposer . most draft laws are government bills introduced by ministers in the governing party . bills pass through parliament in a number of stages :
+[33m[1m            QUESTION: what may be presented to parliament in various ways ?[0m[39m
+[33m[1m         TRUE ANSWER: bills[0m[39m
+[33m[1m    PREDICTED ANSWER: bills[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 177
+[45moxygen[49m gas can also be produced through electrolysis of water into molecular oxygen and hydrogen . dc electricity must be used : if ac is used , the gases in each limb consist of hydrogen and oxygen in the explosive ratio 2:1 . contrary to popular belief , the 2:1 ratio observed in the dc electrolysis of acidified water does not prove that the empirical formula of water is h2o unless certain assumptions are made about the molecular formulae of hydrogen and oxygen themselves . a similar method is the _electrocatalytic_ o 2 evolution from oxides and _oxoacids_ . [32m[1mchemical[0m[39m [41mcatalysts[49m can be used as well , such as in chemical oxygen generators or oxygen candles that are used as part of the life-support equipment on submarines , and are still part of standard equipment on commercial airliners in case of depressurization emergencies . another air separation technology involves forcing air to dissolve through ceramic membranes based on zirconium dioxide by either high pressure or an electric current , to produce nearly pure o 2 gas .
+[33m[1m            QUESTION: what other catalysts can be used to produce oxygen ?[0m[39m
+[33m[1m         TRUE ANSWER: chemical[0m[39m
+[33m[1m    PREDICTED ANSWER: oxygen gas can also be produced through electrolysis of water into molecular oxygen and hydrogen . dc electricity must be used : if ac is used , the gases in each limb consist of hydrogen and oxygen in the explosive ratio 2:1 . contrary to popular belief , the 2:1 ratio observed in the dc electrolysis of acidified water does not prove that the empirical formula of water is h2o unless certain assumptions are made about the molecular formulae of hydrogen and oxygen themselves . a similar method is the electrocatalytic o 2 evolution from oxides and oxoacids . chemical catalysts[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.023[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 140
+the simplest valve gears give events of fixed length during the engine cycle and often make the engine rotate in only one direction . most however have a reversing mechanism which additionally can provide means for saving steam as speed and momentum are gained by gradually " [32m[1mshortening[0m[39m [32m[1mthe[0m[39m [41m[32m[1mcutoff[0m[39m[49m " or rather , shortening the admission event ; this in turn proportionately lengthens the expansion period . however , as one and the same valve usually controls both steam flows , a short cutoff at admission adversely affects the exhaust and compression periods which should ideally always be kept fairly constant ; if the exhaust event is too brief , the totality of the exhaust steam can not evacuate the cylinder , choking it and giving excessive compression ( " [45mkick[49m back " ) . [ citation needed ]
+[33m[1m            QUESTION: what is another term for shortening the admission event ?[0m[39m
+[33m[1m         TRUE ANSWER: shortening the cutoff[0m[39m
+[33m[1m    PREDICTED ANSWER: [0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 92
+in 1096 , crusaders passing by the siege of amalfi were joined by bohemond of taranto and his nephew [41m[45m[32m[1mtancred[0m[39m[49m[49m with an army of _italo-normans_ . bohemond was the de facto leader of the crusade during its passage through asia minor . after the successful siege of antioch in 1097 , bohemond began carving out an independent principality around that city . tancred was instrumental in the conquest of jerusalem and he worked for the expansion of the crusader kingdom in transjordan and the region of galilee . [ citation needed ]
+[33m[1m            QUESTION: what was the name of bohemond 's nephew ?[0m[39m
+[33m[1m         TRUE ANSWER: tancred[0m[39m
+[33m[1m    PREDICTED ANSWER: tancred[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 119
+harvard 's 2,400 professors , lecturers , and instructors instruct [32m[1m7,200[0m[39m undergraduates and [41m[45m14,000[49m[49m graduate students . the school color is crimson , which is also the name of the harvard sports teams and the daily newspaper , the harvard crimson . the color was unofficially adopted ( in preference to magenta ) by an 1875 vote of the student body , although the association with some form of red can be traced back to 1858 , when charles william eliot , a young graduate student who would later become harvard 's 21st and longest-serving president ( _1869–1909_ ) , bought red bandanas for his crew so they could more easily be distinguished by spectators at a regatta .
+[33m[1m            QUESTION: what is the enrollment of undergraduates at harvard ?[0m[39m
+[33m[1m         TRUE ANSWER: 7,200[0m[39m
+[33m[1m    PREDICTED ANSWER: 14,000[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 208
+almost all ctenophores are predators , taking prey ranging from microscopic larvae and rotifers to the adults of small crustaceans ; the exceptions are juveniles of two species , which live as parasites on the salps on which adults of their species feed . in favorable circumstances , ctenophores can eat ten times their own weight in a day . only [41m[45m[32m[1m_100–150_[0m[39m[49m[49m species have been validated , and possibly another 25 have not been fully described and named . the textbook examples are _cydippids_ with egg-shaped bodies and a pair of retractable tentacles fringed with _tentilla_ ( " little tentacles " ) that are covered with _colloblasts_ , sticky cells that capture prey . the phylum has a wide range of body forms , including the flattened , deep-sea _platyctenids_ , in which the adults of most species lack combs , and the coastal _beroids_ , which lack tentacles and prey on other ctenophores by using huge mouths armed with groups of large , stiffened cilia that act as teeth . these variations enable different species to build huge populations in the same area , because they specialize in different types of prey , which they capture by as wide a range of methods as spiders use .
+[33m[1m            QUESTION: how many species of ctenophores have been validated ?[0m[39m
+[33m[1m         TRUE ANSWER: 100–150[0m[39m
+[33m[1m    PREDICTED ANSWER: 100–150[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 375
+in the china of the yuan , or mongol era , various important developments in the [41m[45marts[49m[49m occurred or continued in their development , including the areas of [32m[1mpainting[0m[39m [32m[1m,[0m[39m [32m[1mmathematics[0m[39m [32m[1m,[0m[39m [32m[1mcalligraphy[0m[39m [32m[1m,[0m[39m [32m[1mpoetry[0m[39m [32m[1m,[0m[39m [32m[1mand[0m[39m [32m[1mtheater[0m[39m , with many great artists and writers being famous today . due to the coming together of painting , poetry , and calligraphy at this time many of the artists practicing these different pursuits were the same individuals , though perhaps more famed for one area of their achievements than others . often in terms of the further development of landscape painting as well as the classical joining together of the arts of painting , poetry , and calligraphy , the song dynasty and the yuan dynasty are linked together . in the area of chinese painting during the yuan dynasty there were many famous painters . in the area of calligraphy many of the great calligraphers were from the yuan dynasty era . in yuan poetry , the main development was the qu , which was used among other poetic forms by most of the famous yuan poets . many of the poets were also involved in the major developments in the theater during this time , and the other way around , with people important in the theater becoming famous through the development of the _sanqu_ type of qu . one of the key factors in the mix of the _zaju_ variety show was the incorporation of poetry both classical and of the newer qu form . one of the important cultural developments during the yuan era was the consolidation of poetry , painting , and calligraphy into a unified piece of the type that tends to come to mind when people think of classical chinese art . another important aspect of yuan times is the increasing incorporation of the then current , vernacular chinese into both the qu form of poetry and the _zaju_ variety show . another important consideration regarding yuan dynasty arts and culture is that so much of it has survived in china , relatively to works from the tang dynasty and song dynasty , which have often been better preserved in places such as the _shōsōin_ , in japan .
+[33m[1m            QUESTION: what type of arts flourished in the yuan ?[0m[39m
+[33m[1m         TRUE ANSWER: painting , mathematics , calligraphy , poetry , and theater[0m[39m
+[33m[1m    PREDICTED ANSWER: arts[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 74
+misconduct by teachers , especially sexual misconduct , has been getting increased scrutiny from the media and the courts . a study by the american association of university women reported that [45m9.6[49m % of students in the united states claim to have received unwanted sexual attention from an adult associated with education ; be they a volunteer , bus driver , teacher , administrator or other adult ; [32m[1msometime[0m[39m [32m[1mduring[0m[39m [32m[1mtheir[0m[39m [32m[1meducational[0m[39m [41m[32m[1mcareer[0m[39m[49m [32m[1m.[0m[39m
+[33m[1m            QUESTION: what is the time period of this statistic ?[0m[39m
+[33m[1m         TRUE ANSWER: sometime during their educational career .[0m[39m
+[33m[1m    PREDICTED ANSWER: 9.6 % of students in the united states claim to have received unwanted sexual attention from an adult associated with education ; be they a volunteer , bus driver , teacher , administrator or other adult ; sometime during their educational career[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.263[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 116
+in 1993 , for the franchise 's 30th anniversary , another charity special , titled [41mdimensions[49m in time was produced for [45m[32m[1mchildren[0m[39m[49m [32m[1min[0m[39m [32m[1mneed[0m[39m , featuring all of the surviving actors who played the doctor and a number of previous companions . it also featured a crossover with the soap opera eastenders , the action taking place in the latter 's albert square location and around greenwich . the special was one of several special 3d programmes the bbc produced at the time , using a 3d system that made use of the _pulfrich_ effect requiring glasses with one darkened lens ; the picture would look normal to those viewers who watched without the glasses .
+[33m[1m            QUESTION: what charity benefited from the 30th anniversary show ?[0m[39m
+[33m[1m         TRUE ANSWER: children in need[0m[39m
+[33m[1m    PREDICTED ANSWER: [0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 116
+producers introduced the concept of regeneration to permit the recasting of the main character . this was first prompted by original star william hartnell 's poor health . the actual term " [41m[45mregeneration[49m[49m " was not initially conceived of until the doctor 's third on-screen regeneration however ; hartnell 's doctor had merely described undergoing a " [32m[1mrenewal[0m[39m , " and the second doctor underwent a " change of appearance " . [ citation needed ] the device has allowed for the recasting of the actor various times in the show 's history , as well as the depiction of alternative doctors either from the doctor 's relative past or future . [ citation needed ]
+[33m[1m            QUESTION: what term was used for the first regeneration ?[0m[39m
+[33m[1m         TRUE ANSWER: renewal[0m[39m
+[33m[1m    PREDICTED ANSWER: regeneration[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 143
+alternatively , glucose monomers in the chloroplast can be linked together to make starch , which accumulates into the starch grains found in the chloroplast . under conditions such as high atmospheric co2 concentrations , these starch grains may grow very large , [32m[1mdistorting[0m[39m [32m[1mthe[0m[39m [32m[1mgrana[0m[39m [32m[1mand[0m[39m [32m[1mthylakoids[0m[39m . the starch granules displace the thylakoids , but [45mleave[49m them [41mintact[49m . waterlogged roots can also cause starch buildup in the chloroplasts , possibly due to less sucrose being exported out of the chloroplast ( or more accurately , the plant cell ) . this depletes a plant 's free phosphate supply , which indirectly stimulates chloroplast starch synthesis . while linked to low photosynthesis rates , the starch grains themselves may not necessarily interfere significantly with the efficiency of photosynthesis , and might simply be a side effect of another _photosynthesis-depressing_ factor .
+[33m[1m            QUESTION: what happens when starch grains become overly large ?[0m[39m
+[33m[1m         TRUE ANSWER: distorting the grana and thylakoids[0m[39m
+[33m[1m    PREDICTED ANSWER: leave them intact[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.000[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 239
+luther came to understand justification as entirely the work of god . this teaching by luther was clearly expressed in his 1525 publication on the bondage of the will , which was written in response to on free will by desiderius erasmus ( 1524 ) . luther based his position on predestination on st. paul 's epistle to the ephesians _2:8–10_ . against the teaching of his day that the righteous acts of believers are performed in cooperation with god , luther wrote that christians receive such righteousness entirely from outside themselves ; that righteousness not only comes from christ but actually is the righteousness of christ , imputed to christians ( rather than infused into them ) through faith . " that is why faith alone makes someone just and fulfills the law , " he wrote . " faith is that which brings the holy spirit through the merits of christ . " faith , for luther , was a gift from god ; the experience of being justified by faith was " as though i had been born again . " his entry into paradise , no less , was a discovery about " the righteousness of god " – a discovery that " the just person " of whom the bible speaks ( as in romans 1:17 ) lives by faith . he explained his concept of " justification " in the [45m[32m[1m_smalcald_[0m[39m[49m [41m[32m[1marticles[0m[39m[49m :
+[33m[1m            QUESTION: where did luther explain his idea of justification ?[0m[39m
+[33m[1m         TRUE ANSWER: smalcald articles[0m[39m
+[33m[1m    PREDICTED ANSWER: smalcald articles[0m[39m
+[33m[1m     F1 SCORE ANSWER: 1.000[0m[39m
+[33m[1m            EM SCORE: True[0m[39m
+
+CONTEXT: ([32m[1mgreen text[0m[39m is true answer, [45mmagenta background[49m is predicted start, [41mred background[49m is predicted end, _underscores_ are unknown tokens). Length: 134
+near _tamins-reichenau_ the anterior rhine and the posterior rhine join and form the rhine . the river makes a distinctive turn to the north near chur . this section is nearly [45m[32m[1m86[0m[39m[49m [32m[1mkm[0m[39m [41mlong[49m , and descends from a height of 599 m to 396 m. it flows through a wide glacial alpine valley known as the rhine valley ( german : _rheintal_ ) . near sargans a natural dam , only a few metres high , prevents it from flowing into the open _seeztal_ valley and then through lake walen and lake zurich into the river aare . the alpine rhine begins in the most western part of the swiss canton of graubünden , and later forms the border between switzerland to the west and liechtenstein and later austria to the east .
+[33m[1m            QUESTION: how long is the section that turns north ?[0m[39m
+[33m[1m         TRUE ANSWER: 86 km[0m[39m
+[33m[1m    PREDICTED ANSWER: 86 km long[0m[39m
+[33m[1m     F1 SCORE ANSWER: 0.800[0m[39m
+[33m[1m            EM SCORE: False[0m[39m
+
