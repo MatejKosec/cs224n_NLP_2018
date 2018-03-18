@@ -228,8 +228,6 @@ class BiDirAttn(object):
             reshaped_values_weighted = tf.matmul(reshaped_values, w_sim[values.get_shape().as_list()[2]:values.get_shape().as_list()[2] * 2, :])
             reshaped_sim_scores_weighted = tf.matmul(reshaped_sim_scores, w_sim[values.get_shape().as_list()[2] * 2:values.get_shape().as_list()[2] * 3, :])
 
-            print keys.shape[1]
-            print values.shape[1]
             keys_weighted = tf.reshape(reshaped_keys_weighted, [-1, keys.shape[1], 1])
             values_weighted = tf.reshape(reshaped_values_weighted, [-1, 1, values.shape[1]])
             sim_scores_weighted = tf.reshape(reshaped_sim_scores_weighted, [-1, keys.shape[1], values.shape[1]])
